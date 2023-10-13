@@ -8,7 +8,15 @@ from django.apps import AppConfig
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.db.models import signals
-
+from django.contrib.auth.signals import (
+    user_logged_in,
+    user_logged_out,
+)
+from django.dispatch import receiver
+from django.db.models.signals import (
+    pre_save,
+    post_save,
+)
 # HTK Imports
 from htk.app_config import HtkAppConfig
 from htk.apps.sites.utils import get_site_name
@@ -22,6 +30,9 @@ from htk.utils import htk_setting
 ################################################################################
 # signals and signal handlers
 
+# views.models Imports
+from htk.apps.organizations.views import OrganizationInvitationResponseView
+
 
 @disable_for_loaddata
 def create_user_profile(sender, instance, created, **kwargs):
@@ -29,14 +40,12 @@ def create_user_profile(sender, instance, created, **kwargs):
     if created:
         user = instance
         from htk.apps.accounts.utils.general import get_user_profile_model
-
         UserProfileModel = get_user_profile_model()
         profile = UserProfileModel.objects.create(user=user)
         profile.save()
+        from htk.utils.notifications import slack_notify
         if not settings.TEST and htk_setting('HTK_SLACK_NOTIFICATIONS_ENABLED'):
             try:
-                from htk.utils.notifications import slack_notify
-
                 slack_notify(
                     'A new user has registered on the site %s: *%s <%s>*'
                     % (
@@ -87,6 +96,40 @@ def pre_delete_user(sender, instance, using, **kwargs):
         except:
             rollbar.report_exc_info()
 
+# logged in signal
+# @receiver(user_logged_in)
+def logged_in_user(sender, user, **kwargs):
+    from htk.utils.notifications import slack_notify
+    try:
+        slack_notify(
+            'The user %s logged in as *%s <%s>*'
+            % (
+                user.username,
+                user.profile.get_display_name(),
+                user.email,
+            )
+        )
+    except:
+        rollbar.report_exc_info()
+
+user_logged_in.connect(logged_in_user)
+
+# logged out signal
+def logged_out_user(sender, user, request, **kwargs):
+    from htk.utils.notifications import slack_notify
+    try:
+        slack_notify(
+            'The user %s logged out as *%s <%s>*'
+            % (
+                user.username,
+                user.profile.get_display_name(),
+                user.email,
+            )
+        )
+    except:
+        rollbar.report_exc_info()
+
+user_logged_out.connect(logged_out_user)
 
 @disable_for_loaddata
 def process_user_email_association(sender, instance, created, **kwargs):

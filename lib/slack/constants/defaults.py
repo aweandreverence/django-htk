@@ -67,6 +67,10 @@ HTK_SLACK_NOTIFICATION_CHANNELS = {
 }
 HTK_SLACK_DEBUG_CHANNEL = '#test'
 
+HTK_SLACK_DEBUG_CHANNELS = {
+    'test': '#test',
+    'debug': '#alerts-p5-debug'
+}
 
 ##
 # url names (routes)

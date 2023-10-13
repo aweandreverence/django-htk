@@ -27,11 +27,10 @@ class InvitationsService(HtkBaseService):
 
                 if htk_setting('HTK_SLACK_NOTIFICATIONS_ENABLED'):
                     from htk.utils.notifications import slack_notify
-
                     msg = '*%s* has signed up for %s as a result of an invitation from *%s <%s>* (Campaign: `%s` - sent %s).' % (
                         email,
                         get_site_name(),
-                        invitation.invited_by.profile.display_name,
+                        invitation.invited_by.profile.display_name, #first name last name
                         invitation.invited_by.email,
                         invitation.campaign or 'None',
                         invitation.get_relative_time(),
@@ -64,3 +63,4 @@ class InvitationsService(HtkBaseService):
             if q.exists():
                 invitation = q.first()
                 invitation.complete(user)
+                

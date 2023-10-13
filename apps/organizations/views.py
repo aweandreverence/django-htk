@@ -6,6 +6,9 @@ from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.views import View
 
+from django.db.models.signals import post_save #new imports
+from django.dispatch import receiver #new imports
+
 # HTK Imports
 from htk.apps.organizations.enums import OrganizationMemberRoles
 from htk.utils import (
@@ -14,7 +17,6 @@ from htk.utils import (
     resolve_model_dynamically,
 )
 from htk.view_helpers import render_custom as _r
-
 
 class OrganizationInvitationResponseView(View):
     """Organization Invitation Response Class Based View
@@ -40,6 +42,7 @@ class OrganizationInvitationResponseView(View):
         super().__init__(*args, **kwargs)
         self.render_method = _r
         self.template_name = 'organizations/invitation_response.html'
+        self.post
 
     def setup(self, request, *args, **kwargs):
         super().setup(request, *args, **kwargs)
@@ -71,6 +74,7 @@ class OrganizationInvitationResponseView(View):
         return response
 
     @method_decorator(login_required)
+    @receiver(post_save, sender=OrganizationMemberRoles) #new receiever
     def post(self, request, *args, **kwargs):
         invitation_response = request.POST.get('response', None)
 
@@ -79,11 +83,22 @@ class OrganizationInvitationResponseView(View):
 
         if self.invitation.accepted:
             self.invitation.user = request.user
+            from htk.utils.notifications import slack_notify
+            slack_notify(
+                '%s (%s | %s) has accepted an invitation for Organization (<%s>)'
+            % (
+                self.invitation.user.profile.display_name(),#none displayed for get_full_name()
+                self.invitation.user.profile.get_org_display_name(), #username
+                self.invitation.user.profile.email,
+                self.invitation.user.profile.get_absolute_url(),
+                )
+            )
+            
             # TODO: adding as member but maybe this should be a setting?
             self.invitation.organization.add_member(
                 self.invitation.user, OrganizationMemberRoles.MEMBER
             )
-
+        
         self.invitation.save()
 
         self.data['invitation_accepted'] = self.invitation.accepted

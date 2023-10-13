@@ -1,5 +1,6 @@
 # Python Standard Library Imports
 
+
 # Third Party (PyPI) Imports
 import rollbar
 
@@ -178,6 +179,7 @@ class UserRegistrationForm(UserCreationForm):
                     email_sender=email_sender
                 )
             return user
+        
 
         from htk.apps.accounts.locks import UserEmailRegistrationLock
         email = self.email

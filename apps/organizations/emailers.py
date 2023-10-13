@@ -32,3 +32,15 @@ def send_invitation_email(request, invitation, early_access_code=None):
         template=htk_setting('HTK_ORGANIZATION_INVITATION_EMAIL_TEMPLATE_NAME'),
         context=context,
     )
+    if send_email:
+        from htk.utils.notifications import slack_notify
+        msg = '*%s* (%s<%s>) has sent an invitation for Organization (<%s>) to email %s' % (
+            invitation.invited_by.profile.display_name, #first name last name
+            invitation.organization.name, 
+            invitation.invited_by.email,
+            invitation_url,
+            invitation.email,
+        )
+        slack_notify(msg)
+        'Firstname Lastname (username<profileurl>) has sent an invitation for Organization (<organizationurl>) to <email>'
+
