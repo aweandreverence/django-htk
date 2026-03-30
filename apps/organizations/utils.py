@@ -48,7 +48,7 @@ def get_organization_team_member_role_choices():
 
 
 def get_user_organizations_with_attribute(user, key):
-    organizations = user.members.filter(
+    organizations = user.organizations.filter(
         active=True, organization__attributes__key=key
     ).exclude(organization__attributes__value=None)
     return organizations
@@ -77,7 +77,7 @@ def invite_organization_member(request, invitation):
             first_name=invitation.first_name,
             last_name=invitation.last_name,
             site=get_current_site(request),
-            enable_early_access=True
+            enable_early_access=True,
         )
         early_access_code = prelaunch_signup.early_access_code
     else:

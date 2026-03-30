@@ -244,7 +244,7 @@ class BaseAbstractOrganization(HtkBaseModel, GoogleOrganizationMixin):
 
 class BaseAbstractOrganizationMember(HtkBaseModel):
     organization = fk_organization(related_name='members', required=True)
-    user = fk_user(related_name='members', required=True)
+    user = fk_user(related_name='organizations', required=True)
     role = models.PositiveIntegerField(
         default=OrganizationMemberRoles.MEMBER.value,
         choices=get_organization_member_role_choices(),
@@ -342,7 +342,9 @@ class BaseAbstractOrganizationInvitation(HtkBaseModel):
         status = (
             'Invited'
             if self.accepted is None
-            else 'Accepted' if self.accepted else 'Declined'
+            else 'Accepted'
+            if self.accepted
+            else 'Declined'
         )
 
         return status
@@ -438,7 +440,9 @@ class BaseAbstractOrganizationJoinRequest(HtkBaseModel):
         status = (
             'Requested'
             if self.accepted is None
-            else 'Accepted' if self.accepted else 'Declined'
+            else 'Accepted'
+            if self.accepted
+            else 'Declined'
         )
 
         return status
