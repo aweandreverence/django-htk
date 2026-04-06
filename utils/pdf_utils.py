@@ -119,9 +119,17 @@ def render_to_pdf_response_pisa(template_name, context_dict):
     https://github.com/xhtml2pdf/xhtml2pdf/issues/44
 
     PyPI: https://pypi.python.org/pypi/pisa/
+
+    Note: xhtml2pdf is treated as an optional dependency because most HTK
+    consumers do not use this legacy code path.
     """
     from six.moves import cStringIO as StringIO
-    from xhtml2pdf import pisa
+    try:
+        from xhtml2pdf import pisa
+    except ImportError as exc:
+        raise RuntimeError(
+            'xhtml2pdf is not installed. Install it to use render_to_pdf_response_pisa().'
+        ) from exc
     html = generate_html_from_template(template_name, context_dict)
     result = StringIO()
     pdf = pisa.pisaDocument(StringIO(html.encode('utf-8')), result)

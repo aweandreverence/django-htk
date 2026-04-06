@@ -15,4 +15,3 @@ requests>=2.32.4,<3
 rollbar>=0.15.1,<2
 stripe>=12.3.0,<13
 user-agents==2.2.0
-xhtml2pdf==0.2.17
