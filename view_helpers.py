@@ -107,7 +107,7 @@ def get_asset_version():
         if settings.ENV_DEV:
             asset_version = now.strftime('%Y%m%d%H%M')
         else:
-            asset_version = now.strftime('%Y%m%d%H')
+            asset_version = now.strftime('%Y%m%d%H%M')
     return asset_version
 
 
