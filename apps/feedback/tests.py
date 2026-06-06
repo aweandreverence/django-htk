@@ -29,6 +29,8 @@ from htk.apps.feedback import views
 
 @override_settings(SITE_ID=1)
 class FeedbackRequestApiTestCase(TestCase):
+    databases = '__all__'
+
     def setUp(self):
         self.factory = RequestFactory()
         self.site, _ = Site.objects.update_or_create(
