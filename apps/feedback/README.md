@@ -62,8 +62,9 @@ category = board.categories.create(
 
 ### `FeedbackRequest`
 
-A request is the central public/semi-public item: feature request, bug report,
-content issue, support question, or general feedback.
+A request is the central reviewable item: feature request, bug report,
+content issue, support question, or general feedback. New requests default to
+`private` and `needs_review=True`; publish them only after staff review.
 
 ```python
 from htk.apps.feedback.constants import FEEDBACK_REQUEST_TYPE_FEATURE
@@ -150,7 +151,7 @@ Content-Type: application/json
 }
 ```
 
-Form-encoded and multipart submissions are also supported.
+Form-encoded and multipart submissions are also supported. Public-facing submissions default to `visibility=private` and `needs_review=true`; non-staff users cannot self-publish by passing `visibility=public`. Staff may intentionally set `visibility=public` and `needs_review=false` after review.
 
 ### Detail
 
@@ -212,6 +213,7 @@ Authenticated users can see requests they created, voted for, or subscribed to.
 
 ## Integration Notes
 
+- Keep new submissions private by default and publish only reviewed, public-safe requests.
 - Keep public status separate from internal triage/roadmap status.
 - Keep public categories separate from internal labels/custom fields.
 - Scope every request by `site`; optionally scope by board/category.

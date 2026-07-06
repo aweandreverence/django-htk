@@ -17,6 +17,8 @@ from htk.api.constants import HTK_API_VALUE_ANTISPAM_CHALLENGE_RESPONSE
 from htk.apps.feedback.constants import FEEDBACK_REQUEST_TYPE_BUG
 from htk.apps.feedback.constants import FEEDBACK_REQUEST_TYPE_FEATURE
 from htk.apps.feedback.constants import FEEDBACK_STATUS_IN_PROGRESS
+from htk.apps.feedback.constants import FEEDBACK_VISIBILITY_PRIVATE
+from htk.apps.feedback.constants import FEEDBACK_VISIBILITY_PUBLIC
 from htk.apps.feedback.models import Feedback
 from htk.apps.feedback.models import FeedbackBoard
 from htk.apps.feedback.models import FeedbackEvidence
@@ -92,6 +94,8 @@ class FeedbackRequestApiTestCase(TestCase):
         self.assertEqual('Add reading plan support', feedback_request.title)
         self.assertEqual('awesome-bible', feedback_request.board.slug)
         self.assertEqual({'route': 'reader', 'reference': 'Romans 8'}, feedback_request.context)
+        self.assertEqual(FEEDBACK_VISIBILITY_PRIVATE, feedback_request.visibility)
+        self.assertTrue(feedback_request.needs_review)
         self.assertEqual(1, feedback_request.votes_count)
         self.assertEqual(1, feedback_request.supporters_count)
         self.assertEqual(1, FeedbackBoard.objects.count())
@@ -103,11 +107,16 @@ class FeedbackRequestApiTestCase(TestCase):
             site=self.site,
             title='Improve Bible search',
             description='Support exact phrase searching.',
+            visibility=FEEDBACK_VISIBILITY_PUBLIC,
+        )
+        default_private_request = FeedbackRequest.objects.create(
+            site=self.site,
+            title='Search default private note',
         )
         FeedbackRequest.objects.create(
             site=self.site,
             title='Private admin note',
-            visibility='private',
+            visibility=FEEDBACK_VISIBILITY_PRIVATE,
         )
 
         request = self._request('get', '/feedback/requests', data={'q': 'search'})
@@ -115,12 +124,55 @@ class FeedbackRequestApiTestCase(TestCase):
         payload = self._json(response)
 
         self.assertTrue(payload['success'])
+        self.assertEqual(FEEDBACK_VISIBILITY_PRIVATE, default_private_request.visibility)
+        self.assertTrue(default_private_request.needs_review)
         self.assertEqual([public_request.id], [item['id'] for item in payload['requests']])
+
+    def test_request_submit_non_staff_cannot_self_publish(self):
+        request = self._request(
+            'post',
+            '/feedback/requests/submit',
+            user=self.user,
+            data={
+                'title': 'Publish me immediately',
+                'description': 'This should still need review.',
+                'visibility': FEEDBACK_VISIBILITY_PUBLIC,
+                'needs_review': 'false',
+            },
+        )
+        response = views.request_submit(request)
+        payload = self._json(response)
+        feedback_request = FeedbackRequest.objects.get()
+
+        self.assertTrue(payload['success'])
+        self.assertEqual(FEEDBACK_VISIBILITY_PRIVATE, feedback_request.visibility)
+        self.assertTrue(feedback_request.needs_review)
+
+    def test_request_submit_staff_can_publish_reviewed_request(self):
+        request = self._request(
+            'post',
+            '/feedback/requests/submit',
+            user=self.staff,
+            data={
+                'title': 'Reviewed public request',
+                'description': 'Staff can intentionally publish reviewed requests.',
+                'visibility': FEEDBACK_VISIBILITY_PUBLIC,
+                'needs_review': 'false',
+            },
+        )
+        response = views.request_submit(request)
+        payload = self._json(response)
+        feedback_request = FeedbackRequest.objects.get()
+
+        self.assertTrue(payload['success'])
+        self.assertEqual(FEEDBACK_VISIBILITY_PUBLIC, feedback_request.visibility)
+        self.assertFalse(feedback_request.needs_review)
 
     def test_duplicate_votes_update_existing_vote_instead_of_incrementing(self):
         feedback_request = FeedbackRequest.objects.create(
             site=self.site,
             title='Add cross references',
+            visibility=FEEDBACK_VISIBILITY_PUBLIC,
         )
         first = self._request(
             'post',
@@ -147,6 +199,7 @@ class FeedbackRequestApiTestCase(TestCase):
         feedback_request = FeedbackRequest.objects.create(
             site=self.site,
             title='Add Psalms reading mode',
+            visibility=FEEDBACK_VISIBILITY_PUBLIC,
         )
         feedback_request.vote(user=self.user)
         feedback_request.refresh_from_db()
@@ -170,6 +223,7 @@ class FeedbackRequestApiTestCase(TestCase):
             site=self.site,
             title='Report typo in John',
             request_type=FEEDBACK_REQUEST_TYPE_BUG,
+            visibility=FEEDBACK_VISIBILITY_PUBLIC,
         )
         comment_request = self._request(
             'post',

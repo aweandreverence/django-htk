@@ -98,6 +98,22 @@ def _bool_value(value, default=False):
     return str(value).lower() in ('1', 'true', 'yes', 'on')
 
 
+def _visibility_value(value, user=None):
+    visibility_values = {choice[0] for choice in FEEDBACK_VISIBILITY_CHOICES}
+    visibility = value if value in visibility_values else FEEDBACK_VISIBILITY_PRIVATE
+    is_staff = user is not None and user.is_staff
+    if visibility == FEEDBACK_VISIBILITY_PUBLIC and not is_staff:
+        return FEEDBACK_VISIBILITY_PRIVATE
+    return visibility
+
+
+def _needs_review_value(value, user=None):
+    is_staff = user is not None and user.is_staff
+    if not is_staff:
+        return True
+    return _bool_value(value, True)
+
+
 def _int_value(value, default=0):
     try:
         return int(value)
@@ -293,7 +309,7 @@ def request_submit(request):
     source_uri = data.get('source_uri') or data.get('uri') or request.META.get('HTTP_REFERER', '')
     user_agent = data.get('user_agent') or request.META.get('HTTP_USER_AGENT', '')
     referrer = data.get('referrer') or request.META.get('HTTP_REFERER', '')
-    visibility = data.get('visibility') or FEEDBACK_VISIBILITY_PUBLIC
+    visibility = _visibility_value(data.get('visibility'), user=user)
 
     feedback_request = FeedbackRequest.objects.create(
         site=site,
@@ -312,7 +328,7 @@ def request_submit(request):
         referrer=referrer,
         context=_json_value(data.get('context')),
         metadata=_json_value(data.get('metadata')),
-        needs_review=_bool_value(data.get('needs_review'), False),
+        needs_review=_needs_review_value(data.get('needs_review'), user=user),
     )
     FeedbackEvidence.objects.create(
         request=feedback_request,
