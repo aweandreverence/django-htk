@@ -1,6 +1,11 @@
+# Django Imports
+from django.db import models
+from django.test import TestCase
+
 # HTK Imports
 from htk.constants import *
 from htk.lib.tests import *
+from htk.models.classes import HtkBaseModel
 from htk.scripts.tests import *
 from htk.test_scaffold.models import TestScaffold
 from htk.test_scaffold.tests import (
@@ -8,6 +13,26 @@ from htk.test_scaffold.tests import (
     BaseWebTestCase,
 )
 from htk.utils.tests import *
+
+
+class HtkUrlModel(HtkBaseModel):
+    name = models.CharField(max_length=32, blank=True)
+
+    class Meta:
+        app_label = 'test_scaffold'
+
+    def get_absolute_url(self):
+        return '/test-model/%s/' % self.id
+
+
+class HtkBaseModelTestCase(TestCase):
+    def test_get_full_url_builds_absolute_url_from_absolute_path(self):
+        obj = HtkUrlModel(id=42)
+
+        self.assertEqual(
+            'https://hacktoolkit.com/test-model/42/',
+            obj.get_full_url(),
+        )
 
 
 class HtkWebViewsTestCase(BaseWebTestCase):
