@@ -267,6 +267,7 @@ class FeedbackRequestVoteAdmin(admin.ModelAdmin):
         'id',
         'request',
         'user',
+        'username',
         'email',
         'importance',
         'is_active',
@@ -282,6 +283,7 @@ class FeedbackRequestVoteAdmin(admin.ModelAdmin):
     search_fields = (
         'request__title',
         'email',
+        'username',
         'name',
         'user__username',
     )
@@ -292,6 +294,7 @@ class FeedbackRequestSubscriptionAdmin(admin.ModelAdmin):
         'id',
         'request',
         'user',
+        'username',
         'email',
         'source',
         'is_active',
@@ -309,6 +312,7 @@ class FeedbackRequestSubscriptionAdmin(admin.ModelAdmin):
     search_fields = (
         'request__title',
         'email',
+        'username',
         'name',
         'user__username',
     )
@@ -362,6 +366,7 @@ class FeedbackEvidenceAdmin(admin.ModelAdmin):
         'request__title',
         'body',
         'email',
+        'username',
         'name',
         'source_uri',
     )

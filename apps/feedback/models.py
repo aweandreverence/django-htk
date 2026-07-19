@@ -140,6 +140,9 @@ class FeedbackRequest(HtkBaseModel):
     visibility = models.CharField(max_length=24, choices=FEEDBACK_VISIBILITY_CHOICES, default=FEEDBACK_VISIBILITY_PRIVATE)
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='created_feedback_requests', null=True, blank=True, default=None, on_delete=models.SET_DEFAULT)
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='owned_feedback_requests', null=True, blank=True, default=None, on_delete=models.SET_DEFAULT)
+    username = models.CharField(max_length=150, blank=True)
+    first_name = models.CharField(max_length=150, blank=True)
+    last_name = models.CharField(max_length=150, blank=True)
     name = models.CharField(max_length=100, blank=True)
     email = models.EmailField(max_length=254, blank=True)
     source_uri = models.CharField(max_length=1024, blank=True)
@@ -187,7 +190,17 @@ class FeedbackRequest(HtkBaseModel):
         if self.created_by_id:
             full_name = self.created_by.get_full_name()
             return full_name or self.created_by.get_username()
-        return self.name
+        full_name = ' '.join(part for part in (self.first_name, self.last_name) if part).strip()
+        return self.name or full_name or self.username
+
+    def _identity_defaults(self, username='', first_name='', last_name='', email='', name=''):
+        return {
+            'username': username,
+            'first_name': first_name,
+            'last_name': last_name,
+            'email': email,
+            'name': name,
+        }
 
     def refresh_counts(self, save=True):
         self.votes_count = self.votes.filter(is_active=True, is_spam=False).count()
@@ -196,15 +209,21 @@ class FeedbackRequest(HtkBaseModel):
         if save:
             self.save(update_fields=('votes_count', 'supporters_count', 'comments_count', 'updated_on'))
 
-    def subscribe(self, user=None, email='', name='', source='request', notify=True):
+    def subscribe(self, user=None, email='', name='', source='request', notify=True, username='', first_name='', last_name=''):
         if user is None and not email:
             return None
-        defaults = {
-            'name': name,
+        defaults = self._identity_defaults(
+            username=username,
+            first_name=first_name,
+            last_name=last_name,
+            email=email,
+            name=name,
+        )
+        defaults.update({
             'source': source,
             'is_active': True,
             'notify_status_updates': notify,
-        }
+        })
         if user is not None:
             subscription, _ = FeedbackRequestSubscription.objects.update_or_create(
                 request=self,
@@ -220,15 +239,20 @@ class FeedbackRequest(HtkBaseModel):
             )
         return subscription
 
-    def vote(self, user=None, email='', name='', ip_address='', importance=0, subscribe=True):
-        defaults = {
-            'email': email,
-            'name': name,
+    def vote(self, user=None, email='', name='', ip_address='', importance=0, subscribe=True, username='', first_name='', last_name=''):
+        defaults = self._identity_defaults(
+            username=username,
+            first_name=first_name,
+            last_name=last_name,
+            email=email,
+            name=name,
+        )
+        defaults.update({
             'ip_address': ip_address,
             'importance': importance or 0,
             'is_active': True,
             'is_spam': False,
-        }
+        })
         if user is not None:
             vote, _ = FeedbackRequestVote.objects.update_or_create(
                 request=self,
@@ -245,7 +269,15 @@ class FeedbackRequest(HtkBaseModel):
         else:
             return None
         if subscribe:
-            self.subscribe(user=user, email=email, name=name, source='vote')
+            self.subscribe(
+                user=user,
+                email=email,
+                name=name,
+                source='vote',
+                username=username,
+                first_name=first_name,
+                last_name=last_name,
+            )
         self.refresh_counts()
         return vote
 
@@ -295,6 +327,9 @@ class FeedbackRequestVote(HtkBaseModel):
     request = models.ForeignKey(FeedbackRequest, related_name='votes', on_delete=models.CASCADE)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='feedback_request_votes', null=True, blank=True, default=None, on_delete=models.SET_DEFAULT)
     email = models.EmailField(max_length=254, blank=True)
+    username = models.CharField(max_length=150, blank=True)
+    first_name = models.CharField(max_length=150, blank=True)
+    last_name = models.CharField(max_length=150, blank=True)
     name = models.CharField(max_length=100, blank=True)
     importance = models.PositiveSmallIntegerField(default=0)
     ip_address = models.GenericIPAddressField(null=True, blank=True)
@@ -320,6 +355,9 @@ class FeedbackRequestSubscription(HtkBaseModel):
     request = models.ForeignKey(FeedbackRequest, related_name='subscriptions', on_delete=models.CASCADE)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='feedback_request_subscriptions', null=True, blank=True, default=None, on_delete=models.SET_DEFAULT)
     email = models.EmailField(max_length=254, blank=True)
+    username = models.CharField(max_length=150, blank=True)
+    first_name = models.CharField(max_length=150, blank=True)
+    last_name = models.CharField(max_length=150, blank=True)
     name = models.CharField(max_length=100, blank=True)
     source = models.CharField(max_length=64, blank=True)
     is_active = models.BooleanField(default=True)
@@ -344,6 +382,9 @@ class FeedbackRequestSubscription(HtkBaseModel):
 class FeedbackRequestComment(HtkBaseModel):
     request = models.ForeignKey(FeedbackRequest, related_name='comments', on_delete=models.CASCADE)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='feedback_request_comments', null=True, blank=True, default=None, on_delete=models.SET_DEFAULT)
+    username = models.CharField(max_length=150, blank=True)
+    first_name = models.CharField(max_length=150, blank=True)
+    last_name = models.CharField(max_length=150, blank=True)
     name = models.CharField(max_length=100, blank=True)
     email = models.EmailField(max_length=254, blank=True)
     comment = models.TextField()
@@ -421,6 +462,9 @@ class FeedbackEvidence(HtkBaseModel):
     request = models.ForeignKey(FeedbackRequest, related_name='evidence', null=True, blank=True, on_delete=models.SET_NULL)
     site = models.ForeignKey(Site, related_name='feedback_evidence', on_delete=models.CASCADE)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='feedback_evidence', null=True, blank=True, default=None, on_delete=models.SET_DEFAULT)
+    username = models.CharField(max_length=150, blank=True)
+    first_name = models.CharField(max_length=150, blank=True)
+    last_name = models.CharField(max_length=150, blank=True)
     name = models.CharField(max_length=100, blank=True)
     email = models.EmailField(max_length=254, blank=True)
     body = models.TextField(blank=True)

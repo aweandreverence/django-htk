@@ -47,6 +47,8 @@ class FeedbackRequestApiTestCase(TestCase):
             username='feedback-user',
             email='feedback-user@example.com',
             password='password',
+            first_name='Feedback',
+            last_name='Reader',
         )
         self.staff = User.objects.create_user(
             username='feedback-staff',
@@ -94,13 +96,53 @@ class FeedbackRequestApiTestCase(TestCase):
         self.assertEqual('Add reading plan support', feedback_request.title)
         self.assertEqual('awesome-bible', feedback_request.board.slug)
         self.assertEqual({'route': 'reader', 'reference': 'Romans 8'}, feedback_request.context)
+        self.assertEqual(self.user, feedback_request.created_by)
+        self.assertEqual('feedback-user', feedback_request.username)
+        self.assertEqual('Feedback', feedback_request.first_name)
+        self.assertEqual('Reader', feedback_request.last_name)
+        self.assertEqual('Feedback Reader', feedback_request.name)
+        self.assertEqual('feedback-user@example.com', feedback_request.email)
         self.assertEqual(FEEDBACK_VISIBILITY_PRIVATE, feedback_request.visibility)
         self.assertTrue(feedback_request.needs_review)
         self.assertEqual(1, feedback_request.votes_count)
         self.assertEqual(1, feedback_request.supporters_count)
         self.assertEqual(1, FeedbackBoard.objects.count())
         self.assertEqual(1, FeedbackEvidence.objects.count())
-        self.assertEqual(1, FeedbackRequestVote.objects.count())
+        vote = FeedbackRequestVote.objects.get()
+        evidence = FeedbackEvidence.objects.get()
+        self.assertEqual(self.user, vote.user)
+        self.assertEqual('feedback-user', vote.username)
+        self.assertEqual('Feedback', vote.first_name)
+        self.assertEqual('Reader', vote.last_name)
+        self.assertEqual(self.user, evidence.user)
+        self.assertEqual('feedback-user', evidence.username)
+        self.assertEqual('Feedback', evidence.first_name)
+        self.assertEqual('Reader', evidence.last_name)
+
+    def test_request_submit_allows_anonymous_optional_identity(self):
+        request = self._request(
+            'post',
+            '/feedback/requests/submit',
+            data={
+                'title': 'Anonymous idea',
+                'description': 'Contact fields should be optional.',
+                'username': 'anon-reader',
+                'first_name': 'Anonymous',
+                'last_name': 'Reader',
+            },
+        )
+        response = views.request_submit(request)
+        payload = self._json(response)
+        feedback_request = FeedbackRequest.objects.get()
+
+        self.assertTrue(payload['success'])
+        self.assertIsNone(feedback_request.created_by)
+        self.assertEqual('anon-reader', feedback_request.username)
+        self.assertEqual('Anonymous', feedback_request.first_name)
+        self.assertEqual('Reader', feedback_request.last_name)
+        self.assertEqual('Anonymous Reader', feedback_request.name)
+        self.assertEqual('', feedback_request.email)
+        self.assertEqual(0, FeedbackRequestVote.objects.count())
 
     def test_request_list_searches_and_excludes_private_items_for_public_users(self):
         public_request = FeedbackRequest.objects.create(

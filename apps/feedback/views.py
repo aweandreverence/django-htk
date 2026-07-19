@@ -51,6 +51,50 @@ def _request_user(request):
     return None
 
 
+def _value(value):
+    return (value or '').strip()
+
+
+def _user_identity(user):
+    if user is None:
+        return {
+            'username': '',
+            'first_name': '',
+            'last_name': '',
+            'email': '',
+            'name': '',
+        }
+    username = user.get_username() if hasattr(user, 'get_username') else ''
+    first_name = getattr(user, 'first_name', '') or ''
+    last_name = getattr(user, 'last_name', '') or ''
+    email = getattr(user, 'email', '') or ''
+    full_name = user.get_full_name() if hasattr(user, 'get_full_name') else ''
+    name = full_name or username
+    return {
+        'username': username,
+        'first_name': first_name,
+        'last_name': last_name,
+        'email': email,
+        'name': name,
+    }
+
+
+def _identity_from_data(data, user=None):
+    user_identity = _user_identity(user)
+    username = _value(data.get('username')) or user_identity['username']
+    first_name = _value(data.get('first_name')) or user_identity['first_name']
+    last_name = _value(data.get('last_name')) or user_identity['last_name']
+    email = _value(data.get('email')) or user_identity['email']
+    full_name = ' '.join(part for part in (first_name, last_name) if part).strip()
+    name = _value(data.get('name')) or full_name or user_identity['name'] or username
+    return {
+        'username': username,
+        'first_name': first_name,
+        'last_name': last_name,
+        'email': email,
+        'name': name,
+    }
+
 def _client_ip(request):
     forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR', '')
     if forwarded_for:
@@ -310,6 +354,7 @@ def request_submit(request):
     user_agent = data.get('user_agent') or request.META.get('HTTP_USER_AGENT', '')
     referrer = data.get('referrer') or request.META.get('HTTP_REFERER', '')
     visibility = _visibility_value(data.get('visibility'), user=user)
+    identity = _identity_from_data(data, user=user)
 
     feedback_request = FeedbackRequest.objects.create(
         site=site,
@@ -321,8 +366,11 @@ def request_submit(request):
         visibility=visibility,
         created_by=user,
         owner=owner,
-        name=data.get('name', ''),
-        email=data.get('email', ''),
+        username=identity['username'],
+        first_name=identity['first_name'],
+        last_name=identity['last_name'],
+        name=identity['name'],
+        email=identity['email'],
         source_uri=source_uri,
         user_agent=user_agent,
         referrer=referrer,
@@ -334,8 +382,11 @@ def request_submit(request):
         request=feedback_request,
         site=site,
         user=user,
-        name=data.get('name', ''),
-        email=data.get('email', ''),
+        username=identity['username'],
+        first_name=identity['first_name'],
+        last_name=identity['last_name'],
+        name=identity['name'],
+        email=identity['email'],
         body=description,
         source=data.get('source', 'submit'),
         source_uri=source_uri,
@@ -346,8 +397,11 @@ def request_submit(request):
     )
     feedback_request.vote(
         user=user,
-        email=data.get('email', ''),
-        name=data.get('name', ''),
+        email=identity['email'],
+        name=identity['name'],
+        username=identity['username'],
+        first_name=identity['first_name'],
+        last_name=identity['last_name'],
         ip_address=_client_ip(request),
         importance=_int_value(data.get('importance'), 0),
         subscribe=_bool_value(data.get('subscribe'), True),
@@ -367,13 +421,17 @@ def request_vote(request, request_id):
         return json_response_error({'error': 'Request is closed for voting'})
     data = _payload(request)
     user = _request_user(request)
-    email = data.get('email', '')
+    identity = _identity_from_data(data, user=user)
+    email = identity['email']
     if user is None and not email:
         return json_response_error({'error': 'Authenticated user or email required'})
     vote = feedback_request.vote(
         user=user,
         email=email,
-        name=data.get('name', ''),
+        name=identity['name'],
+        username=identity['username'],
+        first_name=identity['first_name'],
+        last_name=identity['last_name'],
         ip_address=_client_ip(request),
         importance=_int_value(data.get('importance'), 0),
         subscribe=_bool_value(data.get('subscribe'), True),
@@ -415,11 +473,15 @@ def request_comment(request, request_id):
     is_internal = _bool_value(data.get('is_internal'), False)
     if is_internal and not (user is not None and user.is_staff):
         return json_response_error({'error': 'Forbidden'}, status=403)
+    identity = _identity_from_data(data, user=user)
     comment = FeedbackRequestComment.objects.create(
         request=feedback_request,
         user=user,
-        name=data.get('name', ''),
-        email=data.get('email', ''),
+        username=identity['username'],
+        first_name=identity['first_name'],
+        last_name=identity['last_name'],
+        name=identity['name'],
+        email=identity['email'],
         comment=comment_text,
         is_internal=is_internal,
     )
