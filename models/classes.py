@@ -129,15 +129,6 @@ class HtkBaseModel(models.Model):
     def get_absolute_url(self):
         raise Exception('Not implemented')
 
-    def get_full_url(self, request=None, use_secure=True):
-        from htk.utils.urls import build_full_url
-
-        return build_full_url(
-            self.get_absolute_url(),
-            request=request,
-            use_secure=use_secure,
-        )
-
     ##
     # SEO and Unicode
 
