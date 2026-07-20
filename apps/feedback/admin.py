@@ -184,14 +184,15 @@ class FeedbackRequestCommentInline(admin.TabularInline):
 class FeedbackRequestAdmin(admin.ModelAdmin):
     list_display = (
         'id',
+        'title',
+        'created_by',
+        'created_on',
         'site',
         'board',
         'request_type',
-        'title',
         'status',
         'internal_status',
         'visibility',
-        'created_by',
         'owner',
         'votes_count',
         'supporters_count',
@@ -200,7 +201,6 @@ class FeedbackRequestAdmin(admin.ModelAdmin):
         'is_hidden',
         'is_spam',
         'processed',
-        'created_on',
     )
     list_editable = (
         'status',
