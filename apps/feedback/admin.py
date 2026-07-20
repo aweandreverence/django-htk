@@ -191,6 +191,7 @@ class FeedbackRequestAdmin(admin.ModelAdmin):
         'status',
         'internal_status',
         'visibility',
+        'created_by',
         'owner',
         'votes_count',
         'supporters_count',
@@ -218,6 +219,7 @@ class FeedbackRequestAdmin(admin.ModelAdmin):
         'request_type',
         'status',
         'visibility',
+        'created_by',
         'owner',
         'needs_review',
         'is_hidden',
@@ -230,7 +232,13 @@ class FeedbackRequestAdmin(admin.ModelAdmin):
         'description',
         'name',
         'email',
+        'created_by__username',
+        'created_by__email',
         'source_uri',
+    )
+    raw_id_fields = (
+        'created_by',
+        'owner',
     )
     readonly_fields = (
         'votes_count',
