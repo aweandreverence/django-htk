@@ -3,9 +3,8 @@
 Reusable feedback collection and UserVoice-style feature-request infrastructure.
 
 The app keeps the legacy `Feedback` contact-form model working, while adding a
-new product-feedback layer for boards, feature requests, bug reports, votes,
-comments, attachments, status updates, private feedback evidence, and activity
-tracking.
+new product-feedback layer for feature requests, bug reports, votes,
+comments, and attachments.
 
 ## Core Concepts
 
@@ -32,34 +31,6 @@ The legacy API endpoint remains available:
 POST /feedback/submit
 ```
 
-### `FeedbackBoard`
-
-A board is a product/app feedback space. A&R can use separate boards for
-AwesomeBible, Maskil, LetsPray.AI, and future products while reusing the same
-HTK backend.
-
-```python
-from htk.apps.feedback.models import FeedbackBoard
-
-board = FeedbackBoard.objects.create(
-    site=site,
-    slug='awesome-bible',
-    name='AwesomeBible',
-)
-```
-
-### `FeedbackCategory`
-
-Categories are broad user-facing product areas. Keep them simple and stable;
-use internal labels/custom fields later for richer staff-only organization.
-
-```python
-category = board.categories.create(
-    slug='reader',
-    name='Bible reader',
-)
-```
-
 ### `FeedbackRequest`
 
 A request is the central reviewable item: feature request, bug report,
@@ -72,8 +43,6 @@ from htk.apps.feedback.models import FeedbackRequest
 
 request = FeedbackRequest.objects.create(
     site=site,
-    board=board,
-    category=category,
     created_by=user,
     request_type=FEEDBACK_REQUEST_TYPE_FEATURE,
     title='Add reading plans',
@@ -118,7 +87,7 @@ style omits trailing slashes.
 ### List requests
 
 ```
-GET /feedback/requests?q=search&type=feature_request&status=planned&board=awesome-bible&order=popular
+GET /feedback/requests?q=search&type=feature_request&status=planned&order=popular
 ```
 
 Response includes public, non-hidden, non-spam requests for normal users. Staff
@@ -140,11 +109,9 @@ POST /feedback/requests/submit
 Content-Type: application/json
 
 {
-  "board": "awesome-bible",
   "type": "feature_request",
   "title": "Add reading plans",
   "description": "I would like a reading plan for the Psalms.",
-  "subscribe": true,
   "context": {
     "surface": "dashboard"
   }
@@ -159,8 +126,7 @@ Form-encoded and multipart submissions are also supported. Public-facing submiss
 GET /feedback/requests/<id>
 ```
 
-Returns the request plus public comments, public status updates, and
-attachments.
+Returns the request plus public comments and attachments.
 
 ### Vote / unvote
 
@@ -188,7 +154,7 @@ Public comments are available by default. Staff users may pass
 POST /feedback/requests/<id>/status
 ```
 
-Staff-only. Creates a status update and changes the request status.
+Staff-only. Changes the request status directly.
 
 ### My requests
 
@@ -196,27 +162,20 @@ Staff-only. Creates a status update and changes the request status.
 GET /feedback/requests/my
 ```
 
-Authenticated users can see requests they created, voted for, or subscribed to.
+Authenticated users can see requests they created or voted for.
 
 ## Model Shape
 
-- `FeedbackBoard` — product/app-scoped feedback board.
-- `FeedbackCategory` — broad public category within a board.
 - `FeedbackRequest` — idea/feature/bug/content/support/general request.
 - `FeedbackRequestVote` — one active support/vote per user or email.
-- `FeedbackRequestSubscription` — explicit close-the-loop notification state.
 - `FeedbackRequestComment` — public or internal discussion.
 - `FeedbackRequestAttachment` — screenshot/file/log attachment.
-- `FeedbackEvidence` — private/internal captured feedback linked to a request.
-- `FeedbackRequestStatusUpdate` — public/internal status history.
-- `FeedbackRequestEvent` — activity/audit stream for notifications/webhooks.
 
 ## Integration Notes
 
 - Keep new submissions private by default and publish only reviewed, public-safe requests.
-- Keep public status separate from internal triage/roadmap status.
-- Keep public categories separate from internal labels/custom fields.
-- Scope every request by `site`; optionally scope by board/category.
+- Keep status lightweight; add richer workflow only when a real queue needs it.
+- Scope every request by `site`.
 - Do not expose private emails or account traits in public payloads.
 - Add async email/webhook delivery in consuming apps or future HTK work.
 - Use `context` JSON for app-specific page state and `metadata` JSON for

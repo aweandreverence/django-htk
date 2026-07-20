@@ -20,11 +20,8 @@ from htk.apps.feedback.constants import FEEDBACK_STATUS_IN_PROGRESS
 from htk.apps.feedback.constants import FEEDBACK_VISIBILITY_PRIVATE
 from htk.apps.feedback.constants import FEEDBACK_VISIBILITY_PUBLIC
 from htk.apps.feedback.models import Feedback
-from htk.apps.feedback.models import FeedbackBoard
-from htk.apps.feedback.models import FeedbackEvidence
 from htk.apps.feedback.models import FeedbackRequest
 from htk.apps.feedback.models import FeedbackRequestComment
-from htk.apps.feedback.models import FeedbackRequestStatusUpdate
 from htk.apps.feedback.models import FeedbackRequestVote
 from htk.apps.feedback import views
 
@@ -69,7 +66,7 @@ class FeedbackRequestApiTestCase(TestCase):
         request.user = user if user is not None else AnonymousUser()
         return request
 
-    def test_request_submit_creates_board_request_evidence_and_vote(self):
+    def test_request_submit_creates_request_and_vote(self):
         request = self._request(
             'post',
             '/feedback/requests/submit',
@@ -78,7 +75,6 @@ class FeedbackRequestApiTestCase(TestCase):
                 'title': 'Add reading plan support',
                 'description': 'I want a plan for reading through Romans.',
                 'type': FEEDBACK_REQUEST_TYPE_FEATURE,
-                'board': 'awesome-bible',
                 'context': json.dumps(
                     {
                         'route': 'reader',
@@ -94,30 +90,17 @@ class FeedbackRequestApiTestCase(TestCase):
         self.assertTrue(payload['success'])
         feedback_request = FeedbackRequest.objects.get()
         self.assertEqual('Add reading plan support', feedback_request.title)
-        self.assertEqual('awesome-bible', feedback_request.board.slug)
         self.assertEqual({'route': 'reader', 'reference': 'Romans 8'}, feedback_request.context)
         self.assertEqual(self.user, feedback_request.created_by)
-        self.assertEqual('feedback-user', feedback_request.username)
-        self.assertEqual('Feedback', feedback_request.first_name)
-        self.assertEqual('Reader', feedback_request.last_name)
-        self.assertEqual('Feedback Reader', feedback_request.name)
-        self.assertEqual('feedback-user@example.com', feedback_request.email)
+        self.assertEqual('', feedback_request.name)
+        self.assertEqual('', feedback_request.email)
         self.assertEqual(FEEDBACK_VISIBILITY_PRIVATE, feedback_request.visibility)
         self.assertTrue(feedback_request.needs_review)
         self.assertEqual(1, feedback_request.votes_count)
-        self.assertEqual(1, feedback_request.supporters_count)
-        self.assertEqual(1, FeedbackBoard.objects.count())
-        self.assertEqual(1, FeedbackEvidence.objects.count())
         vote = FeedbackRequestVote.objects.get()
-        evidence = FeedbackEvidence.objects.get()
         self.assertEqual(self.user, vote.user)
-        self.assertEqual('feedback-user', vote.username)
-        self.assertEqual('Feedback', vote.first_name)
-        self.assertEqual('Reader', vote.last_name)
-        self.assertEqual(self.user, evidence.user)
-        self.assertEqual('feedback-user', evidence.username)
-        self.assertEqual('Feedback', evidence.first_name)
-        self.assertEqual('Reader', evidence.last_name)
+        self.assertEqual('', vote.name)
+        self.assertEqual('', vote.email)
 
     def test_request_submit_allows_anonymous_optional_identity(self):
         request = self._request(
@@ -126,9 +109,7 @@ class FeedbackRequestApiTestCase(TestCase):
             data={
                 'title': 'Anonymous idea',
                 'description': 'Contact fields should be optional.',
-                'username': 'anon-reader',
-                'first_name': 'Anonymous',
-                'last_name': 'Reader',
+                'name': 'Anonymous Reader',
             },
         )
         response = views.request_submit(request)
@@ -137,9 +118,6 @@ class FeedbackRequestApiTestCase(TestCase):
 
         self.assertTrue(payload['success'])
         self.assertIsNone(feedback_request.created_by)
-        self.assertEqual('anon-reader', feedback_request.username)
-        self.assertEqual('Anonymous', feedback_request.first_name)
-        self.assertEqual('Reader', feedback_request.last_name)
         self.assertEqual('Anonymous Reader', feedback_request.name)
         self.assertEqual('', feedback_request.email)
         self.assertEqual(0, FeedbackRequestVote.objects.count())
@@ -288,7 +266,6 @@ class FeedbackRequestApiTestCase(TestCase):
         feedback_request.refresh_from_db()
 
         self.assertEqual(1, FeedbackRequestComment.objects.count())
-        self.assertEqual(1, FeedbackRequestStatusUpdate.objects.count())
         self.assertEqual(FEEDBACK_STATUS_IN_PROGRESS, feedback_request.status)
 
     @mock.patch('htk.apps.feedback.forms.feedback_email')
