@@ -92,24 +92,19 @@ class FeedbackRequestApiTestCase(TestCase):
         self.assertEqual('Add reading plan support', feedback_request.title)
         self.assertEqual({'route': 'reader', 'reference': 'Romans 8'}, feedback_request.context)
         self.assertEqual(self.user, feedback_request.created_by)
-        self.assertEqual('', feedback_request.name)
-        self.assertEqual('', feedback_request.email)
         self.assertEqual(FEEDBACK_VISIBILITY_PRIVATE, feedback_request.visibility)
         self.assertTrue(feedback_request.needs_review)
         self.assertEqual(1, feedback_request.votes_count)
         vote = FeedbackRequestVote.objects.get()
         self.assertEqual(self.user, vote.user)
-        self.assertEqual('', vote.name)
-        self.assertEqual('', vote.email)
 
-    def test_request_submit_allows_anonymous_optional_identity(self):
+    def test_request_submit_allows_anonymous_feedback_without_identity(self):
         request = self._request(
             'post',
             '/feedback/requests/submit',
             data={
                 'title': 'Anonymous idea',
-                'description': 'Contact fields should be optional.',
-                'name': 'Anonymous Reader',
+                'description': 'Contact fields should not be required.',
             },
         )
         response = views.request_submit(request)
@@ -118,8 +113,6 @@ class FeedbackRequestApiTestCase(TestCase):
 
         self.assertTrue(payload['success'])
         self.assertIsNone(feedback_request.created_by)
-        self.assertEqual('Anonymous Reader', feedback_request.name)
-        self.assertEqual('', feedback_request.email)
         self.assertEqual(0, FeedbackRequestVote.objects.count())
 
     def test_request_list_searches_and_excludes_private_items_for_public_users(self):

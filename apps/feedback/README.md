@@ -1,10 +1,9 @@
 # Feedback App
 
-Reusable feedback collection and UserVoice-style feature-request infrastructure.
+Reusable feedback collection and lightweight feature-request infrastructure.
 
 The app keeps the legacy `Feedback` contact-form model working, while adding a
-new product-feedback layer for feature requests, bug reports, votes,
-comments, and attachments.
+small product-feedback layer for reviewable requests, votes, and comments.
 
 ## Core Concepts
 
@@ -21,7 +20,7 @@ feedback = Feedback.objects.create(
     name='Jane',
     email='jane@example.com',
     comment='This page was confusing.',
-    uri='/bible/Romans/8',
+    uri='/dashboard',
 )
 ```
 
@@ -33,51 +32,46 @@ POST /feedback/submit
 
 ### `FeedbackRequest`
 
-A request is the central reviewable item: feature request, bug report,
-content issue, support question, or general feedback. New requests default to
-`private` and `needs_review=True`; publish them only after staff review.
+A request is the central reviewable item: feature request, bug report, content
+issue, support question, or general feedback. New requests default to `private`
+and `needs_review=True`; publish them only after staff review.
 
 ```python
 from htk.apps.feedback.constants import FEEDBACK_REQUEST_TYPE_FEATURE
 from htk.apps.feedback.models import FeedbackRequest
 
-request = FeedbackRequest.objects.create(
+feedback = FeedbackRequest.objects.create(
     site=site,
     created_by=user,
     request_type=FEEDBACK_REQUEST_TYPE_FEATURE,
-    title='Add reading plans',
-    description='I would like a reading plan for the Psalms.',
-    source_uri='/dashboard',
+    title='Add saved searches',
+    description='I would like to save searches and return to them later.',
+    source_uri='/search',
     context={
-        'app': 'awesome-bible',
-        'surface': 'dashboard',
+        'app': 'example-app',
+        'surface': 'search-results',
     },
 )
 ```
 
-## Bug Reports: Screenshot + User/Page State
+## Bug Reports: User/Page State
 
-For bug reports, downstream apps should submit both attachments and structured
-context. Screenshots are helpful, but page state is often what makes the report
-reproducible.
+For bug reports, downstream apps should submit structured context that makes the
+report reproducible. Keep files/uploads in the consuming app until there is a
+clear shared storage policy.
 
-Suggested context for AwesomeBible:
+Suggested generic context:
 
 ```json
 {
-  "app": "awesome-bible",
-  "surface": "reader",
-  "path": "/bible/Romans/8",
-  "reference": "Romans 8",
-  "search_query": "love",
-  "collection_id": 17,
+  "app": "example-app",
+  "surface": "search-results",
+  "path": "/search?q=grace",
+  "query": "grace",
   "viewport": {"width": 1440, "height": 900},
-  "app_version": "2026.06.05"
+  "app_version": "2026.07.21"
 }
 ```
-
-Attach screenshots/files with multipart form data. Use the `screenshot` field
-name or set `<field>_is_screenshot=true`.
 
 ## API Endpoints
 
@@ -96,7 +90,7 @@ users may see private/hidden items.
 ### Find likely duplicates
 
 ```
-GET /feedback/requests/matches?q=reading%20plans
+GET /feedback/requests/matches?q=saved%20searches
 ```
 
 Use this while a user is typing a title/body so they can support an existing
@@ -110,15 +104,18 @@ Content-Type: application/json
 
 {
   "type": "feature_request",
-  "title": "Add reading plans",
-  "description": "I would like a reading plan for the Psalms.",
+  "title": "Add saved searches",
+  "description": "I would like to save searches and return to them later.",
   "context": {
-    "surface": "dashboard"
+    "surface": "search-results"
   }
 }
 ```
 
-Form-encoded and multipart submissions are also supported. Public-facing submissions default to `visibility=private` and `needs_review=true`; non-staff users cannot self-publish by passing `visibility=public`. Staff may intentionally set `visibility=public` and `needs_review=false` after review.
+Form-encoded submissions are also supported. Public-facing submissions default
+to `visibility=private` and `needs_review=true`; non-staff users cannot
+self-publish by passing `visibility=public`. Staff may intentionally set
+`visibility=public` and `needs_review=false` after review.
 
 ### Detail
 
@@ -126,7 +123,7 @@ Form-encoded and multipart submissions are also supported. Public-facing submiss
 GET /feedback/requests/<id>
 ```
 
-Returns the request plus public comments and attachments.
+Returns the request plus public comments.
 
 ### Vote / unvote
 
@@ -135,9 +132,8 @@ POST /feedback/requests/<id>/vote
 POST /feedback/requests/<id>/unvote
 ```
 
-Authenticated users can vote once per request. Anonymous/email voting is
-supported by passing an email address. Duplicate votes update the existing vote
-instead of incrementing the count.
+Authenticated users can vote once per request. Anonymous voting is intentionally
+not supported; require login so the vote row only needs a `user` FK.
 
 ### Comment
 
@@ -167,16 +163,15 @@ Authenticated users can see requests they created or voted for.
 ## Model Shape
 
 - `FeedbackRequest` — idea/feature/bug/content/support/general request.
-- `FeedbackRequestVote` — one active support/vote per user or email.
+- `FeedbackRequestVote` — one active support/vote per authenticated user.
 - `FeedbackRequestComment` — public or internal discussion.
-- `FeedbackRequestAttachment` — screenshot/file/log attachment.
 
 ## Integration Notes
 
 - Keep new submissions private by default and publish only reviewed, public-safe requests.
 - Keep status lightweight; add richer workflow only when a real queue needs it.
 - Scope every request by `site`.
-- Do not expose private emails or account traits in public payloads.
+- Do not duplicate authenticated identity snapshots; use the `created_by`/`user` FKs.
+- Keep anonymous request submission contact-free for now. Add app-local contact capture only when a real follow-up workflow exists.
 - Add async email/webhook delivery in consuming apps or future HTK work.
-- Use `context` JSON for app-specific page state and `metadata` JSON for
-  staff/integration-only data.
+- Use `context` JSON for app-specific page state and `metadata` JSON for staff/integration-only data.

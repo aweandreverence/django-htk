@@ -47,8 +47,6 @@ class FeedbackRequest(HtkBaseModel):
     visibility = models.CharField(max_length=24, choices=FEEDBACK_VISIBILITY_CHOICES, default=FEEDBACK_VISIBILITY_PRIVATE)
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='created_feedback_requests', null=True, blank=True, default=None, on_delete=models.SET_DEFAULT)
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='owned_feedback_requests', null=True, blank=True, default=None, on_delete=models.SET_DEFAULT)
-    name = models.CharField(max_length=100, blank=True)
-    email = models.EmailField(max_length=254, blank=True)
     source_uri = models.CharField(max_length=1024, blank=True)
     user_agent = models.CharField(max_length=512, blank=True)
     referrer = models.CharField(max_length=1024, blank=True)
@@ -89,13 +87,7 @@ class FeedbackRequest(HtkBaseModel):
         if self.created_by_id:
             full_name = self.created_by.get_full_name()
             return full_name or self.created_by.get_username()
-        return self.name or self.email
-
-    def _identity_defaults(self, email='', name=''):
-        return {
-            'email': email,
-            'name': name,
-        }
+        return ''
 
     def refresh_counts(self, save=True):
         self.votes_count = self.votes.filter(is_active=True, is_spam=False).count()
@@ -103,44 +95,25 @@ class FeedbackRequest(HtkBaseModel):
         if save:
             self.save(update_fields=('votes_count', 'comments_count', 'updated_on'))
 
-    def vote(self, user=None, email='', name='', ip_address='', importance=0):
-        defaults = self._identity_defaults(
-            email=email,
-            name=name,
-        )
-        defaults.update({
-            'ip_address': ip_address,
-            'importance': importance or 0,
-            'is_active': True,
-            'is_spam': False,
-        })
-        if user is not None:
-            vote, _ = FeedbackRequestVote.objects.update_or_create(
-                request=self,
-                user=user,
-                defaults=defaults,
-            )
-        elif email:
-            vote, _ = FeedbackRequestVote.objects.update_or_create(
-                request=self,
-                email=email,
-                user=None,
-                defaults=defaults,
-            )
-        else:
+    def vote(self, user, importance=0):
+        if user is None:
             return None
+        vote, _ = FeedbackRequestVote.objects.update_or_create(
+            feedback=self,
+            user=user,
+            defaults={
+                'importance': importance or 0,
+                'is_active': True,
+                'is_spam': False,
+            },
+        )
         self.refresh_counts()
         return vote
 
-    def unvote(self, user=None, email=''):
-        qs = self.votes.filter(is_active=True)
-        if user is not None:
-            qs = qs.filter(user=user)
-        elif email:
-            qs = qs.filter(user=None, email=email)
-        else:
+    def unvote(self, user):
+        if user is None:
             return 0
-        count = qs.update(is_active=False)
+        count = self.votes.filter(user=user, is_active=True).update(is_active=False)
         self.refresh_counts()
         return count
 
@@ -168,12 +141,9 @@ class FeedbackRequest(HtkBaseModel):
 
 
 class FeedbackRequestVote(HtkBaseModel):
-    request = models.ForeignKey(FeedbackRequest, related_name='votes', on_delete=models.CASCADE)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='feedback_request_votes', null=True, blank=True, default=None, on_delete=models.SET_DEFAULT)
-    email = models.EmailField(max_length=254, blank=True)
-    name = models.CharField(max_length=100, blank=True)
+    feedback = models.ForeignKey(FeedbackRequest, related_name='votes', on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='feedback_request_votes', on_delete=models.CASCADE)
     importance = models.PositiveSmallIntegerField(default=0)
-    ip_address = models.GenericIPAddressField(null=True, blank=True)
     is_active = models.BooleanField(default=True)
     is_spam = models.BooleanField(default=False)
     created_on = models.DateTimeField(auto_now_add=True)
@@ -181,22 +151,19 @@ class FeedbackRequestVote(HtkBaseModel):
 
     class Meta:
         constraints = (
-            models.UniqueConstraint(fields=('request', 'user'), condition=Q(user__isnull=False), name='feedback_unique_user_vote'),
-            models.UniqueConstraint(fields=('request', 'email'), condition=Q(user__isnull=True) & ~Q(email=''), name='feedback_unique_email_vote'),
+            models.UniqueConstraint(fields=('feedback', 'user'), name='feedback_unique_user_vote'),
         )
         ordering = ('-created_on',)
         verbose_name = 'Feedback request vote'
         verbose_name_plural = 'Feedback request votes'
 
     def __str__(self):
-        return '%s vote for %s' % (self.user or self.email, self.request)
+        return '%s vote for %s' % (self.user, self.feedback)
 
 
 class FeedbackRequestComment(HtkBaseModel):
-    request = models.ForeignKey(FeedbackRequest, related_name='comments', on_delete=models.CASCADE)
+    feedback = models.ForeignKey(FeedbackRequest, related_name='comments', on_delete=models.CASCADE)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='feedback_request_comments', null=True, blank=True, default=None, on_delete=models.SET_DEFAULT)
-    name = models.CharField(max_length=100, blank=True)
-    email = models.EmailField(max_length=254, blank=True)
     comment = models.TextField()
     is_internal = models.BooleanField(default=False)
     is_hidden = models.BooleanField(default=False)
@@ -210,58 +177,20 @@ class FeedbackRequestComment(HtkBaseModel):
         verbose_name_plural = 'Feedback request comments'
 
     def __str__(self):
-        return '%s comment on %s' % (self.user or self.email or self.name, self.request)
+        return '%s comment on %s' % (self.user or 'Anonymous', self.feedback)
 
     def save(self, *args, **kwargs):
         super(FeedbackRequestComment, self).save(*args, **kwargs)
-        self.request.refresh_counts()
+        self.feedback.refresh_counts()
 
     def json_encode(self):
         value = super(FeedbackRequestComment, self).json_encode()
         value.update(
             {
-                'request_id': self.request_id,
-                'name': self.name,
+                'feedback_id': self.feedback_id,
                 'comment': self.comment,
                 'is_internal': self.is_internal,
                 'created_on': self.created_on,
             }
         )
         return value
-
-
-class FeedbackRequestAttachment(HtkBaseModel):
-    request = models.ForeignKey(FeedbackRequest, related_name='attachments', on_delete=models.CASCADE)
-    comment = models.ForeignKey(FeedbackRequestComment, related_name='attachments', null=True, blank=True, on_delete=models.CASCADE)
-    uploaded_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='feedback_request_attachments', null=True, blank=True, default=None, on_delete=models.SET_DEFAULT)
-    file = models.FileField(upload_to='feedback/attachments/%Y/%m/%d/')
-    original_filename = models.CharField(max_length=255, blank=True)
-    content_type = models.CharField(max_length=128, blank=True)
-    size_bytes = models.PositiveIntegerField(default=0)
-    is_screenshot = models.BooleanField(default=False)
-    created_on = models.DateTimeField(auto_now_add=True)
-
-    class Meta:
-        ordering = ('created_on',)
-        verbose_name = 'Feedback request attachment'
-        verbose_name_plural = 'Feedback request attachments'
-
-    def __str__(self):
-        return self.original_filename or str(self.file)
-
-    def json_encode(self):
-        value = super(FeedbackRequestAttachment, self).json_encode()
-        value.update(
-            {
-                'request_id': self.request_id,
-                'comment_id': self.comment_id,
-                'original_filename': self.original_filename,
-                'content_type': self.content_type,
-                'size_bytes': self.size_bytes,
-                'is_screenshot': self.is_screenshot,
-                'url': self.file.url if self.file else '',
-                'created_on': self.created_on,
-            }
-        )
-        return value
-

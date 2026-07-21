@@ -17,7 +17,6 @@ from htk.api.utils import json_response_okay
 from htk.apps.feedback.constants import *
 from htk.apps.feedback.forms import FeedbackForm
 from htk.apps.feedback.models import FeedbackRequest
-from htk.apps.feedback.models import FeedbackRequestAttachment
 from htk.apps.feedback.models import FeedbackRequestComment
 
 
@@ -48,25 +47,6 @@ def _request_user(request):
 
 def _value(value):
     return (value or '').strip()
-
-
-def _identity_from_data(data, user=None):
-    if user is not None:
-        return {
-            'email': '',
-            'name': '',
-        }
-    return {
-        'email': _value(data.get('email')),
-        'name': _value(data.get('name')),
-    }
-
-
-def _client_ip(request):
-    forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR', '')
-    if forwarded_for:
-        return forwarded_for.split(',')[0].strip()
-    return request.META.get('REMOTE_ADDR') or None
 
 
 def _json_body(request):
@@ -159,35 +139,9 @@ def _serialize_request(feedback_request, include_detail=False):
                         is_internal=False,
                     )
                 ],
-                'attachments': [
-                    attachment.json_encode()
-                    for attachment in feedback_request.attachments.all()
-                ],
             }
         )
     return data
-
-
-def _handle_attachments(request, feedback_request, comment=None):
-    user = _request_user(request)
-    attachments = []
-    for field_name, uploaded_file in request.FILES.items():
-        is_screenshot = field_name in ('screenshot', 'screenshot_file') or _bool_value(
-            request.POST.get('%s_is_screenshot' % field_name),
-            False,
-        )
-        attachment = FeedbackRequestAttachment.objects.create(
-            request=feedback_request,
-            comment=comment,
-            uploaded_by=user,
-            file=uploaded_file,
-            original_filename=uploaded_file.name,
-            content_type=getattr(uploaded_file, 'content_type', '') or '',
-            size_bytes=getattr(uploaded_file, 'size', 0) or 0,
-            is_screenshot=is_screenshot,
-        )
-        attachments.append(attachment)
-    return attachments
 
 
 @require_GET
@@ -262,7 +216,6 @@ def request_submit(request):
     user_agent = data.get('user_agent') or request.META.get('HTTP_USER_AGENT', '')
     referrer = data.get('referrer') or request.META.get('HTTP_REFERER', '')
     visibility = _visibility_value(data.get('visibility'), user=user)
-    identity = _identity_from_data(data, user=user)
 
     feedback_request = FeedbackRequest.objects.create(
         site=site,
@@ -272,8 +225,6 @@ def request_submit(request):
         visibility=visibility,
         created_by=user,
         owner=owner,
-        name=identity['name'],
-        email=identity['email'],
         source_uri=source_uri,
         user_agent=user_agent,
         referrer=referrer,
@@ -281,14 +232,11 @@ def request_submit(request):
         metadata=_json_value(data.get('metadata')),
         needs_review=_needs_review_value(data.get('needs_review'), user=user),
     )
-    feedback_request.vote(
-        user=user,
-        email=identity['email'],
-        name=identity['name'],
-        ip_address=_client_ip(request),
-        importance=_int_value(data.get('importance'), 0),
-    )
-    _handle_attachments(request, feedback_request)
+    if user is not None:
+        feedback_request.vote(
+            user=user,
+            importance=_int_value(data.get('importance'), 0),
+        )
     return json_response_okay({'request': _serialize_request(feedback_request, include_detail=True)})
 
 
@@ -302,15 +250,10 @@ def request_vote(request, request_id):
         return json_response_error({'error': 'Request is closed for voting'})
     data = _payload(request)
     user = _request_user(request)
-    identity = _identity_from_data(data, user=user)
-    email = identity['email']
-    if user is None and not email:
-        return json_response_error({'error': 'Authenticated user or email required'})
+    if user is None:
+        return json_response_error({'error': 'Authentication required'}, status=403)
     vote = feedback_request.vote(
         user=user,
-        email=email,
-        name=identity['name'],
-        ip_address=_client_ip(request),
         importance=_int_value(data.get('importance'), 0),
     )
     return json_response_okay(
@@ -327,10 +270,10 @@ def request_unvote(request, request_id):
         feedback_request = _feedback_queryset(request).get(id=request_id)
     except FeedbackRequest.DoesNotExist:
         return json_response_not_found()
-    data = _payload(request)
     user = _request_user(request)
-    email = data.get('email', '')
-    count = feedback_request.unvote(user=user, email=email)
+    if user is None:
+        return json_response_error({'error': 'Authentication required'}, status=403)
+    count = feedback_request.unvote(user=user)
     return json_response_okay({'request': _serialize_request(feedback_request), 'removed': count})
 
 
@@ -348,16 +291,12 @@ def request_comment(request, request_id):
     is_internal = _bool_value(data.get('is_internal'), False)
     if is_internal and not (user is not None and user.is_staff):
         return json_response_error({'error': 'Forbidden'}, status=403)
-    identity = _identity_from_data(data, user=user)
     comment = FeedbackRequestComment.objects.create(
-        request=feedback_request,
+        feedback=feedback_request,
         user=user,
-        name=identity['name'],
-        email=identity['email'],
         comment=comment_text,
         is_internal=is_internal,
     )
-    _handle_attachments(request, feedback_request, comment=comment)
     return json_response_okay({'comment': comment.json_encode(), 'request': _serialize_request(feedback_request)})
 
 
