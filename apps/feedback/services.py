@@ -63,33 +63,37 @@ def slack_escape_text(value):
 
 
 def absolute_request_uri(request, url):
-    if not url:
-        return ''
-    if request is None:
-        return url
-    return request.build_absolute_uri(url)
+    absolute_url = ''
+    if url:
+        if request is None:
+            absolute_url = url
+        else:
+            absolute_url = request.build_absolute_uri(url)
+    return absolute_url
 
 
 def get_feedback_request_author_display(feedback_request):
     user = feedback_request.created_by
-    if user is None:
-        return 'Anonymous'
-    full_name = user.get_full_name()
-    label = full_name or user.get_username()
-    if user.email:
-        label = '%s <%s>' % (label, user.email)
+    label = 'Anonymous'
+    if user is not None:
+        full_name = user.get_full_name()
+        label = full_name or user.get_username()
+        if user.email:
+            label = '%s <%s>' % (label, user.email)
     return label
 
 
 def get_feedback_source_slack_value(source_uri, request=None):
-    if not source_uri:
-        return 'Not captured'
-    if source_uri.startswith('/'):
-        source_uri = absolute_request_uri(request, source_uri)
-    parsed = urlparse(source_uri)
-    if parsed.scheme in ('http', 'https') and parsed.netloc:
-        return '<%s|Open source page>' % source_uri
-    return slack_escape_text(source_uri)
+    source_value = 'Not captured'
+    if source_uri:
+        if source_uri.startswith('/'):
+            source_uri = absolute_request_uri(request, source_uri)
+        parsed = urlparse(source_uri)
+        if parsed.scheme in ('http', 'https') and parsed.netloc:
+            source_value = '<%s|Open source page>' % source_uri
+        else:
+            source_value = slack_escape_text(source_uri)
+    return source_value
 
 
 def build_feedback_slack_attachment(feedback_request, request=None):
@@ -142,19 +146,17 @@ def build_feedback_slack_attachment(feedback_request, request=None):
 
 
 def notify_feedback_request_slack(feedback_request, request=None):
-    if not htk_setting('HTK_FEEDBACK_SLACK_ENABLED', False):
-        return None
+    response = None
     channel = htk_setting('HTK_FEEDBACK_SLACK_CHANNEL')
-    if not channel:
-        return None
-    attachment = build_feedback_slack_attachment(feedback_request, request=request)
-    response = slack_webhook_call(
-        channel=channel,
-        username=htk_setting('HTK_FEEDBACK_SLACK_USERNAME'),
-        icon_emoji=htk_setting('HTK_FEEDBACK_SLACK_ICON_EMOJI'),
-        text=':memo: New feedback submitted',
-        attachments=[attachment],
-    )
+    if htk_setting('HTK_FEEDBACK_SLACK_ENABLED', False) and channel:
+        attachment = build_feedback_slack_attachment(feedback_request, request=request)
+        response = slack_webhook_call(
+            channel=channel,
+            username=htk_setting('HTK_FEEDBACK_SLACK_USERNAME'),
+            icon_emoji=htk_setting('HTK_FEEDBACK_SLACK_ICON_EMOJI'),
+            text=':memo: New feedback submitted',
+            attachments=[attachment],
+        )
     return response
 
 
