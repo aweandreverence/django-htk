@@ -160,6 +160,21 @@ GET /feedback/requests/my
 
 Authenticated users can see requests they created or voted for.
 
+## Model File Layout
+
+Feedback uses the standard multi-model app package layout:
+
+```text
+models/
+├── __init__.py
+├── feedback.py
+├── request.py
+├── vote.py
+└── comment.py
+```
+
+Import from `htk.apps.feedback.models` unless you specifically need an internal model file. `models/__init__.py` is the stable public surface and imports every model explicitly.
+
 ## Model Shape
 
 - `FeedbackRequest` — idea/feature/bug/content/support/general request.

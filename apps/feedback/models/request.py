@@ -2,38 +2,10 @@
 from django.conf import settings
 from django.contrib.sites.models import Site
 from django.db import models
-from django.db.models import Q
 
 # HTK Imports
 from htk.apps.feedback.constants import *
 from htk.models import HtkBaseModel
-
-
-class Feedback(HtkBaseModel):
-    site = models.ForeignKey(Site, on_delete=models.CASCADE)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='feedback', null=True, blank=True, default=None, on_delete=models.SET_DEFAULT)
-    name = models.CharField(max_length=100, null=True, blank=True)
-    comment = models.CharField(max_length=2000, null=True, blank=True)
-    email = models.EmailField(max_length=100, null=True, blank=True)
-    uri = models.CharField(max_length=200, null=True, blank=True)
-    # admin
-    processed = models.BooleanField(default=False)
-    needs_followup = models.BooleanField(default=True)
-    # read-only
-    created_on = models.DateTimeField(auto_now_add=True)
-
-    class Meta:
-        app_label = 'htk'
-        verbose_name = 'Feedback'
-        verbose_name_plural = 'Feedback'
-
-    def __str__(self):
-        s = '%s, %s, [%s]' % (
-            self.created_on.strftime('%Y-%m-%d %H:%M:%S'),
-            self.uri,
-            self.comment[:50] + '...' if self.comment and len(self.comment) > 50 else self.comment
-        )
-        return s
 
 
 class FeedbackRequest(HtkBaseModel):
@@ -98,6 +70,8 @@ class FeedbackRequest(HtkBaseModel):
     def vote(self, user, importance=0):
         if user is None:
             return None
+        from htk.apps.feedback.models import FeedbackRequestVote
+
         vote, _ = FeedbackRequestVote.objects.update_or_create(
             feedback=self,
             user=user,
@@ -135,62 +109,6 @@ class FeedbackRequest(HtkBaseModel):
                 'needs_review': self.needs_review,
                 'created_on': self.created_on,
                 'updated_on': self.updated_on,
-            }
-        )
-        return value
-
-
-class FeedbackRequestVote(HtkBaseModel):
-    feedback = models.ForeignKey(FeedbackRequest, related_name='votes', on_delete=models.CASCADE)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='feedback_request_votes', on_delete=models.CASCADE)
-    importance = models.PositiveSmallIntegerField(default=0)
-    is_active = models.BooleanField(default=True)
-    is_spam = models.BooleanField(default=False)
-    created_on = models.DateTimeField(auto_now_add=True)
-    updated_on = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        constraints = (
-            models.UniqueConstraint(fields=('feedback', 'user'), name='feedback_unique_user_vote'),
-        )
-        ordering = ('-created_on',)
-        verbose_name = 'Feedback request vote'
-        verbose_name_plural = 'Feedback request votes'
-
-    def __str__(self):
-        return '%s vote for %s' % (self.user, self.feedback)
-
-
-class FeedbackRequestComment(HtkBaseModel):
-    feedback = models.ForeignKey(FeedbackRequest, related_name='comments', on_delete=models.CASCADE)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='feedback_request_comments', null=True, blank=True, default=None, on_delete=models.SET_DEFAULT)
-    comment = models.TextField()
-    is_internal = models.BooleanField(default=False)
-    is_hidden = models.BooleanField(default=False)
-    is_spam = models.BooleanField(default=False)
-    created_on = models.DateTimeField(auto_now_add=True)
-    updated_on = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        ordering = ('created_on',)
-        verbose_name = 'Feedback request comment'
-        verbose_name_plural = 'Feedback request comments'
-
-    def __str__(self):
-        return '%s comment on %s' % (self.user or 'Anonymous', self.feedback)
-
-    def save(self, *args, **kwargs):
-        super(FeedbackRequestComment, self).save(*args, **kwargs)
-        self.feedback.refresh_counts()
-
-    def json_encode(self):
-        value = super(FeedbackRequestComment, self).json_encode()
-        value.update(
-            {
-                'feedback_id': self.feedback_id,
-                'comment': self.comment,
-                'is_internal': self.is_internal,
-                'created_on': self.created_on,
             }
         )
         return value
