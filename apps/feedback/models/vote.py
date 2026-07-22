@@ -3,7 +3,7 @@ from django.conf import settings
 from django.db import models
 
 # HTK Imports
-from htk.apps.feedback.models.request import FeedbackRequest
+from htk.apps.feedback.models.feedback import FeedbackRequest
 from htk.models import HtkBaseModel
 
 

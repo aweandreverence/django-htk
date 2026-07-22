@@ -180,7 +180,7 @@ Feedback uses the standard multi-model app package layout:
 models/
 ├── __init__.py
 ├── feedback.py
-├── request.py
+├── feedback_legacy.py
 ├── vote.py
 └── comment.py
 ```
