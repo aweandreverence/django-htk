@@ -6,6 +6,7 @@ from htk.apps.feedback.models import Feedback
 from htk.apps.feedback.models import FeedbackRequest
 from htk.apps.feedback.models import FeedbackRequestComment
 from htk.apps.feedback.models import FeedbackRequestVote
+from htk.utils import htk_setting
 
 
 class FeedbackAdmin(admin.ModelAdmin):
@@ -192,7 +193,9 @@ class FeedbackRequestCommentAdmin(admin.ModelAdmin):
     )
 
 
-admin.site.register(Feedback, FeedbackAdmin)
+if htk_setting('HTK_FEEDBACK_ENABLE_LEGACY_ADMIN', True):
+    admin.site.register(Feedback, FeedbackAdmin)
+
 admin.site.register(FeedbackRequest, FeedbackRequestAdmin)
 admin.site.register(FeedbackRequestVote, FeedbackRequestVoteAdmin)
 admin.site.register(FeedbackRequestComment, FeedbackRequestCommentAdmin)

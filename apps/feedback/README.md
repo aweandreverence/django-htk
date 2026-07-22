@@ -160,6 +160,18 @@ GET /feedback/requests/my
 
 Authenticated users can see requests they created or voted for.
 
+## Admin
+
+The feature-request models live in the Django admin under **Htk Feedback** so downstream apps can use the shared HTK feedback infrastructure without making the models look product-owned.
+
+The legacy `Feedback` contact-form model is registered in admin by default for backward compatibility. Downstream apps that only want the request/vote/comment surface can hide it with:
+
+```python
+HTK_FEEDBACK_ENABLE_LEGACY_ADMIN = False
+```
+
+This setting only controls admin registration for the legacy model; it does not change migrations, tables, or public imports.
+
 ## Model File Layout
 
 Feedback uses the standard multi-model app package layout:
