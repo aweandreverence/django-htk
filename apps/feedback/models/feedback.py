@@ -63,6 +63,10 @@ class FeedbackRequest(HtkBaseModel):
             return full_name or self.created_by.get_username()
         return ''
 
+    @property
+    def admin_url(self):
+        return self.get_admin_url()
+
     def refresh_counts(self, save=True):
         active_votes = self.votes.filter(is_active=True, is_spam=False)
         self.upvotes_count = active_votes.filter(value=FEEDBACK_VOTE_UP).count()

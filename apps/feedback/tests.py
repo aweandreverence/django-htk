@@ -68,7 +68,12 @@ class FeedbackRequestApiTestCase(TestCase):
         request.user = user if user is not None else AnonymousUser()
         return request
 
-    def test_request_submit_creates_request_and_vote(self):
+    @override_settings(
+        HTK_FEEDBACK_SLACK_ENABLED=True,
+        HTK_FEEDBACK_SLACK_CHANNEL='#feedback',
+    )
+    @mock.patch('htk.apps.feedback.services.slack_webhook_call')
+    def test_request_submit_creates_request_vote_and_slack_notification(self, slack_webhook_call):
         request = self._request(
             'post',
             '/feedback/requests/submit',
@@ -99,9 +104,18 @@ class FeedbackRequestApiTestCase(TestCase):
         self.assertEqual(1, feedback_request.votes_count)
         self.assertEqual(1, feedback_request.upvotes_count)
         self.assertEqual(0, feedback_request.downvotes_count)
+        self.assertEqual(feedback_request.get_admin_url(), feedback_request.admin_url)
         vote = FeedbackRequestVote.objects.get()
         self.assertEqual(self.user, vote.user)
         self.assertEqual(FEEDBACK_VOTE_UP, vote.value)
+        slack_webhook_call.assert_called_once()
+        _, kwargs = slack_webhook_call.call_args
+        self.assertEqual('#feedback', kwargs['channel'])
+        self.assertEqual(':memo: New feedback submitted', kwargs['text'])
+        attachment = kwargs['attachments'][0]
+        self.assertEqual('Add reading plan support', attachment['title'])
+        self.assertIn('Open in Django admin', attachment['fields'][-1]['value'])
+        self.assertIn(feedback_request.admin_url, attachment['fields'][-1]['value'])
 
     def test_request_submit_allows_anonymous_feedback_without_identity(self):
         request = self._request(

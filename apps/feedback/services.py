@@ -1,5 +1,9 @@
 # Python Standard Library Imports
 import json
+from urllib.parse import urlparse
+
+# Third Party (PyPI) Imports
+import rollbar
 
 # Django Imports
 from django.contrib import messages
@@ -21,6 +25,8 @@ from htk.apps.feedback.constants import FEEDBACK_VOTE_DOWN
 from htk.apps.feedback.constants import FEEDBACK_VOTE_UP
 from htk.apps.feedback.models import FeedbackRequest
 from htk.apps.feedback.models import FeedbackRequestVote
+from htk.lib.slack.utils import webhook_call as slack_webhook_call
+from htk.utils import htk_setting
 
 
 DEFAULT_FEEDBACK_APP = 'feedback'
@@ -49,6 +55,120 @@ def get_user_feedback_identity(user):
     return {
         'is_authenticated': user is not None,
     }
+
+
+def slack_escape_text(value):
+    text = str(value or '')
+    return text.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
+
+
+def absolute_request_uri(request, url):
+    if not url:
+        return ''
+    if request is None:
+        return url
+    return request.build_absolute_uri(url)
+
+
+def get_feedback_request_author_display(feedback_request):
+    user = feedback_request.created_by
+    if user is None:
+        return 'Anonymous'
+    full_name = user.get_full_name()
+    label = full_name or user.get_username()
+    if user.email:
+        label = '%s <%s>' % (label, user.email)
+    return label
+
+
+def get_feedback_source_slack_value(source_uri, request=None):
+    if not source_uri:
+        return 'Not captured'
+    if source_uri.startswith('/'):
+        source_uri = absolute_request_uri(request, source_uri)
+    parsed = urlparse(source_uri)
+    if parsed.scheme in ('http', 'https') and parsed.netloc:
+        return '<%s|Open source page>' % source_uri
+    return slack_escape_text(source_uri)
+
+
+def build_feedback_slack_attachment(feedback_request, request=None):
+    admin_url = absolute_request_uri(request, feedback_request.admin_url)
+    source_value = get_feedback_source_slack_value(
+        feedback_request.source_uri,
+        request=request,
+    )
+    admin_value = '<%s|Open in Django admin>' % admin_url if admin_url else 'Unavailable'
+    fields = [
+        {
+            'title': 'Type',
+            'value': slack_escape_text(feedback_request.get_request_type_display()),
+            'short': True,
+        },
+        {
+            'title': 'Status',
+            'value': slack_escape_text(feedback_request.get_status_display()),
+            'short': True,
+        },
+        {
+            'title': 'Visibility',
+            'value': slack_escape_text(feedback_request.get_visibility_display()),
+            'short': True,
+        },
+        {
+            'title': 'Submitted by',
+            'value': slack_escape_text(get_feedback_request_author_display(feedback_request)),
+            'short': True,
+        },
+        {
+            'title': 'Source',
+            'value': source_value,
+            'short': False,
+        },
+        {
+            'title': 'Admin',
+            'value': admin_value,
+            'short': False,
+        },
+    ]
+    return {
+        'fallback': 'New feedback: %s' % slack_escape_text(feedback_request.title),
+        'color': '#4f8cff',
+        'title': slack_escape_text(feedback_request.title),
+        'text': slack_escape_text(feedback_request.description),
+        'fields': fields,
+        'mrkdwn_in': ('fields',),
+    }
+
+
+def notify_feedback_request_slack(feedback_request, request=None):
+    if not htk_setting('HTK_FEEDBACK_SLACK_ENABLED', False):
+        return None
+    channel = htk_setting('HTK_FEEDBACK_SLACK_CHANNEL')
+    if not channel:
+        return None
+    attachment = build_feedback_slack_attachment(feedback_request, request=request)
+    response = slack_webhook_call(
+        channel=channel,
+        username=htk_setting('HTK_FEEDBACK_SLACK_USERNAME'),
+        icon_emoji=htk_setting('HTK_FEEDBACK_SLACK_ICON_EMOJI'),
+        text=':memo: New feedback submitted',
+        attachments=[attachment],
+    )
+    return response
+
+
+def safely_notify_feedback_request_slack(feedback_request, request=None):
+    try:
+        response = notify_feedback_request_slack(feedback_request, request=request)
+    except Exception:
+        rollbar.report_exc_info(
+            extra_data={
+                'feedback_request_id': feedback_request.id,
+            }
+        )
+        response = None
+    return response
 
 
 def build_feedback_context_json(app=DEFAULT_FEEDBACK_APP, source=DEFAULT_FEEDBACK_SOURCE, source_uri='', extra=None):
@@ -121,6 +241,7 @@ def create_feedback_request_from_post(
     )
     if user is not None:
         feedback_request.upvote(user=user)
+    safely_notify_feedback_request_slack(feedback_request, request=request)
     return feedback_request
 
 
