@@ -14,6 +14,7 @@ from django.test import override_settings
 # HTK Imports
 from htk.api.constants import HTK_API_KEY_ANTISPAM
 from htk.api.constants import HTK_API_VALUE_ANTISPAM_CHALLENGE_RESPONSE
+from htk.apps.accounts.utils.general import get_user_profile_model
 from htk.apps.feedback.constants import FEEDBACK_REQUEST_TYPE_BUG
 from htk.apps.feedback.constants import FEEDBACK_REQUEST_TYPE_FEATURE
 from htk.apps.feedback.constants import FEEDBACK_STATUS_IN_PROGRESS
@@ -54,6 +55,19 @@ class FeedbackRequestApiTestCase(TestCase):
             email='feedback-staff@example.com',
             password='password',
             is_staff=True,
+        )
+        UserProfileModel = get_user_profile_model()
+        UserProfileModel.objects.get_or_create(
+            user=self.user,
+            defaults={
+                'has_username_set': True,
+            },
+        )
+        UserProfileModel.objects.get_or_create(
+            user=self.staff,
+            defaults={
+                'has_username_set': True,
+            },
         )
 
     def _json(self, response):
@@ -104,7 +118,12 @@ class FeedbackRequestApiTestCase(TestCase):
         self.assertEqual(1, feedback_request.votes_count)
         self.assertEqual(1, feedback_request.upvotes_count)
         self.assertEqual(0, feedback_request.downvotes_count)
+        expected_full_admin_url = request.build_absolute_uri(feedback_request.admin_url)
         self.assertEqual(feedback_request.get_admin_url(), feedback_request.admin_url)
+        self.assertEqual(
+            expected_full_admin_url,
+            feedback_request.get_full_admin_url(request=request),
+        )
         vote = FeedbackRequestVote.objects.get()
         self.assertEqual(self.user, vote.user)
         self.assertEqual(FEEDBACK_VOTE_UP, vote.value)
@@ -115,7 +134,7 @@ class FeedbackRequestApiTestCase(TestCase):
         attachment = kwargs['attachments'][0]
         self.assertEqual('Add reading plan support', attachment['title'])
         self.assertIn('Open in Django admin', attachment['fields'][-1]['value'])
-        self.assertIn(feedback_request.admin_url, attachment['fields'][-1]['value'])
+        self.assertIn(expected_full_admin_url, attachment['fields'][-1]['value'])
 
     def test_request_submit_allows_anonymous_feedback_without_identity(self):
         request = self._request(

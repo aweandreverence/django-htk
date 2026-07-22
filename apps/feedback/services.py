@@ -27,6 +27,7 @@ from htk.apps.feedback.models import FeedbackRequest
 from htk.apps.feedback.models import FeedbackRequestVote
 from htk.lib.slack.utils import webhook_call as slack_webhook_call
 from htk.utils import htk_setting
+from htk.utils.text.converters import slack_escape_text
 
 
 DEFAULT_FEEDBACK_APP = 'feedback'
@@ -57,44 +58,13 @@ def get_user_feedback_identity(user):
     }
 
 
-def slack_escape_text(value):
-    text = str(value or '')
-    escaped_text = text.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
-    return escaped_text
-
-
-def absolute_request_uri(request, url):
-    absolute_url = ''
-    if url:
-        absolute_url = request.build_absolute_uri(url)
-    return absolute_url
-
-
-def get_feedback_user_display_name(user):
-    profile = getattr(user, 'profile', None)
-    display_name = ''
-    if profile is not None and hasattr(profile, 'get_display_name'):
-        display_name = profile.get_display_name()
-    if not display_name:
-        full_name = user.get_full_name()
-        display_name = full_name or user.get_username()
-    return display_name
-
-
-def get_feedback_user_email(user):
-    profile = getattr(user, 'profile', None)
-    email = user.email
-    if profile is not None:
-        email = getattr(profile, 'confirmed_email', None) or email
-    return email
-
-
 def get_feedback_request_author_display(feedback_request):
     user = feedback_request.created_by
     label = 'Anonymous'
     if user is not None:
-        display_name = get_feedback_user_display_name(user)
-        email = get_feedback_user_email(user)
+        profile = user.profile
+        display_name = profile.get_display_name()
+        email = profile.confirmed_email or user.email
         label = display_name
         if email:
             label = '%s <%s>' % (label, email)
@@ -105,7 +75,7 @@ def get_feedback_source_slack_value(source_uri, request):
     source_value = 'Not captured'
     if source_uri:
         if source_uri.startswith('/'):
-            source_uri = absolute_request_uri(request, source_uri)
+            source_uri = request.build_absolute_uri(source_uri)
         parsed = urlparse(source_uri)
         if parsed.scheme in ('http', 'https') and parsed.netloc:
             source_value = '<%s|Open source page>' % source_uri
@@ -115,7 +85,7 @@ def get_feedback_source_slack_value(source_uri, request):
 
 
 def build_feedback_slack_attachment(feedback_request, request):
-    admin_url = absolute_request_uri(request, feedback_request.admin_url)
+    admin_url = feedback_request.get_full_admin_url(request=request)
     source_value = get_feedback_source_slack_value(
         feedback_request.source_uri,
         request=request,

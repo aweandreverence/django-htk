@@ -126,6 +126,27 @@ class HtkBaseModel(models.Model):
         )
         return url
 
+    @property
+    def admin_url(self):
+        admin_url = self.get_admin_url()
+        return admin_url
+
+    def get_full_admin_url(self, request=None):
+        from htk.utils.request import get_current_request
+
+        admin_url = self.get_admin_url()
+        full_admin_url = admin_url
+        if request is None:
+            request = get_current_request()
+        if request is not None:
+            full_admin_url = request.build_absolute_uri(admin_url)
+        return full_admin_url
+
+    @property
+    def full_admin_url(self):
+        full_admin_url = self.get_full_admin_url()
+        return full_admin_url
+
     def get_absolute_url(self):
         raise Exception('Not implemented')
 
