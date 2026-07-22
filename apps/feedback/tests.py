@@ -19,6 +19,8 @@ from htk.apps.feedback.constants import FEEDBACK_REQUEST_TYPE_FEATURE
 from htk.apps.feedback.constants import FEEDBACK_STATUS_IN_PROGRESS
 from htk.apps.feedback.constants import FEEDBACK_VISIBILITY_PRIVATE
 from htk.apps.feedback.constants import FEEDBACK_VISIBILITY_PUBLIC
+from htk.apps.feedback.constants import FEEDBACK_VOTE_DOWN
+from htk.apps.feedback.constants import FEEDBACK_VOTE_UP
 from htk.apps.feedback.models import Feedback
 from htk.apps.feedback.models import FeedbackRequest
 from htk.apps.feedback.models import FeedbackRequestComment
@@ -95,8 +97,11 @@ class FeedbackRequestApiTestCase(TestCase):
         self.assertEqual(FEEDBACK_VISIBILITY_PRIVATE, feedback_request.visibility)
         self.assertTrue(feedback_request.needs_review)
         self.assertEqual(1, feedback_request.votes_count)
+        self.assertEqual(1, feedback_request.upvotes_count)
+        self.assertEqual(0, feedback_request.downvotes_count)
         vote = FeedbackRequestVote.objects.get()
         self.assertEqual(self.user, vote.user)
+        self.assertEqual(FEEDBACK_VOTE_UP, vote.value)
 
     def test_request_submit_allows_anonymous_feedback_without_identity(self):
         request = self._request(
@@ -181,7 +186,7 @@ class FeedbackRequestApiTestCase(TestCase):
         self.assertEqual(FEEDBACK_VISIBILITY_PUBLIC, feedback_request.visibility)
         self.assertFalse(feedback_request.needs_review)
 
-    def test_duplicate_votes_update_existing_vote_instead_of_incrementing(self):
+    def test_duplicate_votes_update_existing_vote_direction_instead_of_incrementing(self):
         feedback_request = FeedbackRequest.objects.create(
             site=self.site,
             title='Add cross references',
@@ -191,13 +196,13 @@ class FeedbackRequestApiTestCase(TestCase):
             'post',
             '/feedback/requests/%s/vote' % feedback_request.id,
             user=self.user,
-            data={'importance': 3},
+            data={'direction': 'up'},
         )
         second = self._request(
             'post',
             '/feedback/requests/%s/vote' % feedback_request.id,
             user=self.user,
-            data={'importance': 5},
+            data={'direction': 'down'},
         )
 
         self.assertTrue(self._json(views.request_vote(first, feedback_request.id))['success'])
@@ -205,8 +210,10 @@ class FeedbackRequestApiTestCase(TestCase):
         feedback_request.refresh_from_db()
         vote = FeedbackRequestVote.objects.get()
 
-        self.assertEqual(1, feedback_request.votes_count)
-        self.assertEqual(5, vote.importance)
+        self.assertEqual(-1, feedback_request.votes_count)
+        self.assertEqual(0, feedback_request.upvotes_count)
+        self.assertEqual(1, feedback_request.downvotes_count)
+        self.assertEqual(FEEDBACK_VOTE_DOWN, vote.value)
 
     def test_unvote_deactivates_vote_and_updates_count(self):
         feedback_request = FeedbackRequest.objects.create(
@@ -217,6 +224,8 @@ class FeedbackRequestApiTestCase(TestCase):
         feedback_request.vote(user=self.user)
         feedback_request.refresh_from_db()
         self.assertEqual(1, feedback_request.votes_count)
+        self.assertEqual(1, feedback_request.upvotes_count)
+        self.assertEqual(0, feedback_request.downvotes_count)
 
         request = self._request(
             'post',
@@ -230,6 +239,8 @@ class FeedbackRequestApiTestCase(TestCase):
         self.assertTrue(payload['success'])
         self.assertEqual(1, payload['removed'])
         self.assertEqual(0, feedback_request.votes_count)
+        self.assertEqual(0, feedback_request.upvotes_count)
+        self.assertEqual(0, feedback_request.downvotes_count)
 
     def test_comment_and_staff_status_update(self):
         feedback_request = FeedbackRequest.objects.create(

@@ -112,6 +112,18 @@ def _int_value(value, default=0):
         return default
 
 
+
+
+def _vote_value(data):
+    direction = (data.get('direction') or data.get('vote') or '').strip().lower()
+    if direction in ('down', 'downvote', '-1'):
+        return FEEDBACK_VOTE_DOWN
+    if direction in ('up', 'upvote', '+1', '1'):
+        return FEEDBACK_VOTE_UP
+    value = _int_value(data.get('value'), FEEDBACK_VOTE_UP)
+    return FEEDBACK_VOTE_DOWN if value < 0 else FEEDBACK_VOTE_UP
+
+
 def _feedback_queryset(request):
     site = get_current_site(request)
     qs = FeedbackRequest.objects.filter(site=site)
@@ -233,10 +245,7 @@ def request_submit(request):
         needs_review=_needs_review_value(data.get('needs_review'), user=user),
     )
     if user is not None:
-        feedback_request.vote(
-            user=user,
-            importance=_int_value(data.get('importance'), 0),
-        )
+        feedback_request.upvote(user=user)
     return json_response_okay({'request': _serialize_request(feedback_request, include_detail=True)})
 
 
@@ -252,10 +261,7 @@ def request_vote(request, request_id):
     user = _request_user(request)
     if user is None:
         return json_response_error({'error': 'Authentication required'}, status=403)
-    vote = feedback_request.vote(
-        user=user,
-        importance=_int_value(data.get('importance'), 0),
-    )
+    vote = feedback_request.vote(user=user, value=_vote_value(data))
     return json_response_okay(
         {
             'request': _serialize_request(feedback_request),

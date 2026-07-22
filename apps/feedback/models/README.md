@@ -6,7 +6,7 @@ This package contains one Django model per file for the feedback app.
 
 - `feedback_legacy.py` — legacy `Feedback` contact-form model that remains under the `htk` app label.
 - `feedback.py` — `FeedbackRequest`, the central reviewable feature/bug/content/support item.
-- `vote.py` — `FeedbackRequestVote`, authenticated user support/vote records.
+- `vote.py` — `FeedbackRequestVote`, authenticated user upvote/downvote records.
 - `comment.py` — `FeedbackRequestComment`, public or internal request discussion.
 - `__init__.py` — explicit public imports so Django and downstream callers can import from `htk.apps.feedback.models`.
 

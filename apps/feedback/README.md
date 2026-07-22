@@ -93,8 +93,8 @@ users may see private/hidden items.
 GET /feedback/requests/matches?q=saved%20searches
 ```
 
-Use this while a user is typing a title/body so they can support an existing
-idea instead of creating a duplicate.
+Use this while a user is typing a title/body so they can find an existing
+idea to vote on instead of creating a duplicate.
 
 ### Submit a request
 
@@ -132,8 +132,10 @@ POST /feedback/requests/<id>/vote
 POST /feedback/requests/<id>/unvote
 ```
 
-Authenticated users can vote once per request. Anonymous voting is intentionally
-not supported; require login so the vote row only needs a `user` FK.
+Authenticated users can vote once per request, with `value=1` for an upvote
+and `value=-1` for a downvote. Omitting `value` preserves legacy upvote
+behavior. Anonymous voting is intentionally not supported; require login so
+the vote row only needs a `user` FK.
 
 ### Comment
 
@@ -190,7 +192,7 @@ Import from `htk.apps.feedback.models` unless you specifically need an internal 
 ## Model Shape
 
 - `FeedbackRequest` — idea/feature/bug/content/support/general request.
-- `FeedbackRequestVote` — one active support/vote per authenticated user.
+- `FeedbackRequestVote` — one active upvote/downvote row per authenticated user.
 - `FeedbackRequestComment` — public or internal discussion.
 
 ## Integration Notes

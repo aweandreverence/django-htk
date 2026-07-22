@@ -92,6 +92,8 @@ class FeedbackRequestAdmin(admin.ModelAdmin):
         'visibility',
         'owner',
         'votes_count',
+        'upvotes_count',
+        'downvotes_count',
         'comments_count',
         'needs_review',
         'is_hidden',
@@ -129,6 +131,8 @@ class FeedbackRequestAdmin(admin.ModelAdmin):
     )
     readonly_fields = (
         'votes_count',
+        'upvotes_count',
+        'downvotes_count',
         'comments_count',
         'created_on',
         'updated_on',
@@ -155,7 +159,7 @@ class FeedbackRequestVoteAdmin(admin.ModelAdmin):
         'id',
         'feedback',
         'user',
-        'importance',
+        'value',
         'is_active',
         'is_spam',
         'created_on',
@@ -163,7 +167,7 @@ class FeedbackRequestVoteAdmin(admin.ModelAdmin):
     list_filter = (
         'is_active',
         'is_spam',
-        'importance',
+        'value',
         'created_on',
     )
     search_fields = (

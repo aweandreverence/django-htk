@@ -24,7 +24,9 @@ class FeedbackRequest(HtkBaseModel):
     referrer = models.CharField(max_length=1024, blank=True)
     context = models.JSONField(default=dict, blank=True)
     metadata = models.JSONField(default=dict, blank=True)
-    votes_count = models.PositiveIntegerField(default=0)
+    votes_count = models.IntegerField(default=0)
+    upvotes_count = models.PositiveIntegerField(default=0)
+    downvotes_count = models.PositiveIntegerField(default=0)
     comments_count = models.PositiveIntegerField(default=0)
     is_hidden = models.BooleanField(default=False)
     is_spam = models.BooleanField(default=False)
@@ -62,12 +64,15 @@ class FeedbackRequest(HtkBaseModel):
         return ''
 
     def refresh_counts(self, save=True):
-        self.votes_count = self.votes.filter(is_active=True, is_spam=False).count()
+        active_votes = self.votes.filter(is_active=True, is_spam=False)
+        self.upvotes_count = active_votes.filter(value=FEEDBACK_VOTE_UP).count()
+        self.downvotes_count = active_votes.filter(value=FEEDBACK_VOTE_DOWN).count()
+        self.votes_count = self.upvotes_count - self.downvotes_count
         self.comments_count = self.comments.filter(is_hidden=False, is_spam=False).count()
         if save:
-            self.save(update_fields=('votes_count', 'comments_count', 'updated_on'))
+            self.save(update_fields=('votes_count', 'upvotes_count', 'downvotes_count', 'comments_count', 'updated_on'))
 
-    def vote(self, user, importance=0):
+    def vote(self, user, value=FEEDBACK_VOTE_UP):
         if user is None:
             return None
         from htk.apps.feedback.models import FeedbackRequestVote
@@ -76,13 +81,19 @@ class FeedbackRequest(HtkBaseModel):
             feedback=self,
             user=user,
             defaults={
-                'importance': importance or 0,
+                'value': value,
                 'is_active': True,
                 'is_spam': False,
             },
         )
         self.refresh_counts()
         return vote
+
+    def upvote(self, user):
+        return self.vote(user=user, value=FEEDBACK_VOTE_UP)
+
+    def downvote(self, user):
+        return self.vote(user=user, value=FEEDBACK_VOTE_DOWN)
 
     def unvote(self, user):
         if user is None:
@@ -103,6 +114,8 @@ class FeedbackRequest(HtkBaseModel):
                 'visibility': self.visibility,
                 'source_uri': self.source_uri,
                 'votes_count': self.votes_count,
+                'upvotes_count': self.upvotes_count,
+                'downvotes_count': self.downvotes_count,
                 'comments_count': self.comments_count,
                 'is_hidden': self.is_hidden,
                 'is_spam': self.is_spam,
