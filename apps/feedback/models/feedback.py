@@ -65,7 +65,8 @@ class FeedbackRequest(HtkBaseModel):
 
     @property
     def admin_url(self):
-        return self.get_admin_url()
+        admin_url = self.get_admin_url()
+        return admin_url
 
     def refresh_counts(self, save=True):
         active_votes = self.votes.filter(is_active=True, is_spam=False)

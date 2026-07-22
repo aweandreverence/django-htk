@@ -59,7 +59,8 @@ def get_user_feedback_identity(user):
 
 def slack_escape_text(value):
     text = str(value or '')
-    return text.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
+    escaped_text = text.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
+    return escaped_text
 
 
 def absolute_request_uri(request, url):
@@ -135,7 +136,7 @@ def build_feedback_slack_attachment(feedback_request, request=None):
             'short': False,
         },
     ]
-    return {
+    attachment = {
         'fallback': 'New feedback: %s' % slack_escape_text(feedback_request.title),
         'color': '#4f8cff',
         'title': slack_escape_text(feedback_request.title),
@@ -143,6 +144,7 @@ def build_feedback_slack_attachment(feedback_request, request=None):
         'fields': fields,
         'mrkdwn_in': ('fields',),
     }
+    return attachment
 
 
 def notify_feedback_request_slack(feedback_request, request=None):
