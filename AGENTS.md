@@ -33,6 +33,12 @@ Guidelines:
 
 When adding or materially changing reusable app structure, update the app README and any relevant top-level docs in the same change. Keep examples generic unless the module is intentionally product-specific.
 
+## Reuse and Naming Style
+
+HTK should stay DRY and composable: prefer extending existing utilities in `htk.utils`, shared model/base classes, or reusable app APIs before adding one-off helpers to a feature module. Build small Lego-block functions that downstream projects can reuse.
+
+For new APIs, avoid `get_*` names unless matching Django conventions, preserving backward compatibility, or overriding an existing API. Prefer properties for simple derived values (`admin_url`) and action/build names for functions that compose inputs (`build_full_url`, `build_model_admin_url`).
+
 ## Safety
 
 - Do not commit secrets, tokens, private credentials, or private customer/user data.

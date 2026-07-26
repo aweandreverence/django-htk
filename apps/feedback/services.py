@@ -85,7 +85,10 @@ def get_feedback_source_slack_value(source_uri, request):
 
 
 def build_feedback_slack_attachment(feedback_request, request):
-    admin_url = feedback_request.get_full_admin_url(request=request)
+    admin_url = feedback_request.build_full_admin_url(
+        request=request,
+        use_secure=request.is_secure(),
+    )
     source_value = get_feedback_source_slack_value(
         feedback_request.source_uri,
         request=request,

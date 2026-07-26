@@ -5,10 +5,8 @@ import json
 import six.moves.urllib as urllib
 
 # Django Imports
-from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.http import Http404
-from django.urls import reverse
 from django.utils.http import (
     base36_to_int,
     int_to_base36,
@@ -16,6 +14,8 @@ from django.utils.http import (
 
 # HTK Imports
 from htk.models.utils import normalize_model_field_value
+from htk.utils.urls import build_full_model_admin_url
+from htk.utils.urls import build_model_admin_url
 from htk.utils import (
     htk_setting,
     utcnow,
@@ -119,32 +119,27 @@ class HtkBaseModel(models.Model):
     # URLs
 
     def get_admin_url(self):
-        content_type = ContentType.objects.get_for_model(self.__class__)
-        url = reverse(
-            "admin:%s_%s_change" % (content_type.app_label, content_type.model),
-            args=(self.id,),
-        )
-        return url
+        # Backward-compatible alias; prefer the `admin_url` property or
+        # `htk.utils.urls.build_model_admin_url()` in new code.
+        admin_url = self.admin_url
+        return admin_url
 
     @property
     def admin_url(self):
-        admin_url = self.get_admin_url()
+        admin_url = build_model_admin_url(self)
         return admin_url
 
-    def get_full_admin_url(self, request=None):
-        from htk.utils.request import get_current_request
-
-        admin_url = self.get_admin_url()
-        full_admin_url = admin_url
-        if request is None:
-            request = get_current_request()
-        if request is not None:
-            full_admin_url = request.build_absolute_uri(admin_url)
+    def build_full_admin_url(self, request=None, use_secure=True):
+        full_admin_url = build_full_model_admin_url(
+            self,
+            request=request,
+            use_secure=use_secure,
+        )
         return full_admin_url
 
     @property
     def full_admin_url(self):
-        full_admin_url = self.get_full_admin_url()
+        full_admin_url = self.build_full_admin_url()
         return full_admin_url
 
     def get_absolute_url(self):

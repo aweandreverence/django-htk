@@ -206,7 +206,7 @@ HTK_FEEDBACK_SLACK_USERNAME = 'Feedback'  # optional
 HTK_FEEDBACK_SLACK_ICON_EMOJI = ':memo:'  # optional
 ```
 
-Notifications include request type, status, visibility, submitter, source page, and a direct Django admin link via `FeedbackRequest.admin_url`.
+Notifications include request type, status, visibility, submitter, source page, and a direct Django admin link built from HTK's shared model admin URL helpers.
 
 ## Integration Notes
 

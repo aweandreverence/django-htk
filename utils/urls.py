@@ -6,6 +6,7 @@ import requests
 
 # Django Imports
 from django.conf import settings
+from django.contrib.contenttypes.models import ContentType
 from django.urls import reverse
 
 # HTK Imports
@@ -106,3 +107,22 @@ def build_full_url(partial_url, request=None, use_secure=True):
 
     full_url = '{}://{}{}'.format(protocol, domain, partial_url)
     return full_url
+
+
+def build_model_admin_url(model_instance):
+    content_type = ContentType.objects.get_for_model(model_instance.__class__)
+    url = reverse(
+        "admin:%s_%s_change" % (content_type.app_label, content_type.model),
+        args=(model_instance.id,),
+    )
+    return url
+
+
+def build_full_model_admin_url(model_instance, request=None, use_secure=True):
+    admin_url = build_model_admin_url(model_instance)
+    full_admin_url = build_full_url(
+        admin_url,
+        request=request,
+        use_secure=use_secure,
+    )
+    return full_admin_url

@@ -9,6 +9,12 @@ HTK is a shared Django toolkit. Contributions should keep reusable code boring, 
 3. Run a relevant check or test before handing off.
 4. Update docs/examples when behavior, structure, or recommended usage changes.
 
+## Reuse and API Naming
+
+HTK favors very DRY, reusable, composable building blocks. Before adding feature-local helpers, look for an existing utility, base model method/property, or shared app API to extend. If a helper is generally useful, place it in an appropriate shared module such as `htk.utils` instead of burying it in one app.
+
+For new public APIs, avoid `get_*` names unless the name is required by Django, implements a compatibility alias, or overrides an existing convention. Prefer properties for simple derived values (`admin_url`) and verbs that describe construction/composition (`build_full_url`, `build_model_admin_url`) for functions that combine inputs.
+
 ## Django App Structure
 
 For new Django apps/modules, use a `models/` package when there is more than one model or when the model set is expected to grow:
