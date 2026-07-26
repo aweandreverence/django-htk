@@ -23,7 +23,7 @@ Prefer names that reveal intent and operational characteristics:
 - `fetch_*` — call a remote service, HTTP API, or other external dependency; callers should expect network risk and error handling.
 - `look_up_*` / `retrieve_*` — load previously stored data from a local store such as the database/cache; callers should think about query cost and cardinality.
 - `format_*` / `transform_*` — convert data into a different representation or output shape.
-- `enhance_*` — enrich an existing object/value with additional derived or looked-up information while preserving the original concept.
+- `enrich_*` — add useful derived or looked-up information to an existing object/value while preserving the original concept.
 
 Prefer properties for simple derived values (`admin_url`) and descriptive verbs for functions that compose inputs (`build_full_url`, `build_model_admin_url`).
 

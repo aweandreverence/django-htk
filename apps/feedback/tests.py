@@ -51,9 +51,9 @@ class FeedbackRequestApiTestCase(TestCase):
             first_name='Feedback',
             last_name='Reader',
         )
-        self.staff = User.objects.create_user(
-            username='feedback-staff',
-            email='feedback-staff@example.com',
+        self.staff_user = User.objects.create_user(
+            username='staff-user',
+            email='staff-user@example.com',
             password='password',
             is_staff=True,
         )
@@ -65,7 +65,7 @@ class FeedbackRequestApiTestCase(TestCase):
             },
         )
         UserProfileModel.objects.get_or_create(
-            user=self.staff,
+            user=self.staff_user,
             defaults={
                 'has_username_set': True,
             },
@@ -203,7 +203,7 @@ class FeedbackRequestApiTestCase(TestCase):
         request = self._request(
             'post',
             '/feedback/requests/submit',
-            user=self.staff,
+            user=self.staff_user,
             data={
                 'title': 'Reviewed public request',
                 'description': 'Staff can intentionally publish reviewed requests.',
@@ -291,7 +291,7 @@ class FeedbackRequestApiTestCase(TestCase):
         status_request = self._request(
             'post',
             '/feedback/requests/%s/status' % feedback_request.id,
-            user=self.staff,
+            user=self.staff_user,
             data={
                 'status': FEEDBACK_STATUS_IN_PROGRESS,
                 'message': 'We are checking the content import.',
