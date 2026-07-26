@@ -14,7 +14,7 @@ from django.utils.http import (
 
 # HTK Imports
 from htk.models.utils import normalize_model_field_value
-from htk.utils.urls import build_full_model_admin_url
+from htk.utils.urls import build_full_url
 from htk.utils.urls import build_model_admin_url
 from htk.utils import (
     htk_setting,
@@ -118,29 +118,15 @@ class HtkBaseModel(models.Model):
     ##
     # URLs
 
-    def get_admin_url(self):
-        # Backward-compatible alias; prefer the `admin_url` property or
-        # `htk.utils.urls.build_model_admin_url()` in new code.
-        admin_url = self.admin_url
-        return admin_url
-
     @property
     def admin_url(self):
         admin_url = build_model_admin_url(self)
         return admin_url
 
-    def build_full_admin_url(self, request=None, use_secure=True):
-        full_admin_url = build_full_model_admin_url(
-            self,
-            request=request,
-            use_secure=use_secure,
-        )
-        return full_admin_url
-
     @property
     def full_admin_url(self):
-        full_admin_url = self.build_full_admin_url()
-        return full_admin_url
+        url = build_full_url(self.admin_url)
+        return url
 
     def get_absolute_url(self):
         raise Exception('Not implemented')

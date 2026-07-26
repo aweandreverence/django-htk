@@ -119,18 +119,10 @@ class FeedbackRequestApiTestCase(TestCase):
         self.assertEqual(1, feedback_request.votes_count)
         self.assertEqual(1, feedback_request.upvotes_count)
         self.assertEqual(0, feedback_request.downvotes_count)
-        expected_full_admin_url = build_full_url(
-            feedback_request.admin_url,
-            request=request,
-            use_secure=request.is_secure(),
-        )
-        self.assertEqual(feedback_request.get_admin_url(), feedback_request.admin_url)
+        expected_full_admin_url = build_full_url(feedback_request.admin_url)
         self.assertEqual(
             expected_full_admin_url,
-            feedback_request.build_full_admin_url(
-                request=request,
-                use_secure=request.is_secure(),
-            ),
+            feedback_request.full_admin_url,
         )
         vote = FeedbackRequestVote.objects.get()
         self.assertEqual(self.user, vote.user)

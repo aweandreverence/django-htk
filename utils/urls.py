@@ -109,20 +109,17 @@ def build_full_url(partial_url, request=None, use_secure=True):
     return full_url
 
 
-def build_model_admin_url(model_instance):
+def build_model_admin_url(model_instance, full_url=False) -> str:
+    """Build the Django admin change URL for a model instance.
+
+    Returns the relative admin URL by default. Pass `full_url=True` when callers
+    need an absolute URL composed via `build_full_url()`.
+    """
     content_type = ContentType.objects.get_for_model(model_instance.__class__)
     url = reverse(
         "admin:%s_%s_change" % (content_type.app_label, content_type.model),
         args=(model_instance.id,),
     )
+    if full_url:
+        url = build_full_url(url)
     return url
-
-
-def build_full_model_admin_url(model_instance, request=None, use_secure=True):
-    admin_url = build_model_admin_url(model_instance)
-    full_admin_url = build_full_url(
-        admin_url,
-        request=request,
-        use_secure=use_secure,
-    )
-    return full_admin_url

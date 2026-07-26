@@ -13,6 +13,7 @@ def html2markdown(html):
 
 
 def slack_escape_text(value):
+    """Escape text for safe use inside Slack mrkdwn text fields."""
     text = str(value or '')
     escaped_text = (
         text.replace('&', '&amp;')
