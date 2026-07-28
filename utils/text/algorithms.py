@@ -1,47 +1,40 @@
-# Third Party (PyPI) Imports
-import numpy
+from typing import Iterable
 
 
-def levenshtein_distance(w1, w2):
-    """The Levenshtein distance algorithm that compares two words
+def levenshtein_distance(left: str, right: str) -> int:
+    """Return the Levenshtein edit distance between two strings.
 
-    https://en.wikipedia.org/wiki/Levenshtein_distance
+    The distance is the minimum number of insertions, deletions, or
+    substitutions needed to change ``left`` into ``right``.
 
-    https://blog.paperspace.com/implementing-levenshtein-distance-word-autocomplete-autocorrect/
-
-    Returns an `int` representing the edit distance between two words
+    See: https://en.wikipedia.org/wiki/Levenshtein_distance
     """
-    insertion_cost = 0
-    deletion_cost = 0
-    substitution_cost = 0
-    edit_distance = numpy.zeros((len(w1) + 1, len(w2) + 1))
+    if left == right:
+        return 0
+    if not left:
+        return len(right)
+    if not right:
+        return len(left)
 
-    for x in range(len(w1) + 1):
-        edit_distance[x][0] = x
-
-    for y in range(len(w2) + 1):
-        edit_distance[0][y] = y
-
-    for x in range(1, len(w1) + 1):
-        for y in range(1, len(w2) + 1):
-            if (w1[x - 1] == w2[y - 1]):
-                edit_distance[x][y] = edit_distance[x - 1][y - 1]
-            else:
-                insertion_cost = edit_distance[x][y - 1] + 1
-                deletion_cost = edit_distance[x - 1][y] + 1
-                substitution_cost = edit_distance[x - 1][y - 1] + 1
-
-                edit_distance[x][y] = min(
-                    deletion_cost,
-                    insertion_cost,
-                    substitution_cost
-                )
-
-    result = edit_distance[len(w1)][len(w2)]
-    return result
+    previous_row = list(range(len(right) + 1))
+    for left_index, left_character in enumerate(left, start=1):
+        current_row = [left_index]
+        for right_index, right_character in enumerate(right, start=1):
+            insert_cost = current_row[right_index - 1] + 1
+            delete_cost = previous_row[right_index] + 1
+            replace_cost = previous_row[right_index - 1] + (
+                0 if left_character == right_character else 1
+            )
+            current_row.append(min(insert_cost, delete_cost, replace_cost))
+        previous_row = current_row
+    return previous_row[-1]
 
 
-def get_closest_dict_words(word, dict_words, num_results=20):
+def get_closest_dict_words(
+    word: str,
+    dict_words: Iterable[str],
+    num_results: int = 20,
+) -> list[str]:
     """Uses the Levenshtein distance for Word Autocompletion and Autocorrection
 
     https://blog.paperspace.com/implementing-levenshtein-distance-word-autocomplete-autocorrect/
