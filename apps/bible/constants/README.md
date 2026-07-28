@@ -61,7 +61,7 @@ print(f"{genesis['name']}: {genesis['chapters']} chapters")
 ### Resolve Book Aliases
 
 ```python
-from htk.apps.bible.reference_utils import resolve_bible_book_alias
+from htk.apps.bible.utils.references import resolve_bible_book_alias
 
 # Find canonical name from abbreviation, spacing/case variants, or safe prefix
 canonical = resolve_bible_book_alias('Matt.')  # Returns 'Matthew'

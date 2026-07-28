@@ -1,4 +1,8 @@
-from typing import Iterable
+# Python Standard Library Imports
+from typing import Iterable, List, Optional, Tuple
+
+# Third Party (PyPI) Imports
+import numpy
 
 
 def levenshtein_distance(left: str, right: str) -> int:
@@ -8,40 +12,50 @@ def levenshtein_distance(left: str, right: str) -> int:
     substitutions needed to change ``left`` into ``right``.
 
     See: https://en.wikipedia.org/wiki/Levenshtein_distance
+    See: https://blog.paperspace.com/implementing-levenshtein-distance-word-autocomplete-autocorrect/
     """
-    if left == right:
-        return 0
-    if not left:
-        return len(right)
-    if not right:
-        return len(left)
+    insertion_cost = 0
+    deletion_cost = 0
+    substitution_cost = 0
+    edit_distance = numpy.zeros((len(left) + 1, len(right) + 1))
 
-    previous_row = list(range(len(right) + 1))
-    for left_index, left_character in enumerate(left, start=1):
-        current_row = [left_index]
-        for right_index, right_character in enumerate(right, start=1):
-            insert_cost = current_row[right_index - 1] + 1
-            delete_cost = previous_row[right_index] + 1
-            replace_cost = previous_row[right_index - 1] + (
-                0 if left_character == right_character else 1
-            )
-            current_row.append(min(insert_cost, delete_cost, replace_cost))
-        previous_row = current_row
-    return previous_row[-1]
+    for x in range(len(left) + 1):
+        edit_distance[x][0] = x
+
+    for y in range(len(right) + 1):
+        edit_distance[0][y] = y
+
+    for x in range(1, len(left) + 1):
+        for y in range(1, len(right) + 1):
+            if left[x - 1] == right[y - 1]:
+                edit_distance[x][y] = edit_distance[x - 1][y - 1]
+            else:
+                insertion_cost = edit_distance[x][y - 1] + 1
+                deletion_cost = edit_distance[x - 1][y] + 1
+                substitution_cost = edit_distance[x - 1][y - 1] + 1
+
+                edit_distance[x][y] = min(
+                    deletion_cost,
+                    insertion_cost,
+                    substitution_cost
+                )
+
+    result = edit_distance[len(left)][len(right)]
+    return int(result)
 
 
 def get_closest_dict_words(
     word: str,
     dict_words: Iterable[str],
     num_results: int = 20,
-) -> list[str]:
+) -> List[str]:
     """Uses the Levenshtein distance for Word Autocompletion and Autocorrection
 
     https://blog.paperspace.com/implementing-levenshtein-distance-word-autocomplete-autocorrect/
     """
-    dict_word_distances = []
-    distances = []
-    greatest_distance_allowed = None
+    dict_word_distances: List[Tuple[int, str]] = []
+    distances: List[int] = []
+    greatest_distance_allowed: Optional[int] = None
 
     for dict_word in dict_words:
         word_distance = levenshtein_distance(word, dict_word)

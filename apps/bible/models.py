@@ -37,7 +37,7 @@ class AbstractBibleBook(models.Model):
 
     @classmethod
     def from_reference(cls, reference):
-        from htk.apps.bible.reference_utils import resolve_bible_book_alias
+        from htk.apps.bible.utils.references import resolve_bible_book_alias
 
         book_name = resolve_bible_book_alias(reference) or reference
         try:
