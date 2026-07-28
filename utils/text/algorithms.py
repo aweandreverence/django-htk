@@ -5,11 +5,11 @@ from typing import Iterable, List, Optional, Tuple
 import numpy
 
 
-def levenshtein_distance(left: str, right: str) -> int:
+def levenshtein_distance(w1: str, w2: str) -> int:
     """Return the Levenshtein edit distance between two strings.
 
     The distance is the minimum number of insertions, deletions, or
-    substitutions needed to change ``left`` into ``right``.
+    substitutions needed to change ``w1`` into ``w2``.
 
     See: https://en.wikipedia.org/wiki/Levenshtein_distance
     See: https://blog.paperspace.com/implementing-levenshtein-distance-word-autocomplete-autocorrect/
@@ -17,17 +17,17 @@ def levenshtein_distance(left: str, right: str) -> int:
     insertion_cost = 0
     deletion_cost = 0
     substitution_cost = 0
-    edit_distance = numpy.zeros((len(left) + 1, len(right) + 1))
+    edit_distance = numpy.zeros((len(w1) + 1, len(w2) + 1))
 
-    for x in range(len(left) + 1):
+    for x in range(len(w1) + 1):
         edit_distance[x][0] = x
 
-    for y in range(len(right) + 1):
+    for y in range(len(w2) + 1):
         edit_distance[0][y] = y
 
-    for x in range(1, len(left) + 1):
-        for y in range(1, len(right) + 1):
-            if left[x - 1] == right[y - 1]:
+    for x in range(1, len(w1) + 1):
+        for y in range(1, len(w2) + 1):
+            if w1[x - 1] == w2[y - 1]:
                 edit_distance[x][y] = edit_distance[x - 1][y - 1]
             else:
                 insertion_cost = edit_distance[x][y - 1] + 1
@@ -40,8 +40,8 @@ def levenshtein_distance(left: str, right: str) -> int:
                     substitution_cost
                 )
 
-    result = edit_distance[len(left)][len(right)]
-    return int(result)
+    result = int(edit_distance[len(w1)][len(w2)])
+    return result
 
 
 def get_closest_dict_words(
