@@ -160,73 +160,78 @@ def match_bible_book_alias(
     3. Levenshtein correction is accepted only when the best match maps to one
        book, so misspelled ambiguous abbreviations are left unresolved.
     """
+    result = None
     normalized_reference = normalize_bible_book_reference(reference)
-    if not normalized_reference:
-        return None
-
-    exact_book = _unique_book_name(
-        BIBLE_BOOKS_NORMALIZED_ALIAS_MAPPINGS.get(normalized_reference, set())
-    )
-    if exact_book:
-        return {
-            'book': exact_book,
-            'distance': 0,
-            'kind': 'exact',
-            'normalized': normalized_reference,
-        }
-
-    if allow_prefix:
-        prefix_book = _unique_book_name(
-            BIBLE_BOOKS_NORMALIZED_PREFIX_MAPPINGS.get(
+    if normalized_reference:
+        exact_book = _unique_book_name(
+            BIBLE_BOOKS_NORMALIZED_ALIAS_MAPPINGS.get(
                 normalized_reference, set()
             )
         )
-        if prefix_book:
-            return {
-                'book': prefix_book,
+        if exact_book:
+            result = {
+                'book': exact_book,
                 'distance': 0,
-                'kind': 'prefix',
+                'kind': 'exact',
                 'normalized': normalized_reference,
             }
 
-    if not allow_fuzzy or len(normalized_reference) < 2:
-        return None
-
-    candidate_mappings = dict(BIBLE_BOOKS_NORMALIZED_ALIAS_MAPPINGS)
-    if allow_prefix:
-        candidate_mappings.update(BIBLE_BOOKS_NORMALIZED_PREFIX_MAPPINGS)
-
-    best_distance = None
-    best_prefix_length = None
-    best_books = set()
-    for candidate, book_names in candidate_mappings.items():
-        distance = levenshtein_distance(normalized_reference, candidate)
-        if distance > _allowed_bible_book_alias_distance(candidate):
-            continue
-        prefix_length = _common_prefix_length(normalized_reference, candidate)
-        if (
-            best_distance is None
-            or distance < best_distance
-            or (
-                distance == best_distance
-                and prefix_length > best_prefix_length
+        if result is None and allow_prefix:
+            prefix_book = _unique_book_name(
+                BIBLE_BOOKS_NORMALIZED_PREFIX_MAPPINGS.get(
+                    normalized_reference, set()
+                )
             )
-        ):
-            best_distance = distance
-            best_prefix_length = prefix_length
-            best_books = set(book_names)
-        elif distance == best_distance and prefix_length == best_prefix_length:
-            best_books.update(book_names)
+            if prefix_book:
+                result = {
+                    'book': prefix_book,
+                    'distance': 0,
+                    'kind': 'prefix',
+                    'normalized': normalized_reference,
+                }
 
-    best_book = _unique_book_name(best_books)
-    if best_book:
-        return {
-            'book': best_book,
-            'distance': best_distance,
-            'kind': 'fuzzy',
-            'normalized': normalized_reference,
-        }
-    return None
+        if result is None and allow_fuzzy and len(normalized_reference) >= 2:
+            candidate_mappings = dict(BIBLE_BOOKS_NORMALIZED_ALIAS_MAPPINGS)
+            if allow_prefix:
+                candidate_mappings.update(BIBLE_BOOKS_NORMALIZED_PREFIX_MAPPINGS)
+
+            best_distance = None
+            best_prefix_length = None
+            best_books = set()
+            for candidate, book_names in candidate_mappings.items():
+                distance = levenshtein_distance(normalized_reference, candidate)
+                if distance > _allowed_bible_book_alias_distance(candidate):
+                    continue
+                prefix_length = _common_prefix_length(
+                    normalized_reference,
+                    candidate,
+                )
+                if (
+                    best_distance is None
+                    or distance < best_distance
+                    or (
+                        distance == best_distance
+                        and prefix_length > best_prefix_length
+                    )
+                ):
+                    best_distance = distance
+                    best_prefix_length = prefix_length
+                    best_books = set(book_names)
+                elif (
+                    distance == best_distance
+                    and prefix_length == best_prefix_length
+                ):
+                    best_books.update(book_names)
+
+            best_book = _unique_book_name(best_books)
+            if best_book:
+                result = {
+                    'book': best_book,
+                    'distance': best_distance,
+                    'kind': 'fuzzy',
+                    'normalized': normalized_reference,
+                }
+    return result
 
 
 def resolve_bible_book_alias(
