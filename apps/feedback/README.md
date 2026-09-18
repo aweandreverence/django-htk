@@ -174,6 +174,16 @@ HTK_FEEDBACK_ENABLE_LEGACY_ADMIN = False
 
 This setting only controls admin registration for the legacy model; it does not change migrations, tables, or public imports.
 
+### Legacy schema compatibility
+
+The legacy `htk.Feedback` model is not created by the modern feedback-request
+app's migration. Fresh projects or reviewed existing layouts can explicitly
+select the [optional legacy baseline](legacy_migrations/README.md), paired with
+model-specific routing and a `create`/`adopt` decision. It preserves the public
+model/table identity and does not run by default. Read its validation, historical
+layout and irreversible-baseline limits before adopting it. Other legacy HTK
+account models are outside this migration's scope.
+
 ## Model File Layout
 
 Feedback uses the standard multi-model app package layout:
