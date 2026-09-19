@@ -146,3 +146,16 @@ class HtkAccountsAppConfig(HtkAppConfig):
             sender=UserEmail,
             dispatch_uid='htk_process_user_email_association',
         )
+
+
+class HtkAccountsBigAutoFieldAppConfig(HtkAccountsAppConfig):
+    """Opt into account signals without reverting a consumer's 64-bit ID state.
+
+    Select this dotted class path explicitly. Keeping it out of automatic
+    discovery preserves existing consumers; registration does not migrate or
+    widen their physical tables. Review schema capacity and migration state
+    separately before selecting the optional legacy account baseline.
+    """
+
+    default = False
+    default_auto_field = 'django.db.models.BigAutoField'
