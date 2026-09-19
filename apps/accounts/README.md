@@ -119,7 +119,18 @@ is_followed = user.profile.has_follower(other_user)
 ## Models
 
 - **`BaseAbstractUserProfile`** - Extend to add custom user profile fields
+- **`UserAttribute`** - Stores per-user key/value attributes
 - **`UserEmail`** - Stores multiple emails per user
+
+### Legacy schema compatibility
+
+The two concrete legacy models can use an explicitly selected
+[optional baseline](legacy_migrations/README.md) after reviewing the actual
+schema, migration history and backups. It creates both tables only when both
+are absent, or validates/adopts both without DDL or row changes. It does not
+run by default or change model registration, signals, auth users or profiles.
+Read the 32-bit-ID, routing, irreversible-baseline and MySQL partial-DDL limits
+before adoption; this is not a general account-erasure service.
 
 ## Key Features
 
