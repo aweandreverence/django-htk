@@ -38,6 +38,17 @@ HTK's AutoField AppConfig, different auth models or other migration histories
 require their own state comparison; the separate accounts service is not
 certified by this fixture.
 
+Consumers explicitly wanting the existing accounts signals with this reviewed
+BigAutoField state can select
+`htk.apps.accounts.apps.HtkAccountsBigAutoFieldAppConfig` in `INSTALLED_APPS`.
+It inherits the current handlers and is excluded from automatic discovery.
+This is a separate registration choice, not implicit migration activation. For a
+single-default-database service, choose `HTK_LEGACY_ACCOUNTS_DATABASE = 'default'`
+only after verifying its actual co-located user/account schema. Retain the same
+explicit create/adopt mode and use `--database=default` for that selected target.
+The old explicit AutoField configuration remains unchanged and does not match
+this static BigAutoField history.
+
 ## Modes, guarantees and limits
 
 - **Create:** both tables must be absent, and the co-located user table must
@@ -75,6 +86,17 @@ and without profiles, populated attributes/emails, per-user uniqueness,
 unrelated-row preservation, retained feedback with a null user, and referenced
 saved-data restriction. They do not test the separate accounts-service signals,
 Passport, outbound providers, raw SQL or concurrent cross-database deletion.
+
+A separate `awesomebible.tests.accounts_service_registry_preflight` consumer
+harness now compares the literal accounts-service source list, the old explicit
+AutoField configuration and the new explicit BigAutoField configuration. On
+SQLite/MySQL, the BigAutoField candidate passes fresh/create and populated
+32/64-bit adoption with connected signals, automatic profiles, state parity and
+unrelated-row preservation. Repeat `ready()` does not duplicate receivers; user
+updates do not create another profile. The original configurations and absent
+schema mode retain their reported failures. This uses isolated source-derived
+settings and candidate dependencies, not accounts-service HTTP or deployed
+settings. Physical 32-bit capacity remains 32-bit after adoption.
 
 Use SPEAR for adoption: scope the real consumer/history, plan backups/recovery,
 execute a disposable rehearsal, assess schema/data/routes/lifecycle separately,

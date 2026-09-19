@@ -180,22 +180,40 @@ The app automatically caches:
 
 ## Installation
 
+Select the account configuration explicitly when signal registration is wanted.
+The bare `htk.apps.accounts` path does not guarantee custom AppConfig selection
+on modern Django. For consumers whose reviewed account model state uses 64-bit
+automatic IDs:
+
 ```python
 # settings.py
 INSTALLED_APPS = [
-    'htk.apps.accounts',
+    'htk.apps.accounts.apps.HtkAccountsBigAutoFieldAppConfig',
     # ...
 ]
 
 # Add custom user profile
-AUTH_USER_PROFILE_MODEL = 'myapp.CustomUserProfile'
+HTK_USER_PROFILE_MODEL = 'myapp.CustomUserProfile'
 ```
+
+The new configuration inherits the existing account signal handlers and has
+`default = False`: it is never selected automatically. The older explicit
+`HtkAccountsAppConfig` retains its AutoField policy. Existing bare-path discovery
+also stays unchanged; no product setting is switched by this library update.
+Do not select both configurations, silently shrink/widen an existing ID column,
+or confuse registration with schema creation. Review actual tables and the
+[optional baseline](legacy_migrations/README.md) independently.
 
 ## Signals
 
-Automatic signal handlers:
+Handlers connected by the explicit accounts configurations:
 - `create_user_profile` - Creates profile when User is created
+- `pre_delete_user` - Runs the configured account deletion integrations
 - `process_user_email_association` - Handles email verification
+
+Audit caller-created profiles and enabled external integrations before changing
+registration. Signal selection is not cross-product account-erasure permission
+or protection for saved references whose models are absent from that process.
 
 ## Best Practices
 
