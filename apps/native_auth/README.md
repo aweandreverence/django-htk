@@ -7,7 +7,9 @@ No Bible, A&R, Expo, Accounts-provider, or product-domain dependencies. Python
 
 ## Adopt
 
-1. Add `htk.apps.native_auth` to INSTALLED_APPS. Route `htk_native_auth` to one
+1. Add `htk.apps.native_auth` to INSTALLED_APPS. Its Django app label is
+   `native_auth`, consistent with the unprefixed labels of other HTK apps.
+   Route `native_auth` to one
    credential database and apply its migrations there. Grant/session writes must
    use the same connection; account lookups honor the user model's router.
 2. Construct a `NativeClient(client_id=..., redirect_uri=..., app_name=...,
