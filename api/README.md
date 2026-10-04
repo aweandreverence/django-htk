@@ -75,3 +75,5 @@ The view automatically handles:
 - **`extract_post_params`** - Safely extracts expected parameters from POST data
 - **`get_object_or_json_error`** - Retrieves object or returns JSON error
 - **`model_datatables_api_get_view`** - Generic DataTables API view for any model
+
+Private JSON endpoints can reuse `htk.api.http.private_json_response` (no-store/referrer protection) and `parse_string_json_body` (bounded string-valued JSON object).

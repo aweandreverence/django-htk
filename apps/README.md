@@ -337,3 +337,7 @@ Each app includes migrations for easy database setup:
 ```bash
 python manage.py migrate
 ```
+
+## Native authentication
+
+See [native_auth](native_auth/README.md) for opt-in browser consent, PKCE and client-scoped device sessions.

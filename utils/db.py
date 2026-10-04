@@ -1,5 +1,9 @@
 # Python Standard Library Imports
 from collections import namedtuple
+from typing import Callable, ParamSpec, TypeVar
+
+P = ParamSpec("P")
+R = TypeVar("R")
 
 
 # isort: off
@@ -105,3 +109,17 @@ def namedtuplefetchall(cursor):
     desc = cursor.description
     nt_result = namedtuple('Result', [col[0] for col in desc])
     return [nt_result(*row) for row in cursor.fetchall()]
+
+
+def atomic_for(model: type) -> Callable[[Callable[P, R]], Callable[P, R]]:
+    """Wrap a synchronous operation in the model's routed write transaction."""
+    from functools import wraps
+    from django.db import router, transaction
+
+    def decorate(function: Callable[P, R]) -> Callable[P, R]:
+        @wraps(function)
+        def wrapped(*args: P.args, **kwargs: P.kwargs) -> R:
+            with transaction.atomic(using=router.db_for_write(model)):
+                return function(*args, **kwargs)
+        return wrapped
+    return decorate

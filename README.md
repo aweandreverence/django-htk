@@ -147,3 +147,5 @@ For detailed information about each module, see:
 ## Contributing
 
 HTK is designed to be extended. Create custom apps that inherit from abstract base classes and add your own business logic.
+
+- [Native browser authentication](apps/native_auth/README.md): opt-in PKCE and client-scoped rotating device sessions.
