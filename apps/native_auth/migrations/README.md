@@ -1,7 +1,8 @@
 # Native credential schema
 
 Opt-in `native_auth` migrations. Apply on the database selected for both grant
-and session models. In A&R this is `core`, not a product or Bible database.
+and session models. Consumers must explicitly target their configured credential
+database rather than an unrelated domain database.
 Regenerate with Django makemigrations using the isolated test settings. No data
 from legacy product-local credential tables is migrated automatically.
 

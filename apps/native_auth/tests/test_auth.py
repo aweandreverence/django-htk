@@ -1,4 +1,4 @@
-"""Real ORM/HTTP contract and cross-client isolation, independent of A&R."""
+"""Product-independent ORM/HTTP contract and cross-client isolation tests."""
 
 # Python Standard Library Imports
 from dataclasses import replace
@@ -134,13 +134,40 @@ class NativeAuthTests(TestCase):
         browser.force_login(self.user)
         response = browser.get(url)
         self.assertContains(response, "Connect Alpha")
-        self.assertEqual(response["Referrer-Policy"], "no-referrer")
+        self.assertEqual(response["Referrer-Policy"], "same-origin")
         self.assertEqual(browser.post(url, {"approve": "yes"}).status_code, 403)
         consent = {
             "approve": "yes",
             "csrfmiddlewaretoken": browser.cookies["csrftoken"].value,
         }
-        result = browser.post(url, consent)
+        # Exercise real HTTPS origin checks, not the test client's default HTTP
+        # request with no Origin/Referer. Never trust null or unrelated origins.
+        for origin in ("null", "https://untrusted.example"):
+            self.assertEqual(
+                browser.post(
+                    url, consent, secure=True, HTTP_ORIGIN=origin
+                ).status_code,
+                403,
+            )
+        self.assertFalse(MobileGrant.objects.exists())
+        cancelled = browser.post(
+            url,
+            {**consent, "approve": "no"},
+            secure=True,
+            HTTP_ORIGIN="https://testserver",
+        )
+        self.assertEqual(cancelled.status_code, 302)
+        self.assertEqual(cancelled["Referrer-Policy"], "no-referrer")
+        self.assertEqual(
+            parse_qs(urlsplit(cancelled["Location"]).query),
+            {"state": [params["state"]], "error": ["access_denied"]},
+        )
+        self.assertFalse(MobileGrant.objects.exists())
+        result = browser.post(
+            url, consent, secure=True, HTTP_ORIGIN="https://testserver"
+        )
+        self.assertEqual(result.status_code, 302)
+        self.assertEqual(result["Referrer-Policy"], "no-referrer")
         code = parse_qs(urlsplit(result["Location"]).query)["code"][0]
         payload = {
             "client_id": "alpha",

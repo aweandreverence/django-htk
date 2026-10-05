@@ -2,8 +2,8 @@
 
 Opt-in Django app providing reusable, client-scoped S256 PKCE browser consent,
 single-use grants, hashed bearer/refresh credentials, rotation and device logout.
-No Bible, A&R, Expo, Accounts-provider, or product-domain dependencies. Python
-3.12+, Django 4.2+; portable clients can use a different account login provider.
+No product-domain, frontend-framework or hosted identity-provider dependencies.
+Python 3.12+, Django 4.2+; clients can use their own account login provider.
 
 ## Adopt
 
@@ -48,7 +48,7 @@ It is not advertised as a full OAuth/OIDC authorization server.
 Default lifetimes: grant 2 minutes, access 15 minutes, absolute session 30 days.
 Password changes, account disablement/removal and device logout invalidate access.
 Only digests are stored; expired rows may be purged by the consumer's maintenance
-process. Deleting Accounts data and downstream personal data is a coordinated
+process. Deleting account data and downstream personal data is a coordinated
 consumer operation, not a cross-database cascade promised by this package.
 
 SPEAR review rubric: protocol/cross-client isolation; storage/transaction and
@@ -56,5 +56,19 @@ migration correctness; consumer compatibility; consent/privacy; reproducible
 verification. No hosted identity provider or physical-device behavior is certified
 by the isolated SQLite suite. Keep production/MySQL and client acceptance explicit.
 
-Provenance: extracted from the reviewed Awesome.Bible native handoff into generic
-HTK APIs; governed by this repository's license. No production credentials/data.
+Reusable HTK APIs governed by this repository's license and existing author
+attribution. No production credentials or user data are included.
+
+## Browser consent and CSRF
+
+The HTML consent page uses `Referrer-Policy: same-origin` so a same-origin
+form POST retains its origin for Django CSRF validation, without sending a
+referrer to another origin. `no-referrer` on that page makes real browsers send
+`Origin: null` and breaks both Connect and Cancel. Callback/login redirects and
+errors retain `no-referrer`. Do not exempt consent from CSRF or trust a null
+origin to work around this. See [MDN's form/Origin explanation](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Referrer-Policy).
+
+Consumer acceptance must submit both consent buttons in a real browser as well
+as exercising the HTTP contract; a script omitting Origin cannot prove browser
+compatibility. Social providers and installed-app callback delivery remain
+consumer acceptance responsibilities.
