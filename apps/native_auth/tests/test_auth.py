@@ -1,4 +1,4 @@
-"""Real ORM/HTTP contract and cross-client isolation, independent of A&R."""
+"""Product-independent ORM/HTTP contract and cross-client isolation tests."""
 
 # Python Standard Library Imports
 from dataclasses import replace
