@@ -1489,6 +1489,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../apps/native_auth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native browser authentication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../apps/notifications/" class="md-nav__link">
         
   
@@ -3162,7 +3190,7 @@
 
 <span class="c1"># Define a job function</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">update_user_stats</span><span class="p">():</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Updating user statistics...&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Updating user statistics..."</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
         <span class="n">user</span><span class="o">.</span><span class="n">update_stats</span><span class="p">()</span>
 
@@ -3209,14 +3237,14 @@
 <span class="k">class</span><span class="w"> </span><span class="nc">ScriptTestCase</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">test_job_runner</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># Job should complete successfully</span>
-        <span class="n">job_runner</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">))</span>
+        <span class="n">job_runner</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s2">"test"</span><span class="p">))</span>
 </code></pre></div>
 <h2 id="common-patterns">Common Patterns<a class="headerlink" href="#common-patterns" title="Permanent link">&para;</a></h2>
 <h3 id="batch-processing">Batch Processing<a class="headerlink" href="#batch-processing" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">htk.scripts.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">job_runner</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">batch_process_orders</span><span class="p">():</span>
-    <span class="n">orders</span> <span class="o">=</span> <span class="n">Order</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="s1">&#39;pending&#39;</span><span class="p">)</span>
+    <span class="n">orders</span> <span class="o">=</span> <span class="n">Order</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="s1">'pending'</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">order</span> <span class="ow">in</span> <span class="n">orders</span><span class="p">:</span>
         <span class="n">order</span><span class="o">.</span><span class="n">process</span><span class="p">()</span>
         <span class="n">order</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>

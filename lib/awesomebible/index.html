@@ -1359,6 +1359,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../apps/native_auth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native browser authentication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../apps/notifications/" class="md-nav__link">
         
   
@@ -3310,57 +3338,57 @@
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">htk.lib.awesomebible.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">Client</span>
 
 <span class="c1"># Create client with credentials</span>
-<span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="s1">&#39;your_api_key&#39;</span><span class="p">)</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="s1">'your_api_key'</span><span class="p">)</span>
 
 <span class="c1"># Or use from settings</span>
 <span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">()</span>  <span class="c1"># Uses HTK_AWESOMEBIBLE_API_KEY from settings</span>
 </code></pre></div>
 <h3 id="basic-operation">Basic Operation<a class="headerlink" href="#basic-operation" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="c1"># Get resource</span>
-<span class="n">resource</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_resource</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s1">&#39;resource_id&#39;</span><span class="p">)</span>
+<span class="n">resource</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_resource</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s1">'resource_id'</span><span class="p">)</span>
 
 <span class="c1"># List resources</span>
 <span class="n">resources</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">list_resources</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 
 <span class="c1"># Create resource</span>
-<span class="n">new_resource</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">create_resource</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;My Resource&#39;</span><span class="p">)</span>
+<span class="n">new_resource</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">create_resource</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'My Resource'</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="operations">Operations<a class="headerlink" href="#operations" title="Permanent link">&para;</a></h2>
 <h3 id="read-operations">Read Operations<a class="headerlink" href="#read-operations" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="c1"># Get single resource</span>
-<span class="n">resource</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s1">&#39;123&#39;</span><span class="p">)</span>
+<span class="n">resource</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s1">'123'</span><span class="p">)</span>
 
 <span class="c1"># List resources</span>
 <span class="n">resources</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">list</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
 <span class="c1"># Search</span>
-<span class="n">results</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">query</span><span class="o">=</span><span class="s1">&#39;search term&#39;</span><span class="p">)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">query</span><span class="o">=</span><span class="s1">'search term'</span><span class="p">)</span>
 
 <span class="c1"># Count</span>
 <span class="n">count</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
 </code></pre></div>
 <h3 id="write-operations">Write Operations<a class="headerlink" href="#write-operations" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="c1"># Create resource</span>
-<span class="n">new</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;test&#39;</span><span class="p">)</span>
+<span class="n">new</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'test'</span><span class="p">)</span>
 
 <span class="c1"># Update resource</span>
-<span class="n">updated</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s1">&#39;123&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;new name&#39;</span><span class="p">)</span>
+<span class="n">updated</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s1">'123'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'new name'</span><span class="p">)</span>
 
 <span class="c1"># Delete resource</span>
-<span class="n">client</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s1">&#39;123&#39;</span><span class="p">)</span>
+<span class="n">client</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s1">'123'</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="authentication">Authentication<a class="headerlink" href="#authentication" title="Permanent link">&para;</a></h2>
 <p>Configure credentials:</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># settings.py</span>
-<span class="n">HTK_AWESOMEBIBLE_API_KEY</span> <span class="o">=</span> <span class="s1">&#39;your_api_key&#39;</span>
-<span class="n">HTK_AWESOMEBIBLE_API_SECRET</span> <span class="o">=</span> <span class="s1">&#39;your_secret&#39;</span>
-<span class="n">HTK_AWESOMEBIBLE_API_URL</span> <span class="o">=</span> <span class="s1">&#39;https://api.service.com&#39;</span>
+<span class="n">HTK_AWESOMEBIBLE_API_KEY</span> <span class="o">=</span> <span class="s1">'your_api_key'</span>
+<span class="n">HTK_AWESOMEBIBLE_API_SECRET</span> <span class="o">=</span> <span class="s1">'your_secret'</span>
+<span class="n">HTK_AWESOMEBIBLE_API_URL</span> <span class="o">=</span> <span class="s1">'https://api.service.com'</span>
 </code></pre></div>
 <h2 id="response-format">Response Format<a class="headerlink" href="#response-format" title="Permanent link">&para;</a></h2>
 <p>API responses are returned as Python dictionaries or objects:</p>
-<div class="highlight"><pre><span></span><code><span class="n">result</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s1">&#39;123&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;created_at&#39;</span><span class="p">])</span>
+<div class="highlight"><pre><span></span><code><span class="n">result</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s1">'123'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s1">'name'</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s1">'created_at'</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="pagination">Pagination<a class="headerlink" href="#pagination" title="Permanent link">&para;</a></h2>
 <p>Handle paginated responses:</p>
@@ -3376,7 +3404,7 @@
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">django.core.cache</span><span class="w"> </span><span class="kn">import</span> <span class="n">cache</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">get_resource</span><span class="p">(</span><span class="nb">id</span><span class="p">):</span>
-    <span class="n">cache_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;resource_</span><span class="si">{</span><span class="nb">id</span><span class="si">}</span><span class="s1">&#39;</span>
+    <span class="n">cache_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">'resource_</span><span class="si">{</span><span class="nb">id</span><span class="si">}</span><span class="s1">'</span>
     <span class="n">resource</span> <span class="o">=</span> <span class="n">cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">cache_key</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">resource</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -3389,7 +3417,7 @@
 <p>Configure in Django settings:</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># settings.py</span>
 <span class="n">HTK_AWESOMEBIBLE_ENABLED</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="n">HTK_AWESOMEBIBLE_API_KEY</span> <span class="o">=</span> <span class="s1">&#39;your_key&#39;</span>
+<span class="n">HTK_AWESOMEBIBLE_API_KEY</span> <span class="o">=</span> <span class="s1">'your_key'</span>
 <span class="n">HTK_AWESOMEBIBLE_TIMEOUT</span> <span class="o">=</span> <span class="mi">30</span>
 <span class="n">HTK_AWESOMEBIBLE_RETRIES</span> <span class="o">=</span> <span class="mi">3</span>
 </code></pre></div>

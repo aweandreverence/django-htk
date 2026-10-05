@@ -1552,6 +1552,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../native_auth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native browser authentication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../notifications/" class="md-nav__link">
         
   
@@ -3296,22 +3324,22 @@
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">htk.apps.features.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_feature_flag</span>
 
 <span class="c1"># Check if feature is enabled for user</span>
-<span class="k">if</span> <span class="n">get_feature_flag</span><span class="p">(</span><span class="s1">&#39;new_dashboard&#39;</span><span class="p">,</span> <span class="n">user</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;new_dashboard.html&#39;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">get_feature_flag</span><span class="p">(</span><span class="s1">'new_dashboard'</span><span class="p">,</span> <span class="n">user</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">'new_dashboard.html'</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;old_dashboard.html&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">'old_dashboard.html'</span><span class="p">)</span>
 
 <span class="c1"># Check global feature</span>
-<span class="k">if</span> <span class="n">get_feature_flag</span><span class="p">(</span><span class="s1">&#39;maintenance_mode&#39;</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s1">&#39;/maintenance/&#39;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">get_feature_flag</span><span class="p">(</span><span class="s1">'maintenance_mode'</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s1">'/maintenance/'</span><span class="p">)</span>
 </code></pre></div>
 <h3 id="create-feature-flags">Create Feature Flags<a class="headerlink" href="#create-feature-flags" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">htk.apps.features.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">FeatureFlag</span>
 
 <span class="c1"># Global flag</span>
 <span class="n">flag</span> <span class="o">=</span> <span class="n">FeatureFlag</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
-    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;new_checkout&#39;</span><span class="p">,</span>
-    <span class="n">description</span><span class="o">=</span><span class="s1">&#39;New checkout flow&#39;</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">'new_checkout'</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s1">'New checkout flow'</span><span class="p">,</span>
     <span class="n">is_active</span><span class="o">=</span><span class="kc">True</span>
 <span class="p">)</span>
 
@@ -3326,12 +3354,12 @@
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">htk.apps.features.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">assign_variant</span>
 
 <span class="c1"># Assign user to variant</span>
-<span class="n">variant</span> <span class="o">=</span> <span class="n">assign_variant</span><span class="p">(</span><span class="s1">&#39;new_ui_test&#39;</span><span class="p">,</span> <span class="n">user</span><span class="p">)</span>
+<span class="n">variant</span> <span class="o">=</span> <span class="n">assign_variant</span><span class="p">(</span><span class="s1">'new_ui_test'</span><span class="p">,</span> <span class="n">user</span><span class="p">)</span>
 
-<span class="k">if</span> <span class="n">variant</span> <span class="o">==</span> <span class="s1">&#39;control&#39;</span><span class="p">:</span>
-    <span class="n">template</span> <span class="o">=</span> <span class="s1">&#39;ui/control.html&#39;</span>
+<span class="k">if</span> <span class="n">variant</span> <span class="o">==</span> <span class="s1">'control'</span><span class="p">:</span>
+    <span class="n">template</span> <span class="o">=</span> <span class="s1">'ui/control.html'</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="n">template</span> <span class="o">=</span> <span class="s1">&#39;ui/new.html&#39;</span>
+    <span class="n">template</span> <span class="o">=</span> <span class="s1">'ui/new.html'</span>
 
 <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">template</span><span class="p">)</span>
 </code></pre></div>
@@ -3345,7 +3373,7 @@
 <p>Feature flags are automatically cached:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">htk.apps.features.cachekeys</span><span class="w"> </span><span class="kn">import</span> <span class="n">FeatureFlagCache</span>
 
-<span class="n">cache</span> <span class="o">=</span> <span class="n">FeatureFlagCache</span><span class="p">(</span><span class="s1">&#39;feature_name&#39;</span><span class="p">)</span>
+<span class="n">cache</span> <span class="o">=</span> <span class="n">FeatureFlagCache</span><span class="p">(</span><span class="s1">'feature_name'</span><span class="p">)</span>
 <span class="n">cache</span><span class="o">.</span><span class="n">invalidate_cache</span><span class="p">()</span>  <span class="c1"># Refresh when flag changes</span>
 </code></pre></div>
 <h2 id="best-practices">Best Practices<a class="headerlink" href="#best-practices" title="Permanent link">&para;</a></h2>
@@ -3367,7 +3395,7 @@
 </ol>
 <h2 id="integration-examples">Integration Examples<a class="headerlink" href="#integration-examples" title="Permanent link">&para;</a></h2>
 <h3 id="in-templates">In Templates<a class="headerlink" href="#in-templates" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="cp">{%</span> <span class="k">if</span> <span class="nv">feature_flag</span> <span class="s1">&#39;new_dashboard&#39;</span> <span class="cp">%}</span>
+<div class="highlight"><pre><span></span><code><span class="cp">{%</span> <span class="k">if</span> <span class="nv">feature_flag</span> <span class="s1">'new_dashboard'</span> <span class="cp">%}</span>
 <span class="x">  &lt;!-- New dashboard content --&gt;</span>
 <span class="cp">{%</span> <span class="k">else</span> <span class="cp">%}</span>
 <span class="x">  &lt;!-- Legacy dashboard content --&gt;</span>
@@ -3375,11 +3403,11 @@
 </code></pre></div>
 <h3 id="in-tests">In Tests<a class="headerlink" href="#in-tests" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">test_new_feature</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="n">flag</span> <span class="o">=</span> <span class="n">FeatureFlag</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;test_feature&#39;</span><span class="p">,</span> <span class="n">is_active</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">flag</span> <span class="o">=</span> <span class="n">FeatureFlag</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'test_feature'</span><span class="p">,</span> <span class="n">is_active</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">flag</span><span class="o">.</span><span class="n">enable_for_user</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">user</span><span class="p">)</span>
 
-    <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/dashboard/&#39;</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">assertContains</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="s1">&#39;New feature&#39;</span><span class="p">)</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'/dashboard/'</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">assertContains</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="s1">'New feature'</span><span class="p">)</span>
 </code></pre></div>
 
 

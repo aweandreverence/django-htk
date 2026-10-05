@@ -1359,6 +1359,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../apps/native_auth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native browser authentication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../apps/notifications/" class="md-nav__link">
         
   
@@ -3043,10 +3071,10 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">htk.lib.yahoo.sports.fantasy.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_yahoo_fantasy_sports_client_for_user</span>
 
 <span class="c1"># Get stock price</span>
-<span class="n">price</span> <span class="o">=</span> <span class="n">get_stock_price</span><span class="p">(</span><span class="s1">&#39;AAPL&#39;</span><span class="p">)</span>
+<span class="n">price</span> <span class="o">=</span> <span class="n">get_stock_price</span><span class="p">(</span><span class="s1">'AAPL'</span><span class="p">)</span>
 
 <span class="c1"># Get stock info and history</span>
-<span class="n">info</span> <span class="o">=</span> <span class="n">get_stock_info_and_historical_data</span><span class="p">(</span><span class="s1">&#39;AAPL&#39;</span><span class="p">)</span>
+<span class="n">info</span> <span class="o">=</span> <span class="n">get_stock_info_and_historical_data</span><span class="p">(</span><span class="s1">'AAPL'</span><span class="p">)</span>
 
 <span class="c1"># Get fantasy sports client</span>
 <span class="n">client</span> <span class="o">=</span> <span class="n">get_yahoo_fantasy_sports_client_for_user</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
@@ -3055,9 +3083,9 @@
 </code></pre></div>
 <h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="c1"># settings.py</span>
-<span class="n">YAHOO_API_KEY</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;YAHOO_API_KEY&#39;</span><span class="p">)</span>
-<span class="n">YAHOO_OAUTH_CLIENT_ID</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;YAHOO_OAUTH_CLIENT_ID&#39;</span><span class="p">)</span>
-<span class="n">YAHOO_OAUTH_CLIENT_SECRET</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;YAHOO_OAUTH_CLIENT_SECRET&#39;</span><span class="p">)</span>
+<span class="n">YAHOO_API_KEY</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'YAHOO_API_KEY'</span><span class="p">)</span>
+<span class="n">YAHOO_OAUTH_CLIENT_ID</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'YAHOO_OAUTH_CLIENT_ID'</span><span class="p">)</span>
+<span class="n">YAHOO_OAUTH_CLIENT_SECRET</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'YAHOO_OAUTH_CLIENT_SECRET'</span><span class="p">)</span>
 </code></pre></div>
 
 

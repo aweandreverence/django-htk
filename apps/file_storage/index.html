@@ -1641,6 +1641,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../native_auth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native browser authentication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../notifications/" class="md-nav__link">
         
   
@@ -3465,8 +3493,8 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">htk.apps.file_storage.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">store_uploaded_file</span>
 
 <span class="c1"># Store uploaded file</span>
-<span class="n">file_obj</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">FILES</span><span class="p">[</span><span class="s1">&#39;file&#39;</span><span class="p">]</span>
-<span class="n">stored_file</span> <span class="o">=</span> <span class="n">store_uploaded_file</span><span class="p">(</span><span class="n">file_obj</span><span class="p">,</span> <span class="n">folder</span><span class="o">=</span><span class="s1">&#39;uploads&#39;</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span>
+<span class="n">file_obj</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">FILES</span><span class="p">[</span><span class="s1">'file'</span><span class="p">]</span>
+<span class="n">stored_file</span> <span class="o">=</span> <span class="n">store_uploaded_file</span><span class="p">(</span><span class="n">file_obj</span><span class="p">,</span> <span class="n">folder</span><span class="o">=</span><span class="s1">'uploads'</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span>
 
 <span class="c1"># Access file</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">stored_file</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>  <span class="c1"># Disk path</span>
@@ -3480,11 +3508,11 @@
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">htk.apps.file_storage.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">StoredFile</span>
 
 <span class="c1"># Store uploaded file</span>
-<span class="n">uploaded_file</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">FILES</span><span class="p">[</span><span class="s1">&#39;document&#39;</span><span class="p">]</span>
+<span class="n">uploaded_file</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">FILES</span><span class="p">[</span><span class="s1">'document'</span><span class="p">]</span>
 <span class="n">stored</span> <span class="o">=</span> <span class="n">StoredFile</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
     <span class="n">file</span><span class="o">=</span><span class="n">uploaded_file</span><span class="p">,</span>
     <span class="n">user</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">,</span>
-    <span class="n">folder</span><span class="o">=</span><span class="s1">&#39;documents&#39;</span>
+    <span class="n">folder</span><span class="o">=</span><span class="s1">'documents'</span>
 <span class="p">)</span>
 
 <span class="c1"># Access URL for display</span>
@@ -3494,51 +3522,51 @@
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">django.core.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">ValidationError</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">htk.apps.file_storage.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">store_uploaded_file</span>
 
-<span class="n">ALLOWED_TYPES</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;pdf&#39;</span><span class="p">,</span> <span class="s1">&#39;doc&#39;</span><span class="p">,</span> <span class="s1">&#39;docx&#39;</span><span class="p">,</span> <span class="s1">&#39;txt&#39;</span><span class="p">]</span>
+<span class="n">ALLOWED_TYPES</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'pdf'</span><span class="p">,</span> <span class="s1">'doc'</span><span class="p">,</span> <span class="s1">'docx'</span><span class="p">,</span> <span class="s1">'txt'</span><span class="p">]</span>
 <span class="n">MAX_SIZE</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span>  <span class="c1"># 10MB</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">upload_document</span><span class="p">(</span><span class="n">file_obj</span><span class="p">,</span> <span class="n">user</span><span class="p">):</span>
     <span class="c1"># Check size</span>
     <span class="k">if</span> <span class="n">file_obj</span><span class="o">.</span><span class="n">size</span> <span class="o">&gt;</span> <span class="n">MAX_SIZE</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;File too large: </span><span class="si">{</span><span class="n">file_obj</span><span class="o">.</span><span class="n">size</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="sa">f</span><span class="s1">'File too large: </span><span class="si">{</span><span class="n">file_obj</span><span class="o">.</span><span class="n">size</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
 
     <span class="c1"># Check type</span>
-    <span class="n">ext</span> <span class="o">=</span> <span class="n">file_obj</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="n">ext</span> <span class="o">=</span> <span class="n">file_obj</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">'.'</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">ext</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ALLOWED_TYPES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;File type not allowed: </span><span class="si">{</span><span class="n">ext</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="sa">f</span><span class="s1">'File type not allowed: </span><span class="si">{</span><span class="n">ext</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
 
     <span class="c1"># Store file</span>
-    <span class="n">stored</span> <span class="o">=</span> <span class="n">store_uploaded_file</span><span class="p">(</span><span class="n">file_obj</span><span class="p">,</span> <span class="n">folder</span><span class="o">=</span><span class="s1">&#39;documents&#39;</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">)</span>
+    <span class="n">stored</span> <span class="o">=</span> <span class="n">store_uploaded_file</span><span class="p">(</span><span class="n">file_obj</span><span class="p">,</span> <span class="n">folder</span><span class="o">=</span><span class="s1">'documents'</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">stored</span>
 </code></pre></div>
 <h3 id="organize-by-folder">Organize by Folder<a class="headerlink" href="#organize-by-folder" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">htk.apps.file_storage.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">StoredFile</span>
 
 <span class="c1"># Store in organized structure</span>
-<span class="n">uploaded</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">FILES</span><span class="p">[</span><span class="s1">&#39;file&#39;</span><span class="p">]</span>
+<span class="n">uploaded</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">FILES</span><span class="p">[</span><span class="s1">'file'</span><span class="p">]</span>
 
 <span class="c1"># Store with folder</span>
 <span class="n">stored</span> <span class="o">=</span> <span class="n">StoredFile</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
     <span class="n">file</span><span class="o">=</span><span class="n">uploaded</span><span class="p">,</span>
     <span class="n">user</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">,</span>
-    <span class="n">folder</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s1">/documents/</span><span class="si">{</span><span class="n">timezone</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">year</span><span class="si">}</span><span class="s1">&#39;</span>
+    <span class="n">folder</span><span class="o">=</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s1">/documents/</span><span class="si">{</span><span class="n">timezone</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">year</span><span class="si">}</span><span class="s1">'</span>
 <span class="p">)</span>
 </code></pre></div>
 <h2 id="file-management">File Management<a class="headerlink" href="#file-management" title="Permanent link">&para;</a></h2>
 <h3 id="list-files">List Files<a class="headerlink" href="#list-files" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">htk.apps.file_storage.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">StoredFile</span>
 
-<span class="c1"># Get user&#39;s files</span>
+<span class="c1"># Get user's files</span>
 <span class="n">user_files</span> <span class="o">=</span> <span class="n">StoredFile</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span>
 
 <span class="c1"># Filter by folder</span>
 <span class="n">documents</span> <span class="o">=</span> <span class="n">StoredFile</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
     <span class="n">user</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">,</span>
-    <span class="n">folder__startswith</span><span class="o">=</span><span class="s1">&#39;documents&#39;</span>
+    <span class="n">folder__startswith</span><span class="o">=</span><span class="s1">'documents'</span>
 <span class="p">)</span>
 
 <span class="c1"># Get recent files</span>
-<span class="n">recent</span> <span class="o">=</span> <span class="n">user_files</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s1">&#39;-created&#39;</span><span class="p">)[:</span><span class="mi">20</span><span class="p">]</span>
+<span class="n">recent</span> <span class="o">=</span> <span class="n">user_files</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s1">'-created'</span><span class="p">)[:</span><span class="mi">20</span><span class="p">]</span>
 </code></pre></div>
 <h3 id="download-files">Download Files<a class="headerlink" href="#download-files" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">django.http</span><span class="w"> </span><span class="kn">import</span> <span class="n">FileResponse</span>
@@ -3552,9 +3580,9 @@
         <span class="k">raise</span> <span class="n">PermissionDenied</span>
 
     <span class="c1"># Return file</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="n">FileResponse</span><span class="p">(</span><span class="n">stored_file</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;rb&#39;</span><span class="p">))</span>
-    <span class="n">response</span><span class="p">[</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">stored_file</span><span class="o">.</span><span class="n">get_mime_type</span><span class="p">()</span>
-    <span class="n">response</span><span class="p">[</span><span class="s1">&#39;Content-Disposition&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;attachment; filename=&quot;</span><span class="si">{</span><span class="n">stored_file</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">&quot;&#39;</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">FileResponse</span><span class="p">(</span><span class="n">stored_file</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">'rb'</span><span class="p">))</span>
+    <span class="n">response</span><span class="p">[</span><span class="s1">'Content-Type'</span><span class="p">]</span> <span class="o">=</span> <span class="n">stored_file</span><span class="o">.</span><span class="n">get_mime_type</span><span class="p">()</span>
+    <span class="n">response</span><span class="p">[</span><span class="s1">'Content-Disposition'</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">'attachment; filename="</span><span class="si">{</span><span class="n">stored_file</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">"'</span>
     <span class="k">return</span> <span class="n">response</span>
 </code></pre></div>
 <h3 id="delete-files">Delete Files<a class="headerlink" href="#delete-files" title="Permanent link">&para;</a></h3>
@@ -3576,18 +3604,18 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">django.core.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">ValidationError</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">htk.apps.file_storage.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">StoredFile</span>
 
-<span class="n">ALLOWED_EXTENSIONS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;pdf&#39;</span><span class="p">,</span> <span class="s1">&#39;txt&#39;</span><span class="p">,</span> <span class="s1">&#39;doc&#39;</span><span class="p">,</span> <span class="s1">&#39;docx&#39;</span><span class="p">,</span> <span class="s1">&#39;xls&#39;</span><span class="p">,</span> <span class="s1">&#39;xlsx&#39;</span><span class="p">]</span>
+<span class="n">ALLOWED_EXTENSIONS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'pdf'</span><span class="p">,</span> <span class="s1">'txt'</span><span class="p">,</span> <span class="s1">'doc'</span><span class="p">,</span> <span class="s1">'docx'</span><span class="p">,</span> <span class="s1">'xls'</span><span class="p">,</span> <span class="s1">'xlsx'</span><span class="p">]</span>
 <span class="n">MAX_FILE_SIZE</span> <span class="o">=</span> <span class="mi">50</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span>  <span class="c1"># 50MB</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">validate_file</span><span class="p">(</span><span class="n">file_obj</span><span class="p">):</span>
     <span class="c1"># Check size</span>
     <span class="k">if</span> <span class="n">file_obj</span><span class="o">.</span><span class="n">size</span> <span class="o">&gt;</span> <span class="n">MAX_FILE_SIZE</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="s1">&#39;File is too large&#39;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="s1">'File is too large'</span><span class="p">)</span>
 
     <span class="c1"># Check extension</span>
-    <span class="n">ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">file_obj</span><span class="o">.</span><span class="n">name</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+    <span class="n">ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">file_obj</span><span class="o">.</span><span class="n">name</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s1">'.'</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">ext</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ALLOWED_EXTENSIONS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;File type </span><span class="si">{</span><span class="n">ext</span><span class="si">}</span><span class="s1"> not allowed&#39;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="sa">f</span><span class="s1">'File type </span><span class="si">{</span><span class="n">ext</span><span class="si">}</span><span class="s1"> not allowed'</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="kc">True</span>
 </code></pre></div>
@@ -3597,7 +3625,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">htk.apps.file_storage.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">StoredFile</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">generate_thumbnail</span><span class="p">(</span><span class="n">stored_file</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">)):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate thumbnail for image file&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Generate thumbnail for image file"""</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">stored_file</span><span class="o">.</span><span class="n">is_image</span><span class="p">():</span>
         <span class="k">return</span> <span class="kc">None</span>
 
@@ -3605,14 +3633,14 @@
     <span class="n">img</span><span class="o">.</span><span class="n">thumbnail</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
 
     <span class="n">thumb_io</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">()</span>
-    <span class="n">img</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">thumb_io</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;JPEG&#39;</span><span class="p">)</span>
+    <span class="n">img</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">thumb_io</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">'JPEG'</span><span class="p">)</span>
     <span class="n">thumb_io</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
     <span class="c1"># Store thumbnail</span>
     <span class="n">thumb</span> <span class="o">=</span> <span class="n">StoredFile</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
         <span class="n">file</span><span class="o">=</span><span class="n">thumb_io</span><span class="p">,</span>
         <span class="n">user</span><span class="o">=</span><span class="n">stored_file</span><span class="o">.</span><span class="n">user</span><span class="p">,</span>
-        <span class="n">folder</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">stored_file</span><span class="o">.</span><span class="n">folder</span><span class="si">}</span><span class="s1">/thumbnails&#39;</span><span class="p">,</span>
+        <span class="n">folder</span><span class="o">=</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">stored_file</span><span class="o">.</span><span class="n">folder</span><span class="si">}</span><span class="s1">/thumbnails'</span><span class="p">,</span>
         <span class="n">parent</span><span class="o">=</span><span class="n">stored_file</span>
     <span class="p">)</span>
     <span class="k">return</span> <span class="n">thumb</span>
@@ -3621,18 +3649,18 @@
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">htk.apps.file_storage.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">StoredFile</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">store_file_with_version</span><span class="p">(</span><span class="n">file_obj</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="n">folder</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Store file with automatic versioning&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Store file with automatic versioning"""</span>
     <span class="n">existing</span> <span class="o">=</span> <span class="n">StoredFile</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
         <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
         <span class="n">folder</span><span class="o">=</span><span class="n">folder</span><span class="p">,</span>
         <span class="n">user</span><span class="o">=</span><span class="n">user</span>
-    <span class="p">)</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s1">&#39;-version&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s1">'-version'</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
 
     <span class="n">version</span> <span class="o">=</span> <span class="p">(</span><span class="n">existing</span><span class="o">.</span><span class="n">version</span> <span class="k">if</span> <span class="n">existing</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
 
     <span class="n">stored</span> <span class="o">=</span> <span class="n">StoredFile</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
         <span class="n">file</span><span class="o">=</span><span class="n">file_obj</span><span class="p">,</span>
-        <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">.v</span><span class="si">{</span><span class="n">version</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+        <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">.v</span><span class="si">{</span><span class="n">version</span><span class="si">}</span><span class="s1">'</span><span class="p">,</span>
         <span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span>
         <span class="n">folder</span><span class="o">=</span><span class="n">folder</span><span class="p">,</span>
         <span class="n">version</span><span class="o">=</span><span class="n">version</span><span class="p">,</span>
@@ -3647,39 +3675,39 @@
 <span class="n">USER_STORAGE_QUOTA</span> <span class="o">=</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span>  <span class="c1"># 1GB</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">check_storage_quota</span><span class="p">(</span><span class="n">user</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if user exceeds storage quota&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Check if user exceeds storage quota"""</span>
     <span class="n">total_size</span> <span class="o">=</span> <span class="n">StoredFile</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
         <span class="n">user</span><span class="o">=</span><span class="n">user</span>
-    <span class="p">)</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">total</span><span class="o">=</span><span class="n">Sum</span><span class="p">(</span><span class="s1">&#39;file__size&#39;</span><span class="p">))[</span><span class="s1">&#39;total&#39;</span><span class="p">]</span> <span class="ow">or</span> <span class="mi">0</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">total</span><span class="o">=</span><span class="n">Sum</span><span class="p">(</span><span class="s1">'file__size'</span><span class="p">))[</span><span class="s1">'total'</span><span class="p">]</span> <span class="ow">or</span> <span class="mi">0</span>
 
     <span class="k">return</span> <span class="n">total_size</span> <span class="o">&lt;</span> <span class="n">USER_STORAGE_QUOTA</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">get_user_storage_usage</span><span class="p">(</span><span class="n">user</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get formatted storage usage&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Get formatted storage usage"""</span>
     <span class="n">total_bytes</span> <span class="o">=</span> <span class="n">StoredFile</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
         <span class="n">user</span><span class="o">=</span><span class="n">user</span>
-    <span class="p">)</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">total</span><span class="o">=</span><span class="n">Sum</span><span class="p">(</span><span class="s1">&#39;file__size&#39;</span><span class="p">))[</span><span class="s1">&#39;total&#39;</span><span class="p">]</span> <span class="ow">or</span> <span class="mi">0</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">total</span><span class="o">=</span><span class="n">Sum</span><span class="p">(</span><span class="s1">'file__size'</span><span class="p">))[</span><span class="s1">'total'</span><span class="p">]</span> <span class="ow">or</span> <span class="mi">0</span>
 
     <span class="k">return</span> <span class="p">{</span>
-        <span class="s1">&#39;used_bytes&#39;</span><span class="p">:</span> <span class="n">total_bytes</span><span class="p">,</span>
-        <span class="s1">&#39;quota_bytes&#39;</span><span class="p">:</span> <span class="n">USER_STORAGE_QUOTA</span><span class="p">,</span>
-        <span class="s1">&#39;used_percent&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">total_bytes</span> <span class="o">/</span> <span class="n">USER_STORAGE_QUOTA</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span>
-        <span class="s1">&#39;used_gb&#39;</span><span class="p">:</span> <span class="n">total_bytes</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1024</span><span class="o">**</span><span class="mi">3</span><span class="p">),</span>
-        <span class="s1">&#39;quota_gb&#39;</span><span class="p">:</span> <span class="n">USER_STORAGE_QUOTA</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1024</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>
+        <span class="s1">'used_bytes'</span><span class="p">:</span> <span class="n">total_bytes</span><span class="p">,</span>
+        <span class="s1">'quota_bytes'</span><span class="p">:</span> <span class="n">USER_STORAGE_QUOTA</span><span class="p">,</span>
+        <span class="s1">'used_percent'</span><span class="p">:</span> <span class="p">(</span><span class="n">total_bytes</span> <span class="o">/</span> <span class="n">USER_STORAGE_QUOTA</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span>
+        <span class="s1">'used_gb'</span><span class="p">:</span> <span class="n">total_bytes</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1024</span><span class="o">**</span><span class="mi">3</span><span class="p">),</span>
+        <span class="s1">'quota_gb'</span><span class="p">:</span> <span class="n">USER_STORAGE_QUOTA</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1024</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>
     <span class="p">}</span>
 </code></pre></div>
 <h3 id="bulk-operations">Bulk Operations<a class="headerlink" href="#bulk-operations" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">htk.apps.file_storage.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">StoredFile</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">export_user_files</span><span class="p">(</span><span class="n">user</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create ZIP of all user files&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Create ZIP of all user files"""</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">zipfile</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">io</span><span class="w"> </span><span class="kn">import</span> <span class="n">BytesIO</span>
 
     <span class="n">files</span> <span class="o">=</span> <span class="n">StoredFile</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">)</span>
 
     <span class="n">zip_buffer</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">()</span>
-    <span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="n">zip_buffer</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">zip_file</span><span class="p">:</span>
+    <span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="n">zip_buffer</span><span class="p">,</span> <span class="s1">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">zip_file</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">stored_file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
             <span class="n">zip_file</span><span class="o">.</span><span class="n">writestr</span><span class="p">(</span>
                 <span class="n">stored_file</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
@@ -3693,34 +3721,34 @@
 <h3 id="storedfile">StoredFile<a class="headerlink" href="#storedfile" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">StoredFile</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
     <span class="n">user</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">)</span>
-    <span class="n">file</span> <span class="o">=</span> <span class="n">FileField</span><span class="p">(</span><span class="n">upload_to</span><span class="o">=</span><span class="s1">&#39;files/%Y/%m/</span><span class="si">%d</span><span class="s1">/&#39;</span><span class="p">)</span>
+    <span class="n">file</span> <span class="o">=</span> <span class="n">FileField</span><span class="p">(</span><span class="n">upload_to</span><span class="o">=</span><span class="s1">'files/%Y/%m/</span><span class="si">%d</span><span class="s1">/'</span><span class="p">)</span>
     <span class="n">name</span> <span class="o">=</span> <span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">255</span><span class="p">)</span>
-    <span class="n">folder</span> <span class="o">=</span> <span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">255</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="n">folder</span> <span class="o">=</span> <span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">255</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span>
     <span class="n">size</span> <span class="o">=</span> <span class="n">IntegerField</span><span class="p">()</span>  <span class="c1"># bytes</span>
     <span class="n">mime_type</span> <span class="o">=</span> <span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
     <span class="n">version</span> <span class="o">=</span> <span class="n">IntegerField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="s1">&#39;self&#39;</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">SET_NULL</span><span class="p">)</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="s1">'self'</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">SET_NULL</span><span class="p">)</span>
     <span class="n">created</span> <span class="o">=</span> <span class="n">DateTimeField</span><span class="p">(</span><span class="n">auto_now_add</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">updated</span> <span class="o">=</span> <span class="n">DateTimeField</span><span class="p">(</span><span class="n">auto_now</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="c1"># settings.py</span>
-<span class="n">FILE_STORAGE_PATH</span> <span class="o">=</span> <span class="s1">&#39;files/&#39;</span>
+<span class="n">FILE_STORAGE_PATH</span> <span class="o">=</span> <span class="s1">'files/'</span>
 <span class="n">FILE_STORAGE_MAX_SIZE</span> <span class="o">=</span> <span class="mi">50</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span>  <span class="c1"># 50MB per file</span>
 
 <span class="n">ALLOWED_FILE_TYPES</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s1">&#39;application/pdf&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;text/plain&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;application/msword&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;image/jpeg&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;image/png&#39;</span><span class="p">,</span>
+    <span class="s1">'application/pdf'</span><span class="p">,</span>
+    <span class="s1">'text/plain'</span><span class="p">,</span>
+    <span class="s1">'application/msword'</span><span class="p">,</span>
+    <span class="s1">'image/jpeg'</span><span class="p">,</span>
+    <span class="s1">'image/png'</span><span class="p">,</span>
 <span class="p">]</span>
 
 <span class="c1"># Storage backend</span>
 <span class="n">STORAGES</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s1">&#39;BACKEND&#39;</span><span class="p">:</span> <span class="s1">&#39;django.core.files.storage.FileSystemStorage&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;LOCATION&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">BASE_DIR</span><span class="p">,</span> <span class="s1">&#39;media&#39;</span><span class="p">)</span>
+    <span class="s1">'default'</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">'BACKEND'</span><span class="p">:</span> <span class="s1">'django.core.files.storage.FileSystemStorage'</span><span class="p">,</span>
+        <span class="s1">'LOCATION'</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">BASE_DIR</span><span class="p">,</span> <span class="s1">'media'</span><span class="p">)</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>

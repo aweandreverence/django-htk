@@ -1541,6 +1541,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../native_auth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native browser authentication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../notifications/" class="md-nav__link">
         
   
@@ -3266,18 +3294,18 @@
 <span class="c1"># Create customer</span>
 <span class="n">customer</span> <span class="o">=</span> <span class="n">BaseCustomer</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
     <span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span>
-    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Acme Corp&#39;</span><span class="p">,</span>
-    <span class="n">email</span><span class="o">=</span><span class="s1">&#39;procurement@acme.com&#39;</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">'Acme Corp'</span><span class="p">,</span>
+    <span class="n">email</span><span class="o">=</span><span class="s1">'procurement@acme.com'</span>
 <span class="p">)</span>
 
 <span class="c1"># Link customer to organization</span>
 <span class="n">org_customer</span> <span class="o">=</span> <span class="n">BaseOrganizationCustomer</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
     <span class="n">organization</span><span class="o">=</span><span class="n">org</span><span class="p">,</span>
     <span class="n">customer</span><span class="o">=</span><span class="n">customer</span><span class="p">,</span>
-    <span class="n">role</span><span class="o">=</span><span class="s1">&#39;procurement_manager&#39;</span>
+    <span class="n">role</span><span class="o">=</span><span class="s1">'procurement_manager'</span>
 <span class="p">)</span>
 
-<span class="c1"># Get customer&#39;s quotes</span>
+<span class="c1"># Get customer's quotes</span>
 <span class="n">quotes</span> <span class="o">=</span> <span class="n">customer</span><span class="o">.</span><span class="n">cpqquote_set</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
 </code></pre></div>
 <h2 id="customer-models">Customer Models<a class="headerlink" href="#customer-models" title="Permanent link">&para;</a></h2>
@@ -3288,14 +3316,14 @@
 <span class="c1"># Create customer with user</span>
 <span class="n">customer</span> <span class="o">=</span> <span class="n">BaseCustomer</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
     <span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span>
-    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;John Doe&#39;</span><span class="p">,</span>
-    <span class="n">email</span><span class="o">=</span><span class="s1">&#39;john@example.com&#39;</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">'John Doe'</span><span class="p">,</span>
+    <span class="n">email</span><span class="o">=</span><span class="s1">'john@example.com'</span>
 <span class="p">)</span>
 
 <span class="c1"># Or without user (for external customers)</span>
 <span class="n">external</span> <span class="o">=</span> <span class="n">BaseCustomer</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
-    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;External Partner&#39;</span><span class="p">,</span>
-    <span class="n">email</span><span class="o">=</span><span class="s1">&#39;partner@external.com&#39;</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">'External Partner'</span><span class="p">,</span>
+    <span class="n">email</span><span class="o">=</span><span class="s1">'partner@external.com'</span>
 <span class="p">)</span>
 
 <span class="c1"># Query customers</span>
@@ -3309,28 +3337,28 @@
 <span class="n">org_customer</span> <span class="o">=</span> <span class="n">BaseOrganizationCustomer</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
     <span class="n">organization</span><span class="o">=</span><span class="n">org</span><span class="p">,</span>
     <span class="n">customer</span><span class="o">=</span><span class="n">customer</span><span class="p">,</span>
-    <span class="n">role</span><span class="o">=</span><span class="s1">&#39;procurement_manager&#39;</span>
+    <span class="n">role</span><span class="o">=</span><span class="s1">'procurement_manager'</span>
 <span class="p">)</span>
 
 <span class="c1"># Get all customers for org</span>
 <span class="n">org_customers</span> <span class="o">=</span> <span class="n">org</span><span class="o">.</span><span class="n">baseorganizationcustomer_set</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
 
 <span class="c1"># Filter by role</span>
-<span class="n">managers</span> <span class="o">=</span> <span class="n">org</span><span class="o">.</span><span class="n">baseorganizationcustomer_set</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">role</span><span class="o">=</span><span class="s1">&#39;procurement_manager&#39;</span><span class="p">)</span>
+<span class="n">managers</span> <span class="o">=</span> <span class="n">org</span><span class="o">.</span><span class="n">baseorganizationcustomer_set</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">role</span><span class="o">=</span><span class="s1">'procurement_manager'</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="common-patterns">Common Patterns<a class="headerlink" href="#common-patterns" title="Permanent link">&para;</a></h2>
 <h3 id="customer-hierarchy">Customer Hierarchy<a class="headerlink" href="#customer-hierarchy" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">htk.apps.customers.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseCustomer</span><span class="p">,</span> <span class="n">BaseOrganizationCustomer</span>
 
 <span class="c1"># Create customer linked to multiple orgs</span>
-<span class="n">customer</span> <span class="o">=</span> <span class="n">BaseCustomer</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Acme&#39;</span><span class="p">)</span>
+<span class="n">customer</span> <span class="o">=</span> <span class="n">BaseCustomer</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'Acme'</span><span class="p">)</span>
 
 <span class="c1"># Add to multiple organizations</span>
 <span class="k">for</span> <span class="n">org</span> <span class="ow">in</span> <span class="n">organizations</span><span class="p">:</span>
     <span class="n">BaseOrganizationCustomer</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
         <span class="n">organization</span><span class="o">=</span><span class="n">org</span><span class="p">,</span>
         <span class="n">customer</span><span class="o">=</span><span class="n">customer</span><span class="p">,</span>
-        <span class="n">role</span><span class="o">=</span><span class="s1">&#39;buyer&#39;</span>
+        <span class="n">role</span><span class="o">=</span><span class="s1">'buyer'</span>
     <span class="p">)</span>
 
 <span class="c1"># Get all orgs for customer</span>
@@ -3342,7 +3370,7 @@
 
 <span class="c1"># Search by name or email</span>
 <span class="n">customers</span> <span class="o">=</span> <span class="n">BaseCustomer</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
-    <span class="n">Q</span><span class="p">(</span><span class="n">name__icontains</span><span class="o">=</span><span class="s1">&#39;acme&#39;</span><span class="p">)</span> <span class="o">|</span> <span class="n">Q</span><span class="p">(</span><span class="n">email__icontains</span><span class="o">=</span><span class="s1">&#39;acme&#39;</span><span class="p">)</span>
+    <span class="n">Q</span><span class="p">(</span><span class="n">name__icontains</span><span class="o">=</span><span class="s1">'acme'</span><span class="p">)</span> <span class="o">|</span> <span class="n">Q</span><span class="p">(</span><span class="n">email__icontains</span><span class="o">=</span><span class="s1">'acme'</span><span class="p">)</span>
 <span class="p">)</span>
 
 <span class="c1"># Get customers with quotes</span>
@@ -3354,7 +3382,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">htk.apps.customers.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseOrganizationCustomer</span>
 <span class="n">org_customers</span> <span class="o">=</span> <span class="n">BaseOrganizationCustomer</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
     <span class="n">organization</span><span class="o">=</span><span class="n">org</span><span class="p">,</span>
-    <span class="n">role__in</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;buyer&#39;</span><span class="p">,</span> <span class="s1">&#39;approver&#39;</span><span class="p">]</span>
+    <span class="n">role__in</span><span class="o">=</span><span class="p">[</span><span class="s1">'buyer'</span><span class="p">,</span> <span class="s1">'approver'</span><span class="p">]</span>
 <span class="p">)</span>
 </code></pre></div>
 <h3 id="customer-activity-tracking">Customer Activity Tracking<a class="headerlink" href="#customer-activity-tracking" title="Permanent link">&para;</a></h3>
@@ -3363,7 +3391,7 @@
 
 <span class="c1"># Track last quote/order date</span>
 <span class="n">customer</span> <span class="o">=</span> <span class="n">BaseOrganizationCustomer</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">customer_id</span><span class="p">)</span>
-<span class="n">latest_quote</span> <span class="o">=</span> <span class="n">customer</span><span class="o">.</span><span class="n">customer</span><span class="o">.</span><span class="n">cpqquote_set</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s1">&#39;-created&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+<span class="n">latest_quote</span> <span class="o">=</span> <span class="n">customer</span><span class="o">.</span><span class="n">customer</span><span class="o">.</span><span class="n">cpqquote_set</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s1">'-created'</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
 
 <span class="c1"># Identify inactive customers (no activity in 90 days)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">timedelta</span>
@@ -3379,25 +3407,25 @@
 <span class="c1"># Create quote for customer</span>
 <span class="n">quote</span> <span class="o">=</span> <span class="n">BaseCPQQuote</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
     <span class="n">customer</span><span class="o">=</span><span class="n">customer</span><span class="p">,</span>
-    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Q2024-001&#39;</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">'Q2024-001'</span><span class="p">,</span>
     <span class="n">amount</span><span class="o">=</span><span class="mf">10000.00</span>
 <span class="p">)</span>
 
-<span class="c1"># Get customer&#39;s quotes</span>
-<span class="n">quotes</span> <span class="o">=</span> <span class="n">customer</span><span class="o">.</span><span class="n">cpqquote_set</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="s1">&#39;sent&#39;</span><span class="p">)</span>
+<span class="c1"># Get customer's quotes</span>
+<span class="n">quotes</span> <span class="o">=</span> <span class="n">customer</span><span class="o">.</span><span class="n">cpqquote_set</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="s1">'sent'</span><span class="p">)</span>
 <span class="n">total_value</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">amount</span> <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">quotes</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="c1"># settings.py</span>
 <span class="n">CUSTOMER_MODELS</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;base&#39;</span><span class="p">:</span> <span class="s1">&#39;myapp.models.CustomCustomer&#39;</span><span class="p">,</span>
+    <span class="s1">'base'</span><span class="p">:</span> <span class="s1">'myapp.models.CustomCustomer'</span><span class="p">,</span>
 <span class="p">}</span>
 
 <span class="c1"># Custom roles for organization customers</span>
 <span class="n">CUSTOMER_ROLES</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">(</span><span class="s1">&#39;buyer&#39;</span><span class="p">,</span> <span class="s1">&#39;Buyer&#39;</span><span class="p">),</span>
-    <span class="p">(</span><span class="s1">&#39;approver&#39;</span><span class="p">,</span> <span class="s1">&#39;Approver&#39;</span><span class="p">),</span>
-    <span class="p">(</span><span class="s1">&#39;procurement_manager&#39;</span><span class="p">,</span> <span class="s1">&#39;Procurement Manager&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">'buyer'</span><span class="p">,</span> <span class="s1">'Buyer'</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">'approver'</span><span class="p">,</span> <span class="s1">'Approver'</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">'procurement_manager'</span><span class="p">,</span> <span class="s1">'Procurement Manager'</span><span class="p">),</span>
 <span class="p">]</span>
 </code></pre></div>
 <h2 id="best-practices">Best Practices<a class="headerlink" href="#best-practices" title="Permanent link">&para;</a></h2>

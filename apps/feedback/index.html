@@ -1329,6 +1329,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#slack-notifications" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Slack Notifications
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#integration-notes" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1587,6 +1598,34 @@
     
   
     MP App (Materialized Properties)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../native_auth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native browser authentication
   
 
     
@@ -3360,6 +3399,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#slack-notifications" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Slack Notifications
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#integration-notes" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3402,10 +3452,10 @@ small product-feedback layer for reviewable requests, votes, and comments.</p>
 <span class="n">feedback</span> <span class="o">=</span> <span class="n">Feedback</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
     <span class="n">site</span><span class="o">=</span><span class="n">site</span><span class="p">,</span>
     <span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span>
-    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Jane&#39;</span><span class="p">,</span>
-    <span class="n">email</span><span class="o">=</span><span class="s1">&#39;jane@example.com&#39;</span><span class="p">,</span>
-    <span class="n">comment</span><span class="o">=</span><span class="s1">&#39;This page was confusing.&#39;</span><span class="p">,</span>
-    <span class="n">uri</span><span class="o">=</span><span class="s1">&#39;/dashboard&#39;</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">'Jane'</span><span class="p">,</span>
+    <span class="n">email</span><span class="o">=</span><span class="s1">'jane@example.com'</span><span class="p">,</span>
+    <span class="n">comment</span><span class="o">=</span><span class="s1">'This page was confusing.'</span><span class="p">,</span>
+    <span class="n">uri</span><span class="o">=</span><span class="s1">'/dashboard'</span><span class="p">,</span>
 <span class="p">)</span>
 </code></pre></div>
 <p>The legacy API endpoint remains available:</p>
@@ -3422,12 +3472,12 @@ and <code>needs_review=True</code>; publish them only after staff review.</p>
     <span class="n">site</span><span class="o">=</span><span class="n">site</span><span class="p">,</span>
     <span class="n">created_by</span><span class="o">=</span><span class="n">user</span><span class="p">,</span>
     <span class="n">request_type</span><span class="o">=</span><span class="n">FEEDBACK_REQUEST_TYPE_FEATURE</span><span class="p">,</span>
-    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Add saved searches&#39;</span><span class="p">,</span>
-    <span class="n">description</span><span class="o">=</span><span class="s1">&#39;I would like to save searches and return to them later.&#39;</span><span class="p">,</span>
-    <span class="n">source_uri</span><span class="o">=</span><span class="s1">&#39;/search&#39;</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="s1">'Add saved searches'</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s1">'I would like to save searches and return to them later.'</span><span class="p">,</span>
+    <span class="n">source_uri</span><span class="o">=</span><span class="s1">'/search'</span><span class="p">,</span>
     <span class="n">context</span><span class="o">=</span><span class="p">{</span>
-        <span class="s1">&#39;app&#39;</span><span class="p">:</span> <span class="s1">&#39;example-app&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;surface&#39;</span><span class="p">:</span> <span class="s1">&#39;search-results&#39;</span><span class="p">,</span>
+        <span class="s1">'app'</span><span class="p">:</span> <span class="s1">'example-app'</span><span class="p">,</span>
+        <span class="s1">'surface'</span><span class="p">:</span> <span class="s1">'search-results'</span><span class="p">,</span>
     <span class="p">},</span>
 <span class="p">)</span>
 </code></pre></div>
@@ -3437,12 +3487,12 @@ report reproducible. Keep files/uploads in the consuming app until there is a
 clear shared storage policy.</p>
 <p>Suggested generic context:</p>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;app&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;example-app&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;surface&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;search-results&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/search?q=grace&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;query&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grace&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;viewport&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;width&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1440</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;height&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">900</span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;app_version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026.07.21&quot;</span>
+<span class="w">  </span><span class="nt">"app"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example-app"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"surface"</span><span class="p">:</span><span class="w"> </span><span class="s2">"search-results"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/search?q=grace"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="s2">"grace"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"viewport"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">1440</span><span class="p">,</span><span class="w"> </span><span class="nt">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">900</span><span class="p">},</span>
+<span class="w">  </span><span class="nt">"app_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026.07.21"</span>
 <span class="p">}</span>
 </code></pre></div>
 <h2 id="api-endpoints">API Endpoints<a class="headerlink" href="#api-endpoints" title="Permanent link">&para;</a></h2>
@@ -3463,11 +3513,11 @@ idea to vote on instead of creating a duplicate.</p>
 Content-Type: application/json
 
 {
-  &quot;type&quot;: &quot;feature_request&quot;,
-  &quot;title&quot;: &quot;Add saved searches&quot;,
-  &quot;description&quot;: &quot;I would like to save searches and return to them later.&quot;,
-  &quot;context&quot;: {
-    &quot;surface&quot;: &quot;search-results&quot;
+  "type": "feature_request",
+  "title": "Add saved searches",
+  "description": "I would like to save searches and return to them later.",
+  "context": {
+    "surface": "search-results"
   }
 }
 </code></pre></div>
@@ -3522,6 +3572,14 @@ the vote row only needs a <code>user</code> FK.</p>
 <li><code>FeedbackRequestVote</code> — one active upvote/downvote row per authenticated user.</li>
 <li><code>FeedbackRequestComment</code> — public or internal discussion.</li>
 </ul>
+<h2 id="slack-notifications">Slack Notifications<a class="headerlink" href="#slack-notifications" title="Permanent link">&para;</a></h2>
+<p>New <code>FeedbackRequest</code> submissions can post to Slack through HTK's existing Slack webhook helper. Configure the downstream app with:</p>
+<div class="highlight"><pre><span></span><code><span class="n">HTK_FEEDBACK_SLACK_ENABLED</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">HTK_FEEDBACK_SLACK_CHANNEL</span> <span class="o">=</span> <span class="s1">'#feedback'</span>
+<span class="n">HTK_FEEDBACK_SLACK_USERNAME</span> <span class="o">=</span> <span class="s1">'Feedback'</span>  <span class="c1"># optional</span>
+<span class="n">HTK_FEEDBACK_SLACK_ICON_EMOJI</span> <span class="o">=</span> <span class="s1">':memo:'</span>  <span class="c1"># optional</span>
+</code></pre></div>
+<p>Notifications include request type, status, visibility, submitter, source page, and a direct Django admin link built from HTK's shared model admin URL helpers.</p>
 <h2 id="integration-notes">Integration Notes<a class="headerlink" href="#integration-notes" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Keep new submissions private by default and publish only reviewed, public-safe requests.</li>
@@ -3529,7 +3587,7 @@ the vote row only needs a <code>user</code> FK.</p>
 <li>Scope every request by <code>site</code>.</li>
 <li>Do not duplicate authenticated identity snapshots; use the <code>created_by</code>/<code>user</code> FKs.</li>
 <li>Keep anonymous request submission contact-free for now. Add app-local contact capture only when a real follow-up workflow exists.</li>
-<li>Add async email/webhook delivery in consuming apps or future HTK work.</li>
+<li>Use Slack notifications for quick human triage when the consuming app has a configured Slack webhook/channel.</li>
 <li>Use <code>context</code> JSON for app-specific page state and <code>metadata</code> JSON for staff/integration-only data.</li>
 </ul>
 

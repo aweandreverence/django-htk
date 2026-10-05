@@ -1607,6 +1607,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../native_auth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native browser authentication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../notifications/" class="md-nav__link">
         
   
@@ -3409,14 +3437,14 @@
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">htk.apps.accounts.utils.general</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_user</span><span class="p">,</span> <span class="n">get_user_by_email</span>
 
 <span class="c1"># Create a new user</span>
-<span class="n">user</span> <span class="o">=</span> <span class="n">create_user</span><span class="p">(</span><span class="s1">&#39;user@example.com&#39;</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s1">&#39;secure_password&#39;</span><span class="p">)</span>
+<span class="n">user</span> <span class="o">=</span> <span class="n">create_user</span><span class="p">(</span><span class="s1">'user@example.com'</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s1">'secure_password'</span><span class="p">)</span>
 
 <span class="c1"># Get user by email</span>
-<span class="n">user</span> <span class="o">=</span> <span class="n">get_user_by_email</span><span class="p">(</span><span class="s1">&#39;user@example.com&#39;</span><span class="p">)</span>
+<span class="n">user</span> <span class="o">=</span> <span class="n">get_user_by_email</span><span class="p">(</span><span class="s1">'user@example.com'</span><span class="p">)</span>
 
 <span class="c1"># Get user by username</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">htk.apps.accounts.utils.general</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_user_by_username</span>
-<span class="n">user</span> <span class="o">=</span> <span class="n">get_user_by_username</span><span class="p">(</span><span class="s1">&#39;john_doe&#39;</span><span class="p">)</span>
+<span class="n">user</span> <span class="o">=</span> <span class="n">get_user_by_username</span><span class="p">(</span><span class="s1">'john_doe'</span><span class="p">)</span>
 </code></pre></div>
 <h3 id="email-management">Email Management<a class="headerlink" href="#email-management" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">htk.apps.accounts.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">UserEmail</span>
@@ -3424,12 +3452,12 @@
 <span class="c1"># Add additional email to user</span>
 <span class="n">user_email</span> <span class="o">=</span> <span class="n">UserEmail</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
     <span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span>
-    <span class="n">email</span><span class="o">=</span><span class="s1">&#39;alternate@example.com&#39;</span><span class="p">,</span>
+    <span class="n">email</span><span class="o">=</span><span class="s1">'alternate@example.com'</span><span class="p">,</span>
     <span class="n">verified</span><span class="o">=</span><span class="kc">False</span>
 <span class="p">)</span>
 
 <span class="c1"># Set primary email</span>
-<span class="n">user</span><span class="o">.</span><span class="n">profile</span><span class="o">.</span><span class="n">set_primary_email</span><span class="p">(</span><span class="s1">&#39;alternate@example.com&#39;</span><span class="p">)</span>
+<span class="n">user</span><span class="o">.</span><span class="n">profile</span><span class="o">.</span><span class="n">set_primary_email</span><span class="p">(</span><span class="s1">'alternate@example.com'</span><span class="p">)</span>
 
 <span class="c1"># Get all emails for user</span>
 <span class="n">emails</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="n">profile</span><span class="o">.</span><span class="n">get_nonprimary_emails</span><span class="p">()</span>
@@ -3447,9 +3475,9 @@
 <h3 id="social-authentication">Social Authentication<a class="headerlink" href="#social-authentication" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="c1"># Configure in settings.py</span>
 <span class="n">AUTHENTICATION_BACKENDS</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s1">&#39;htk.apps.accounts.backends.HtkUserTokenAuthBackend&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;social_core.backends.facebook.FacebookOAuth2&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;social_core.backends.google.GoogleOAuth2&#39;</span><span class="p">,</span>
+    <span class="s1">'htk.apps.accounts.backends.HtkUserTokenAuthBackend'</span><span class="p">,</span>
+    <span class="s1">'social_core.backends.facebook.FacebookOAuth2'</span><span class="p">,</span>
+    <span class="s1">'social_core.backends.google.GoogleOAuth2'</span><span class="p">,</span>
 <span class="p">]</span>
 
 <span class="c1"># Use in views via python-social-auth</span>
@@ -3465,13 +3493,13 @@
 <span class="p">)</span>
 
 <span class="c1"># Search by username</span>
-<span class="n">users</span> <span class="o">=</span> <span class="n">search_by_username</span><span class="p">(</span><span class="s1">&#39;john&#39;</span><span class="p">)</span>
+<span class="n">users</span> <span class="o">=</span> <span class="n">search_by_username</span><span class="p">(</span><span class="s1">'john'</span><span class="p">)</span>
 
 <span class="c1"># Search by email</span>
-<span class="n">user</span> <span class="o">=</span> <span class="n">search_by_email</span><span class="p">(</span><span class="s1">&#39;user@example.com&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+<span class="n">user</span> <span class="o">=</span> <span class="n">search_by_email</span><span class="p">(</span><span class="s1">'user@example.com'</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
 
 <span class="c1"># Combined search across username and name</span>
-<span class="n">users</span> <span class="o">=</span> <span class="n">combined_user_search</span><span class="p">(</span><span class="s1">&#39;john&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">search_by_username</span><span class="p">,</span> <span class="n">search_by_name</span><span class="p">])</span>
+<span class="n">users</span> <span class="o">=</span> <span class="n">combined_user_search</span><span class="p">(</span><span class="s1">'john'</span><span class="p">,</span> <span class="p">[</span><span class="n">search_by_username</span><span class="p">,</span> <span class="n">search_by_name</span><span class="p">])</span>
 </code></pre></div>
 <h3 id="following-system">Following System<a class="headerlink" href="#following-system" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="c1"># Add follower</span>
@@ -3513,7 +3541,7 @@
 <h3 id="timezone-locale">Timezone &amp; Locale<a class="headerlink" href="#timezone-locale" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">htk.apps.accounts.utils.locale</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_local_time</span>
 
-<span class="c1"># Get user&#39;s local time</span>
+<span class="c1"># Get user's local time</span>
 <span class="n">local_time</span> <span class="o">=</span> <span class="n">get_local_time</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">aware_datetime</span><span class="p">)</span>
 
 <span class="c1"># Check if user is online during specific hours</span>
@@ -3528,12 +3556,12 @@
 <h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="c1"># settings.py</span>
 <span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s1">&#39;htk.apps.accounts&#39;</span><span class="p">,</span>
+    <span class="s1">'htk.apps.accounts'</span><span class="p">,</span>
     <span class="c1"># ...</span>
 <span class="p">]</span>
 
 <span class="c1"># Add custom user profile</span>
-<span class="n">AUTH_USER_PROFILE_MODEL</span> <span class="o">=</span> <span class="s1">&#39;myapp.CustomUserProfile&#39;</span>
+<span class="n">AUTH_USER_PROFILE_MODEL</span> <span class="o">=</span> <span class="s1">'myapp.CustomUserProfile'</span>
 </code></pre></div>
 <h2 id="signals">Signals<a class="headerlink" href="#signals" title="Permanent link">&para;</a></h2>
 <p>Automatic signal handlers:

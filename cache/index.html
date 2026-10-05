@@ -1539,6 +1539,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../apps/native_auth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native browser authentication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../apps/notifications/" class="md-nav__link">
         
   
@@ -3276,11 +3304,11 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">user</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_cache_key_suffix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;user_</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s1">_following&#39;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">'user_</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s1">_following'</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_cache_payload</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># Return what to cache</span>
-        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">following</span><span class="o">.</span><span class="n">values_list</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="n">flat</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">following</span><span class="o">.</span><span class="n">values_list</span><span class="p">(</span><span class="s1">'id'</span><span class="p">,</span> <span class="n">flat</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_cache_duration</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># Cache for 1 hour</span>
@@ -3297,7 +3325,7 @@
 
 <span class="k">class</span><span class="w"> </span><span class="nc">ExpensiveDataCache</span><span class="p">(</span><span class="n">LockableObject</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_lock_key_suffix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s1">&#39;expensive_computation&#39;</span>
+        <span class="k">return</span> <span class="s1">'expensive_computation'</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_lock_duration</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># Hold lock for 30 seconds</span>
@@ -3336,7 +3364,7 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">get_cache_key</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># Override for special key formatting</span>
         <span class="n">suffix</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_cache_key_suffix</span><span class="p">()</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;custom:v2:</span><span class="si">{</span><span class="n">suffix</span><span class="si">}</span><span class="s1">&#39;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">'custom:v2:</span><span class="si">{</span><span class="n">suffix</span><span class="si">}</span><span class="s1">'</span>
 </code></pre></div>
 <h2 id="classes">Classes<a class="headerlink" href="#classes" title="Permanent link">&para;</a></h2>
 <ul>

@@ -1439,6 +1439,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../apps/native_auth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native browser authentication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../apps/notifications/" class="md-nav__link">
         
   
@@ -3061,32 +3089,32 @@
 <h2 id="quick-start">Quick Start<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">htk.admin.decorators</span><span class="w"> </span><span class="kn">import</span> <span class="n">django_admin_bool_field</span>
 
-<span class="nd">@django_admin_bool_field</span><span class="p">(</span><span class="s1">&#39;is_active&#39;</span><span class="p">)</span>
+<span class="nd">@django_admin_bool_field</span><span class="p">(</span><span class="s1">'is_active'</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">is_active_display</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">obj</span><span class="o">.</span><span class="n">is_active</span>
-<span class="n">is_active_display</span><span class="o">.</span><span class="n">short_description</span> <span class="o">=</span> <span class="s1">&#39;Active&#39;</span>
+<span class="n">is_active_display</span><span class="o">.</span><span class="n">short_description</span> <span class="o">=</span> <span class="s1">'Active'</span>
 
 <span class="k">class</span><span class="w"> </span><span class="nc">UserAdmin</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">ModelAdmin</span><span class="p">):</span>
-    <span class="n">list_display</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">,</span> <span class="n">is_active_display</span><span class="p">]</span>
+    <span class="n">list_display</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'username'</span><span class="p">,</span> <span class="n">is_active_display</span><span class="p">]</span>
 </code></pre></div>
 <h2 id="boolean-field-display">Boolean Field Display<a class="headerlink" href="#boolean-field-display" title="Permanent link">&para;</a></h2>
 <p>Display boolean fields as green checkmarks or red X marks in admin list view:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">htk.admin.decorators</span><span class="w"> </span><span class="kn">import</span> <span class="n">django_admin_bool_field</span>
 
 <span class="k">class</span><span class="w"> </span><span class="nc">ProductAdmin</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">ModelAdmin</span><span class="p">):</span>
-    <span class="n">list_display</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="n">is_available</span><span class="p">,</span> <span class="n">is_featured</span><span class="p">]</span>
+    <span class="n">list_display</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'name'</span><span class="p">,</span> <span class="n">is_available</span><span class="p">,</span> <span class="n">is_featured</span><span class="p">]</span>
 
-    <span class="nd">@django_admin_bool_field</span><span class="p">(</span><span class="s1">&#39;is_available&#39;</span><span class="p">)</span>
+    <span class="nd">@django_admin_bool_field</span><span class="p">(</span><span class="s1">'is_available'</span><span class="p">)</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">is_available</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">obj</span><span class="o">.</span><span class="n">is_available</span>
 
-    <span class="nd">@django_admin_bool_field</span><span class="p">(</span><span class="s1">&#39;is_featured&#39;</span><span class="p">)</span>
+    <span class="nd">@django_admin_bool_field</span><span class="p">(</span><span class="s1">'is_featured'</span><span class="p">)</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">is_featured</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">obj</span><span class="o">.</span><span class="n">is_featured</span>
 </code></pre></div>
 <h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="c1"># settings.py</span>
-<span class="n">ADMIN_SITE_HEADER</span> <span class="o">=</span> <span class="s1">&#39;My Admin&#39;</span>
+<span class="n">ADMIN_SITE_HEADER</span> <span class="o">=</span> <span class="s1">'My Admin'</span>
 </code></pre></div>
 
 

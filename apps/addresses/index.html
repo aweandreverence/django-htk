@@ -1452,6 +1452,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../native_auth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native browser authentication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../notifications/" class="md-nav__link">
         
   
@@ -3087,11 +3115,11 @@
 
 <span class="c1"># Create address</span>
 <span class="n">address</span> <span class="o">=</span> <span class="n">BasePostalAddress</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
-    <span class="n">street_1</span><span class="o">=</span><span class="s1">&#39;123 Main St&#39;</span><span class="p">,</span>
-    <span class="n">city</span><span class="o">=</span><span class="s1">&#39;San Francisco&#39;</span><span class="p">,</span>
-    <span class="n">state</span><span class="o">=</span><span class="s1">&#39;CA&#39;</span><span class="p">,</span>
-    <span class="n">postal_code</span><span class="o">=</span><span class="s1">&#39;94105&#39;</span><span class="p">,</span>
-    <span class="n">country</span><span class="o">=</span><span class="s1">&#39;US&#39;</span>
+    <span class="n">street_1</span><span class="o">=</span><span class="s1">'123 Main St'</span><span class="p">,</span>
+    <span class="n">city</span><span class="o">=</span><span class="s1">'San Francisco'</span><span class="p">,</span>
+    <span class="n">state</span><span class="o">=</span><span class="s1">'CA'</span><span class="p">,</span>
+    <span class="n">postal_code</span><span class="o">=</span><span class="s1">'94105'</span><span class="p">,</span>
+    <span class="n">country</span><span class="o">=</span><span class="s1">'US'</span>
 <span class="p">)</span>
 
 <span class="c1"># Get Google Maps static image</span>
@@ -3109,7 +3137,7 @@
 </code></pre></div>
 <h2 id="common-patterns">Common Patterns<a class="headerlink" href="#common-patterns" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="c1"># Get full address string</span>
-<span class="n">full_address</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">address</span><span class="o">.</span><span class="n">street_1</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">address</span><span class="o">.</span><span class="n">city</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">address</span><span class="o">.</span><span class="n">state</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">address</span><span class="o">.</span><span class="n">postal_code</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="n">full_address</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">address</span><span class="o">.</span><span class="n">street_1</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">address</span><span class="o">.</span><span class="n">city</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">address</span><span class="o">.</span><span class="n">state</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">address</span><span class="o">.</span><span class="n">postal_code</span><span class="si">}</span><span class="s2">"</span>
 
 <span class="c1"># Distance calculation</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">htk.utils.maths</span><span class="w"> </span><span class="kn">import</span> <span class="n">haversine_distance</span>

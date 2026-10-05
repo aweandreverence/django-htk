@@ -1589,6 +1589,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../apps/native_auth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native browser authentication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../apps/notifications/" class="md-nav__link">
         
   
@@ -3370,7 +3398,7 @@
 <p>Mark functions as deprecated to warn users:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">htk.decorators.classes</span><span class="w"> </span><span class="kn">import</span> <span class="n">deprecated</span>
 
-<span class="nd">@deprecated</span><span class="p">(</span><span class="n">version</span><span class="o">=</span><span class="s1">&#39;2.0&#39;</span><span class="p">,</span> <span class="n">alternative</span><span class="o">=</span><span class="s1">&#39;new_function&#39;</span><span class="p">)</span>
+<span class="nd">@deprecated</span><span class="p">(</span><span class="n">version</span><span class="o">=</span><span class="s1">'2.0'</span><span class="p">,</span> <span class="n">alternative</span><span class="o">=</span><span class="s1">'new_function'</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">old_function</span><span class="p">():</span>
     <span class="k">pass</span>
 
@@ -3387,7 +3415,7 @@
     <span class="k">if</span> <span class="n">created</span><span class="p">:</span>
         <span class="n">UserProfile</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">instance</span><span class="p">)</span>
 
-<span class="c1"># This handler won&#39;t fire during `python manage.py loaddata`</span>
+<span class="c1"># This handler won't fire during `python manage.py loaddata`</span>
 </code></pre></div>
 <p><strong>Use Cases:</strong>
 - Prevent signal handlers from executing during fixture loading
@@ -3401,7 +3429,7 @@
 <span class="nd">@restful_obj_seo_redirect</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">product_detail</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">product_id</span><span class="p">):</span>
     <span class="n">product</span> <span class="o">=</span> <span class="n">Product</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">product_id</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">product</span><span class="o">.</span><span class="n">slug</span> <span class="o">!=</span> <span class="n">request</span><span class="o">.</span><span class="n">resolver_match</span><span class="o">.</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;slug&#39;</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">product</span><span class="o">.</span><span class="n">slug</span> <span class="o">!=</span> <span class="n">request</span><span class="o">.</span><span class="n">resolver_match</span><span class="o">.</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'slug'</span><span class="p">):</span>
         <span class="c1"># Redirects to canonical URL with correct slug</span>
         <span class="k">pass</span>
 </code></pre></div>
@@ -3412,8 +3440,8 @@
 <span class="nd">@resolve_records_from_restful_url</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">organization_detail</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
     <span class="c1"># Organization is automatically resolved from URL</span>
-    <span class="n">org</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">resolved_records</span><span class="p">[</span><span class="s1">&#39;organization&#39;</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;org_detail.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;org&#39;</span><span class="p">:</span> <span class="n">org</span><span class="p">})</span>
+    <span class="n">org</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">resolved_records</span><span class="p">[</span><span class="s1">'organization'</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">'org_detail.html'</span><span class="p">,</span> <span class="p">{</span><span class="s1">'org'</span><span class="p">:</span> <span class="n">org</span><span class="p">})</span>
 </code></pre></div>
 <h2 id="rate-limiting">Rate Limiting<a class="headerlink" href="#rate-limiting" title="Permanent link">&para;</a></h2>
 <h3 id="rate-limit-instance-methods">Rate Limit Instance Methods<a class="headerlink" href="#rate-limit-instance-methods" title="Permanent link">&para;</a></h3>
@@ -3429,7 +3457,7 @@
 <span class="c1"># Usage</span>
 <span class="n">api</span> <span class="o">=</span> <span class="n">UserAPI</span><span class="p">()</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">15</span><span class="p">):</span>
-    <span class="n">api</span><span class="o">.</span><span class="n">send_email</span><span class="p">(</span><span class="s1">&#39;user@example.com&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;Message </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">body</span><span class="p">)</span>
+    <span class="n">api</span><span class="o">.</span><span class="n">send_email</span><span class="p">(</span><span class="s1">'user@example.com'</span><span class="p">,</span> <span class="sa">f</span><span class="s1">'Message </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">'</span><span class="p">,</span> <span class="n">body</span><span class="p">)</span>
     <span class="c1"># Raises RateLimitError after 10 calls in 60 seconds</span>
 </code></pre></div>
 <p><strong>Features:</strong>
@@ -3442,7 +3470,7 @@
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">htk.decorators.classes</span><span class="w"> </span><span class="kn">import</span> <span class="n">deprecated</span>
 
 <span class="k">class</span><span class="w"> </span><span class="nc">UserService</span><span class="p">:</span>
-    <span class="nd">@deprecated</span><span class="p">(</span><span class="n">version</span><span class="o">=</span><span class="s1">&#39;2.0&#39;</span><span class="p">,</span> <span class="n">alternative</span><span class="o">=</span><span class="s1">&#39;create_user_v2&#39;</span><span class="p">)</span>
+    <span class="nd">@deprecated</span><span class="p">(</span><span class="n">version</span><span class="o">=</span><span class="s1">'2.0'</span><span class="p">,</span> <span class="n">alternative</span><span class="o">=</span><span class="s1">'create_user_v2'</span><span class="p">)</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">create_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">password</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_user_v2</span><span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
 
@@ -3458,7 +3486,7 @@
 <span class="nd">@disable_for_loaddata</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">on_user_created</span><span class="p">(</span><span class="n">sender</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">created</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">created</span><span class="p">:</span>
-        <span class="c1"># This won&#39;t run during loaddata/migrations</span>
+        <span class="c1"># This won't run during loaddata/migrations</span>
         <span class="n">send_welcome_email</span><span class="p">(</span><span class="n">instance</span><span class="o">.</span><span class="n">email</span><span class="p">)</span>
 </code></pre></div>
 <h3 id="api-rate-limiting">API Rate Limiting<a class="headerlink" href="#api-rate-limiting" title="Permanent link">&para;</a></h3>
@@ -3470,7 +3498,7 @@
         <span class="c1"># Max 100 charges per hour</span>
         <span class="k">return</span> <span class="n">stripe</span><span class="o">.</span><span class="n">Charge</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
             <span class="n">amount</span><span class="o">=</span><span class="n">amount</span><span class="p">,</span>
-            <span class="n">currency</span><span class="o">=</span><span class="s1">&#39;usd&#39;</span><span class="p">,</span>
+            <span class="n">currency</span><span class="o">=</span><span class="s1">'usd'</span><span class="p">,</span>
             <span class="n">source</span><span class="o">=</span><span class="n">card_token</span>
         <span class="p">)</span>
 </code></pre></div>

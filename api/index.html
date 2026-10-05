@@ -1500,6 +1500,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../apps/native_auth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native browser authentication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../apps/notifications/" class="md-nav__link">
         
   
@@ -3210,14 +3238,14 @@
 <p>Extract expected parameters from POST data:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">htk.api.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">extract_post_params</span>
 
-<span class="n">params</span> <span class="o">=</span> <span class="n">extract_post_params</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;email&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">])</span>
+<span class="n">params</span> <span class="o">=</span> <span class="n">extract_post_params</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">,</span> <span class="p">[</span><span class="s1">'name'</span><span class="p">,</span> <span class="s1">'email'</span><span class="p">,</span> <span class="s1">'age'</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="datatables-integration">DataTables Integration<a class="headerlink" href="#datatables-integration" title="Permanent link">&para;</a></h2>
 <p>Handle server-side DataTables requests with:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">htk.api.views</span><span class="w"> </span><span class="kn">import</span> <span class="n">model_datatables_api_get_view</span>
 
 <span class="c1"># Add to your URL patterns</span>
-<span class="n">path</span><span class="p">(</span><span class="s1">&#39;api/users/datatable/&#39;</span><span class="p">,</span> <span class="n">model_datatables_api_get_view</span><span class="p">(</span><span class="n">User</span><span class="p">))</span>
+<span class="n">path</span><span class="p">(</span><span class="s1">'api/users/datatable/'</span><span class="p">,</span> <span class="n">model_datatables_api_get_view</span><span class="p">(</span><span class="n">User</span><span class="p">))</span>
 </code></pre></div>
 <p>The view automatically handles:
 - Sorting
@@ -3235,6 +3263,7 @@
 <li><strong><code>get_object_or_json_error</code></strong> - Retrieves object or returns JSON error</li>
 <li><strong><code>model_datatables_api_get_view</code></strong> - Generic DataTables API view for any model</li>
 </ul>
+<p>Private JSON endpoints can reuse <code>htk.api.http.private_json_response</code> (no-store/referrer protection) and <code>parse_string_json_body</code> (bounded string-valued JSON object).</p>
 
 
 

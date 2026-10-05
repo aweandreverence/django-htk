@@ -18,7 +18,7 @@
         <link rel="prev" href="../mobile/">
       
       
-        <link rel="next" href="../notifications/">
+        <link rel="next" href="../native_auth/">
       
       
         
@@ -1523,6 +1523,34 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../native_auth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native browser authentication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -3254,21 +3282,21 @@
 <span class="c1"># Define materialized property on model</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">User</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
     <span class="n">name</span> <span class="o">=</span> <span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-    <span class="n">followers</span> <span class="o">=</span> <span class="n">ManyToManyField</span><span class="p">(</span><span class="s1">&#39;self&#39;</span><span class="p">)</span>
+    <span class="n">followers</span> <span class="o">=</span> <span class="n">ManyToManyField</span><span class="p">(</span><span class="s1">'self'</span><span class="p">)</span>
 
     <span class="c1"># Materialized property field</span>
     <span class="n">materialized_follower_count</span> <span class="o">=</span> <span class="n">IntegerField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
     <span class="nd">@materialized_property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">follower_count</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Expensive computation - materialized for O(1) access&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Expensive computation - materialized for O(1) access"""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">followers</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
 
 <span class="c1"># Access property (uses cached value)</span>
 <span class="n">user</span><span class="o">.</span><span class="n">materialized_follower_count</span>  <span class="c1"># O(1) lookup</span>
 
 <span class="c1"># Invalidate when followers change</span>
-<span class="n">invalidate_for_instance</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="s1">&#39;follower_count&#39;</span><span class="p">)</span>
+<span class="n">invalidate_for_instance</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="s1">'follower_count'</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="concept">Concept<a class="headerlink" href="#concept" title="Permanent link">&para;</a></h2>
 <p>Instead of computing expensive properties every time (O(n) or database queries), materialize them by:
@@ -3297,14 +3325,14 @@
 
     <span class="nd">@materialized_property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">review_count</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Number of reviews (cached in DB)&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Number of reviews (cached in DB)"""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">reviews</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
 
 <span class="c1"># Get field name for query</span>
-<span class="n">field_name</span> <span class="o">=</span> <span class="n">to_field_name</span><span class="p">(</span><span class="s1">&#39;review_count&#39;</span><span class="p">)</span>  <span class="c1"># &#39;materialized_review_count&#39;</span>
+<span class="n">field_name</span> <span class="o">=</span> <span class="n">to_field_name</span><span class="p">(</span><span class="s1">'review_count'</span><span class="p">)</span>  <span class="c1"># 'materialized_review_count'</span>
 
 <span class="c1"># Sort by materialized property</span>
-<span class="n">products</span> <span class="o">=</span> <span class="n">Product</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s1">&#39;-materialized_review_count&#39;</span><span class="p">)</span>
+<span class="n">products</span> <span class="o">=</span> <span class="n">Product</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s1">'-materialized_review_count'</span><span class="p">)</span>
 
 <span class="c1"># Filter by materialized property</span>
 <span class="n">popular</span> <span class="o">=</span> <span class="n">Product</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">materialized_review_count__gte</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
@@ -3315,7 +3343,7 @@
 
 <span class="k">class</span><span class="w"> </span><span class="nc">Product</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
     <span class="n">name</span> <span class="o">=</span> <span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
-    <span class="n">reviews</span> <span class="o">=</span> <span class="n">ManyToManyField</span><span class="p">(</span><span class="n">Review</span><span class="p">,</span> <span class="n">through</span><span class="o">=</span><span class="s1">&#39;ProductReview&#39;</span><span class="p">)</span>
+    <span class="n">reviews</span> <span class="o">=</span> <span class="n">ManyToManyField</span><span class="p">(</span><span class="n">Review</span><span class="p">,</span> <span class="n">through</span><span class="o">=</span><span class="s1">'ProductReview'</span><span class="p">)</span>
 
     <span class="n">materialized_avg_rating</span> <span class="o">=</span> <span class="n">DecimalField</span><span class="p">(</span>
         <span class="n">max_digits</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
@@ -3330,20 +3358,20 @@
 
     <span class="nd">@materialized_property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">avg_rating</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Average rating from reviews&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Average rating from reviews"""</span>
         <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reviews</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span>
-            <span class="n">avg</span><span class="o">=</span><span class="n">Avg</span><span class="p">(</span><span class="s1">&#39;rating&#39;</span><span class="p">)</span>
+            <span class="n">avg</span><span class="o">=</span><span class="n">Avg</span><span class="p">(</span><span class="s1">'rating'</span><span class="p">)</span>
         <span class="p">)</span>
-        <span class="k">return</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;avg&#39;</span><span class="p">]</span> <span class="ow">or</span> <span class="mf">0.0</span>
+        <span class="k">return</span> <span class="n">result</span><span class="p">[</span><span class="s1">'avg'</span><span class="p">]</span> <span class="ow">or</span> <span class="mf">0.0</span>
 
     <span class="nd">@materialized_property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">total_sales</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sum of all sales&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Sum of all sales"""</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">django.db.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Sum</span>
         <span class="n">result</span> <span class="o">=</span> <span class="n">Order</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
             <span class="n">product</span><span class="o">=</span><span class="bp">self</span>
-        <span class="p">)</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">total</span><span class="o">=</span><span class="n">Sum</span><span class="p">(</span><span class="s1">&#39;amount&#39;</span><span class="p">))</span>
-        <span class="k">return</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;total&#39;</span><span class="p">]</span> <span class="ow">or</span> <span class="mf">0.0</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">total</span><span class="o">=</span><span class="n">Sum</span><span class="p">(</span><span class="s1">'amount'</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">result</span><span class="p">[</span><span class="s1">'total'</span><span class="p">]</span> <span class="ow">or</span> <span class="mf">0.0</span>
 </code></pre></div>
 <h3 id="invalidation-on-signal">Invalidation on Signal<a class="headerlink" href="#invalidation-on-signal" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">django.db.models.signals</span><span class="w"> </span><span class="kn">import</span> <span class="n">post_save</span><span class="p">,</span> <span class="n">m2m_changed</span>
@@ -3354,12 +3382,12 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">invalidate_product_on_review</span><span class="p">(</span><span class="n">sender</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">created</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">created</span><span class="p">:</span>
         <span class="c1"># Invalidate when new review added</span>
-        <span class="n">invalidate_for_instance</span><span class="p">(</span><span class="n">instance</span><span class="o">.</span><span class="n">product</span><span class="p">,</span> <span class="s1">&#39;avg_rating&#39;</span><span class="p">)</span>
+        <span class="n">invalidate_for_instance</span><span class="p">(</span><span class="n">instance</span><span class="o">.</span><span class="n">product</span><span class="p">,</span> <span class="s1">'avg_rating'</span><span class="p">)</span>
 
 <span class="nd">@receiver</span><span class="p">(</span><span class="n">m2m_changed</span><span class="p">,</span> <span class="n">sender</span><span class="o">=</span><span class="n">Product</span><span class="o">.</span><span class="n">followers</span><span class="o">.</span><span class="n">through</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">invalidate_follower_count</span><span class="p">(</span><span class="n">sender</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="c1"># Invalidate when followers change</span>
-    <span class="n">invalidate_for_instance</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="s1">&#39;follower_count&#39;</span><span class="p">)</span>
+    <span class="n">invalidate_for_instance</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="s1">'follower_count'</span><span class="p">)</span>
 </code></pre></div>
 <h3 id="batch-recalculation">Batch Recalculation<a class="headerlink" href="#batch-recalculation" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">celery</span><span class="w"> </span><span class="kn">import</span> <span class="n">shared_task</span>
@@ -3367,7 +3395,7 @@
 
 <span class="nd">@shared_task</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">recalculate_materialized_properties</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Background task to recalculate all materialized properties&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Background task to recalculate all materialized properties"""</span>
 
     <span class="c1"># Recalculate all products</span>
     <span class="k">for</span> <span class="n">product</span> <span class="ow">in</span> <span class="n">Product</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
@@ -3387,14 +3415,14 @@
 <span class="c1"># Recalculate every hour</span>
 <span class="nd">@shared_task</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">hourly_sync_materialized</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Run every hour via Celery Beat&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Run every hour via Celery Beat"""</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">django.db.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">F</span><span class="p">,</span> <span class="n">Count</span>
 
     <span class="c1"># Get items that changed recently</span>
     <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
         <span class="n">updated__gte</span><span class="o">=</span><span class="n">timezone</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">hours</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     <span class="p">)</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
-        <span class="n">materialized_follower_count</span><span class="o">=</span><span class="n">Count</span><span class="p">(</span><span class="s1">&#39;followers&#39;</span><span class="p">)</span>
+        <span class="n">materialized_follower_count</span><span class="o">=</span><span class="n">Count</span><span class="p">(</span><span class="s1">'followers'</span><span class="p">)</span>
     <span class="p">)</span>
 </code></pre></div>
 <h2 id="performance-comparison">Performance Comparison<a class="headerlink" href="#performance-comparison" title="Permanent link">&para;</a></h2>
@@ -3405,8 +3433,8 @@
 <span class="n">product</span><span class="o">.</span><span class="n">materialized_review_count</span>  <span class="c1"># Direct field access</span>
 
 <span class="c1"># Sorting</span>
-<span class="c1"># Without: Product.objects.annotate(review_count=Count(&#39;reviews&#39;)).order_by(&#39;-review_count&#39;)</span>
-<span class="c1"># With: Product.objects.order_by(&#39;-materialized_review_count&#39;)  # Faster!</span>
+<span class="c1"># Without: Product.objects.annotate(review_count=Count('reviews')).order_by('-review_count')</span>
+<span class="c1"># With: Product.objects.order_by('-materialized_review_count')  # Faster!</span>
 </code></pre></div>
 <h2 id="best-practices">Best Practices<a class="headerlink" href="#best-practices" title="Permanent link">&para;</a></h2>
 <ol>
@@ -3422,7 +3450,7 @@
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">htk.apps.mp.services</span><span class="w"> </span><span class="kn">import</span> <span class="n">invalidate_for_instance</span>
 
 <span class="c1"># Invalidate multiple properties at once</span>
-<span class="n">invalidate_for_instance</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;follower_count&#39;</span><span class="p">,</span> <span class="s1">&#39;post_count&#39;</span><span class="p">,</span> <span class="s1">&#39;like_count&#39;</span><span class="p">])</span>
+<span class="n">invalidate_for_instance</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="p">[</span><span class="s1">'follower_count'</span><span class="p">,</span> <span class="s1">'post_count'</span><span class="p">,</span> <span class="s1">'like_count'</span><span class="p">])</span>
 </code></pre></div>
 
 

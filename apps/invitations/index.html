@@ -1574,6 +1574,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../native_auth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native browser authentication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../notifications/" class="md-nav__link">
         
   
@@ -3341,9 +3369,9 @@
 
 <span class="c1"># Create invitation</span>
 <span class="n">invitation</span> <span class="o">=</span> <span class="n">BaseInvitation</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
-    <span class="n">email</span><span class="o">=</span><span class="s1">&#39;user@example.com&#39;</span><span class="p">,</span>
+    <span class="n">email</span><span class="o">=</span><span class="s1">'user@example.com'</span><span class="p">,</span>
     <span class="n">invited_by</span><span class="o">=</span><span class="n">current_user</span><span class="p">,</span>
-    <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;team&#39;</span><span class="p">:</span> <span class="s1">&#39;engineering&#39;</span><span class="p">}</span>
+    <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s1">'team'</span><span class="p">:</span> <span class="s1">'engineering'</span><span class="p">}</span>
 <span class="p">)</span>
 
 <span class="c1"># Send invitation email</span>
@@ -3361,7 +3389,7 @@
     <span class="c1"># Complete invitation flow</span>
     <span class="n">invitation</span><span class="o">.</span><span class="n">complete</span><span class="p">()</span>
 
-    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s1">&#39;dashboard&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s1">'dashboard'</span><span class="p">)</span>
 </code></pre></div>
 <h3 id="track-invitations">Track Invitations<a class="headerlink" href="#track-invitations" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="c1"># Get pending invitations</span>
@@ -3403,19 +3431,19 @@ Complete Invitation
 <h3 id="invitation-with-role">Invitation with Role<a class="headerlink" href="#invitation-with-role" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="c1"># Create invitation for specific role</span>
 <span class="n">invitation</span> <span class="o">=</span> <span class="n">BaseInvitation</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
-    <span class="n">email</span><span class="o">=</span><span class="s1">&#39;manager@company.com&#39;</span><span class="p">,</span>
+    <span class="n">email</span><span class="o">=</span><span class="s1">'manager@company.com'</span><span class="p">,</span>
     <span class="n">invited_by</span><span class="o">=</span><span class="n">admin</span><span class="p">,</span>
-    <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;role&#39;</span><span class="p">:</span> <span class="s1">&#39;manager&#39;</span><span class="p">,</span> <span class="s1">&#39;org_id&#39;</span><span class="p">:</span> <span class="mi">123</span><span class="p">}</span>
+    <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s1">'role'</span><span class="p">:</span> <span class="s1">'manager'</span><span class="p">,</span> <span class="s1">'org_id'</span><span class="p">:</span> <span class="mi">123</span><span class="p">}</span>
 <span class="p">)</span>
 
 <span class="c1"># When accepted, use metadata</span>
 <span class="n">user</span> <span class="o">=</span> <span class="n">invitation</span><span class="o">.</span><span class="n">user</span>
-<span class="n">role</span> <span class="o">=</span> <span class="n">invitation</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;role&#39;</span><span class="p">)</span>
-<span class="n">org_id</span> <span class="o">=</span> <span class="n">invitation</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;org_id&#39;</span><span class="p">)</span>
+<span class="n">role</span> <span class="o">=</span> <span class="n">invitation</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'role'</span><span class="p">)</span>
+<span class="n">org_id</span> <span class="o">=</span> <span class="n">invitation</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'org_id'</span><span class="p">)</span>
 </code></pre></div>
 <h3 id="batch-invitations">Batch Invitations<a class="headerlink" href="#batch-invitations" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="c1"># Send multiple invitations</span>
-<span class="n">emails</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;user1@example.com&#39;</span><span class="p">,</span> <span class="s1">&#39;user2@example.com&#39;</span><span class="p">,</span> <span class="s1">&#39;user3@example.com&#39;</span><span class="p">]</span>
+<span class="n">emails</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'user1@example.com'</span><span class="p">,</span> <span class="s1">'user2@example.com'</span><span class="p">,</span> <span class="s1">'user3@example.com'</span><span class="p">]</span>
 
 <span class="k">for</span> <span class="n">email</span> <span class="ow">in</span> <span class="n">emails</span><span class="p">:</span>
     <span class="n">invitation</span> <span class="o">=</span> <span class="n">BaseInvitation</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
@@ -3433,8 +3461,8 @@ Complete Invitation
 <h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="c1"># settings.py</span>
 <span class="n">INVITATIONS_EXPIRY_DAYS</span> <span class="o">=</span> <span class="mi">7</span>
-<span class="n">INVITATIONS_EMAIL_TEMPLATE</span> <span class="o">=</span> <span class="s1">&#39;emails/invitation.html&#39;</span>
-<span class="n">INVITATIONS_FROM_EMAIL</span> <span class="o">=</span> <span class="s1">&#39;noreply@example.com&#39;</span>
+<span class="n">INVITATIONS_EMAIL_TEMPLATE</span> <span class="o">=</span> <span class="s1">'emails/invitation.html'</span>
+<span class="n">INVITATIONS_FROM_EMAIL</span> <span class="o">=</span> <span class="s1">'noreply@example.com'</span>
 </code></pre></div>
 <h2 id="services">Services<a class="headerlink" href="#services" title="Permanent link">&para;</a></h2>
 <p>The app integrates with user creation:</p>

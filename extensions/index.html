@@ -1550,6 +1550,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../apps/native_auth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native browser authentication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../apps/notifications/" class="md-nav__link">
         
   
@@ -3291,25 +3319,25 @@
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">htk.extensions.data_structures.ordered_set</span><span class="w"> </span><span class="kn">import</span> <span class="n">OrderedSet</span>
 
 <span class="c1"># Create ordered set</span>
-<span class="n">tags</span> <span class="o">=</span> <span class="n">OrderedSet</span><span class="p">([</span><span class="s1">&#39;python&#39;</span><span class="p">,</span> <span class="s1">&#39;django&#39;</span><span class="p">,</span> <span class="s1">&#39;web&#39;</span><span class="p">,</span> <span class="s1">&#39;python&#39;</span><span class="p">])</span>
-<span class="c1"># OrderedSet([&#39;python&#39;, &#39;django&#39;, &#39;web&#39;])  # Duplicates removed, order preserved</span>
+<span class="n">tags</span> <span class="o">=</span> <span class="n">OrderedSet</span><span class="p">([</span><span class="s1">'python'</span><span class="p">,</span> <span class="s1">'django'</span><span class="p">,</span> <span class="s1">'web'</span><span class="p">,</span> <span class="s1">'python'</span><span class="p">])</span>
+<span class="c1"># OrderedSet(['python', 'django', 'web'])  # Duplicates removed, order preserved</span>
 
 <span class="c1"># All set operations work</span>
-<span class="n">tags</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;api&#39;</span><span class="p">)</span>
-<span class="n">tags</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;web&#39;</span><span class="p">)</span>
+<span class="n">tags</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">'api'</span><span class="p">)</span>
+<span class="n">tags</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">'web'</span><span class="p">)</span>
 
 <span class="c1"># Maintains order</span>
-<span class="nb">list</span><span class="p">(</span><span class="n">tags</span><span class="p">)</span>  <span class="c1"># [&#39;python&#39;, &#39;django&#39;, &#39;api&#39;]</span>
+<span class="nb">list</span><span class="p">(</span><span class="n">tags</span><span class="p">)</span>  <span class="c1"># ['python', 'django', 'api']</span>
 
 <span class="c1"># Check membership in O(1)</span>
-<span class="s1">&#39;django&#39;</span> <span class="ow">in</span> <span class="n">tags</span>  <span class="c1"># True</span>
+<span class="s1">'django'</span> <span class="ow">in</span> <span class="n">tags</span>  <span class="c1"># True</span>
 </code></pre></div>
 <p><strong>vs Python dict:</strong>
 <div class="highlight"><pre><span></span><code><span class="c1"># OrderedSet is like an ordered set</span>
-<span class="n">tags</span> <span class="o">=</span> <span class="n">OrderedSet</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">])</span>
+<span class="n">tags</span> <span class="o">=</span> <span class="n">OrderedSet</span><span class="p">([</span><span class="s1">'a'</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">,</span> <span class="s1">'c'</span><span class="p">])</span>
 
 <span class="c1"># vs dict (Python 3.7+)</span>
-<span class="n">tags_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">])</span>
+<span class="n">tags_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">([</span><span class="s1">'a'</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">,</span> <span class="s1">'c'</span><span class="p">])</span>
 
 <span class="c1"># Functionally similar, but OrderedSet is optimized for set operations</span>
 </code></pre></div></p>
@@ -3317,39 +3345,39 @@
 <h3 id="tracking-unique-items">Tracking Unique Items<a class="headerlink" href="#tracking-unique-items" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">htk.extensions.data_structures.ordered_set</span><span class="w"> </span><span class="kn">import</span> <span class="n">OrderedSet</span>
 
-<span class="c1"># Track user&#39;s visited pages (maintaining order)</span>
+<span class="c1"># Track user's visited pages (maintaining order)</span>
 <span class="n">visited</span> <span class="o">=</span> <span class="n">OrderedSet</span><span class="p">()</span>
-<span class="n">visited</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;/home&#39;</span><span class="p">)</span>
-<span class="n">visited</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;/products&#39;</span><span class="p">)</span>
-<span class="n">visited</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;/home&#39;</span><span class="p">)</span>  <span class="c1"># Won&#39;t be added again</span>
-<span class="n">visited</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;/checkout&#39;</span><span class="p">)</span>
+<span class="n">visited</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">'/home'</span><span class="p">)</span>
+<span class="n">visited</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">'/products'</span><span class="p">)</span>
+<span class="n">visited</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">'/home'</span><span class="p">)</span>  <span class="c1"># Won't be added again</span>
+<span class="n">visited</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">'/checkout'</span><span class="p">)</span>
 
 <span class="c1"># Show visit history</span>
-<span class="n">breadcrumbs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">visited</span><span class="p">)</span>  <span class="c1"># [&#39;/home&#39;, &#39;/products&#39;, &#39;/checkout&#39;]</span>
+<span class="n">breadcrumbs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">visited</span><span class="p">)</span>  <span class="c1"># ['/home', '/products', '/checkout']</span>
 </code></pre></div>
 <h3 id="removing-duplicates-while-preserving-order">Removing Duplicates While Preserving Order<a class="headerlink" href="#removing-duplicates-while-preserving-order" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">htk.extensions.data_structures.ordered_set</span><span class="w"> </span><span class="kn">import</span> <span class="n">OrderedSet</span>
 
 <span class="c1"># Clean list while preserving order</span>
-<span class="n">tags</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;python&#39;</span><span class="p">,</span> <span class="s1">&#39;web&#39;</span><span class="p">,</span> <span class="s1">&#39;python&#39;</span><span class="p">,</span> <span class="s1">&#39;django&#39;</span><span class="p">,</span> <span class="s1">&#39;web&#39;</span><span class="p">,</span> <span class="s1">&#39;rest&#39;</span><span class="p">]</span>
+<span class="n">tags</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'python'</span><span class="p">,</span> <span class="s1">'web'</span><span class="p">,</span> <span class="s1">'python'</span><span class="p">,</span> <span class="s1">'django'</span><span class="p">,</span> <span class="s1">'web'</span><span class="p">,</span> <span class="s1">'rest'</span><span class="p">]</span>
 <span class="n">unique_tags</span> <span class="o">=</span> <span class="n">OrderedSet</span><span class="p">(</span><span class="n">tags</span><span class="p">)</span>
 
-<span class="nb">list</span><span class="p">(</span><span class="n">unique_tags</span><span class="p">)</span>  <span class="c1"># [&#39;python&#39;, &#39;web&#39;, &#39;django&#39;, &#39;rest&#39;]</span>
+<span class="nb">list</span><span class="p">(</span><span class="n">unique_tags</span><span class="p">)</span>  <span class="c1"># ['python', 'web', 'django', 'rest']</span>
 </code></pre></div>
 <h3 id="set-operations">Set Operations<a class="headerlink" href="#set-operations" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">htk.extensions.data_structures.ordered_set</span><span class="w"> </span><span class="kn">import</span> <span class="n">OrderedSet</span>
 
-<span class="n">set_a</span> <span class="o">=</span> <span class="n">OrderedSet</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">])</span>
-<span class="n">set_b</span> <span class="o">=</span> <span class="n">OrderedSet</span><span class="p">([</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">])</span>
+<span class="n">set_a</span> <span class="o">=</span> <span class="n">OrderedSet</span><span class="p">([</span><span class="s1">'a'</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">,</span> <span class="s1">'c'</span><span class="p">])</span>
+<span class="n">set_b</span> <span class="o">=</span> <span class="n">OrderedSet</span><span class="p">([</span><span class="s1">'b'</span><span class="p">,</span> <span class="s1">'c'</span><span class="p">,</span> <span class="s1">'d'</span><span class="p">])</span>
 
 <span class="c1"># Union</span>
-<span class="n">union</span> <span class="o">=</span> <span class="n">set_a</span> <span class="o">|</span> <span class="n">set_b</span>  <span class="c1"># OrderedSet([&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;])</span>
+<span class="n">union</span> <span class="o">=</span> <span class="n">set_a</span> <span class="o">|</span> <span class="n">set_b</span>  <span class="c1"># OrderedSet(['a', 'b', 'c', 'd'])</span>
 
 <span class="c1"># Intersection</span>
-<span class="n">common</span> <span class="o">=</span> <span class="n">set_a</span> <span class="o">&amp;</span> <span class="n">set_b</span>  <span class="c1"># OrderedSet([&#39;b&#39;, &#39;c&#39;])</span>
+<span class="n">common</span> <span class="o">=</span> <span class="n">set_a</span> <span class="o">&amp;</span> <span class="n">set_b</span>  <span class="c1"># OrderedSet(['b', 'c'])</span>
 
 <span class="c1"># Difference</span>
-<span class="n">only_in_a</span> <span class="o">=</span> <span class="n">set_a</span> <span class="o">-</span> <span class="n">set_b</span>  <span class="c1"># OrderedSet([&#39;a&#39;])</span>
+<span class="n">only_in_a</span> <span class="o">=</span> <span class="n">set_a</span> <span class="o">-</span> <span class="n">set_b</span>  <span class="c1"># OrderedSet(['a'])</span>
 </code></pre></div>
 <h2 id="performance-characteristics">Performance Characteristics<a class="headerlink" href="#performance-characteristics" title="Permanent link">&para;</a></h2>
 <table>
@@ -3426,7 +3454,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">htk.extensions.data_structures.ordered_set</span><span class="w"> </span><span class="kn">import</span> <span class="n">OrderedSet</span>
 
 <span class="c1"># Get unique users from multiple queries</span>
-<span class="n">query1</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="s1">&#39;US&#39;</span><span class="p">)</span>
+<span class="n">query1</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="s1">'US'</span><span class="p">)</span>
 <span class="n">query2</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">premium</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">query3</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">created__year</span><span class="o">=</span><span class="mi">2024</span><span class="p">)</span>
 

@@ -1652,6 +1652,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../native_auth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native browser authentication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../notifications/" class="md-nav__link">
         
   
@@ -3491,29 +3519,29 @@
 
 <span class="c1"># Create assessment</span>
 <span class="n">assessment</span> <span class="o">=</span> <span class="n">AbstractAssessment</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
-    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Django Fundamentals Quiz&#39;</span><span class="p">,</span>
-    <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Test your Django knowledge&#39;</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">'Django Fundamentals Quiz'</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s1">'Test your Django knowledge'</span><span class="p">,</span>
     <span class="n">passing_score</span><span class="o">=</span><span class="mi">70</span>
 <span class="p">)</span>
 
 <span class="c1"># Create question</span>
 <span class="n">question</span> <span class="o">=</span> <span class="n">AbstractAssessmentQuestion</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
     <span class="n">assessment</span><span class="o">=</span><span class="n">assessment</span><span class="p">,</span>
-    <span class="n">text</span><span class="o">=</span><span class="s1">&#39;What is Django?&#39;</span><span class="p">,</span>
+    <span class="n">text</span><span class="o">=</span><span class="s1">'What is Django?'</span><span class="p">,</span>
     <span class="n">order</span><span class="o">=</span><span class="mi">1</span>
 <span class="p">)</span>
 
 <span class="c1"># Add answer options</span>
 <span class="n">AbstractAssessmentQuestionAnswerOption</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
     <span class="n">question</span><span class="o">=</span><span class="n">question</span><span class="p">,</span>
-    <span class="n">text</span><span class="o">=</span><span class="s1">&#39;Python web framework&#39;</span><span class="p">,</span>
+    <span class="n">text</span><span class="o">=</span><span class="s1">'Python web framework'</span><span class="p">,</span>
     <span class="n">is_correct</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="n">order</span><span class="o">=</span><span class="mi">1</span>
 <span class="p">)</span>
 
 <span class="n">AbstractAssessmentQuestionAnswerOption</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
     <span class="n">question</span><span class="o">=</span><span class="n">question</span><span class="p">,</span>
-    <span class="n">text</span><span class="o">=</span><span class="s1">&#39;Database system&#39;</span><span class="p">,</span>
+    <span class="n">text</span><span class="o">=</span><span class="s1">'Database system'</span><span class="p">,</span>
     <span class="n">is_correct</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">order</span><span class="o">=</span><span class="mi">2</span>
 <span class="p">)</span>
@@ -3524,8 +3552,8 @@
 
 <span class="c1"># Create quiz</span>
 <span class="n">assessment</span> <span class="o">=</span> <span class="n">AbstractAssessment</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
-    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Company Values Assessment&#39;</span><span class="p">,</span>
-    <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Assess your understanding of company values&#39;</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">'Company Values Assessment'</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s1">'Assess your understanding of company values'</span><span class="p">,</span>
     <span class="n">passing_score</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span>
     <span class="n">time_limit</span><span class="o">=</span><span class="mi">600</span>  <span class="c1"># seconds</span>
 <span class="p">)</span>
@@ -3536,24 +3564,24 @@
 <span class="c1"># Single choice question</span>
 <span class="n">question</span> <span class="o">=</span> <span class="n">AbstractAssessmentQuestion</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
     <span class="n">assessment</span><span class="o">=</span><span class="n">assessment</span><span class="p">,</span>
-    <span class="n">text</span><span class="o">=</span><span class="s1">&#39;Which is our core value?&#39;</span><span class="p">,</span>
-    <span class="n">question_type</span><span class="o">=</span><span class="s1">&#39;single_choice&#39;</span><span class="p">,</span>
+    <span class="n">text</span><span class="o">=</span><span class="s1">'Which is our core value?'</span><span class="p">,</span>
+    <span class="n">question_type</span><span class="o">=</span><span class="s1">'single_choice'</span><span class="p">,</span>
     <span class="n">order</span><span class="o">=</span><span class="mi">1</span>
 <span class="p">)</span>
 
 <span class="c1"># Multiple choice question</span>
 <span class="n">question</span> <span class="o">=</span> <span class="n">AbstractAssessmentQuestion</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
     <span class="n">assessment</span><span class="o">=</span><span class="n">assessment</span><span class="p">,</span>
-    <span class="n">text</span><span class="o">=</span><span class="s1">&#39;Select all that apply&#39;</span><span class="p">,</span>
-    <span class="n">question_type</span><span class="o">=</span><span class="s1">&#39;multiple_choice&#39;</span><span class="p">,</span>
+    <span class="n">text</span><span class="o">=</span><span class="s1">'Select all that apply'</span><span class="p">,</span>
+    <span class="n">question_type</span><span class="o">=</span><span class="s1">'multiple_choice'</span><span class="p">,</span>
     <span class="n">order</span><span class="o">=</span><span class="mi">2</span>
 <span class="p">)</span>
 
 <span class="c1"># Free text question</span>
 <span class="n">question</span> <span class="o">=</span> <span class="n">AbstractAssessmentQuestion</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
     <span class="n">assessment</span><span class="o">=</span><span class="n">assessment</span><span class="p">,</span>
-    <span class="n">text</span><span class="o">=</span><span class="s1">&#39;Explain your answer&#39;</span><span class="p">,</span>
-    <span class="n">question_type</span><span class="o">=</span><span class="s1">&#39;text&#39;</span><span class="p">,</span>
+    <span class="n">text</span><span class="o">=</span><span class="s1">'Explain your answer'</span><span class="p">,</span>
+    <span class="n">question_type</span><span class="o">=</span><span class="s1">'text'</span><span class="p">,</span>
     <span class="n">order</span><span class="o">=</span><span class="mi">3</span>
 <span class="p">)</span>
 </code></pre></div>
@@ -3562,9 +3590,9 @@
 
 <span class="c1"># Create options for question</span>
 <span class="n">options_data</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">(</span><span class="s1">&#39;Innovation&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
-    <span class="p">(</span><span class="s1">&#39;Profit Only&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
-    <span class="p">(</span><span class="s1">&#39;Customer Focus&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">'Innovation'</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">'Profit Only'</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">'Customer Focus'</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
 <span class="p">]</span>
 
 <span class="k">for</span> <span class="n">text</span><span class="p">,</span> <span class="n">is_correct</span> <span class="ow">in</span> <span class="n">options_data</span><span class="p">:</span>
@@ -3613,16 +3641,16 @@
 <span class="n">responses</span> <span class="o">=</span> <span class="n">AbstractAssessmentResponse</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">assessment</span><span class="o">=</span><span class="n">assessment</span><span class="p">)</span>
 
 <span class="n">stats</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;total_attempts&#39;</span><span class="p">:</span> <span class="n">AbstractAssessmentResponse</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">distinct</span><span class="p">()</span><span class="o">.</span><span class="n">count</span><span class="p">(),</span>
-    <span class="s1">&#39;average_score&#39;</span><span class="p">:</span> <span class="n">responses</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">is_correct</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span> <span class="o">/</span> <span class="n">responses</span><span class="o">.</span><span class="n">count</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span>
-    <span class="s1">&#39;pass_rate&#39;</span><span class="p">:</span> <span class="p">(</span>
+    <span class="s1">'total_attempts'</span><span class="p">:</span> <span class="n">AbstractAssessmentResponse</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="s1">'user'</span><span class="p">)</span><span class="o">.</span><span class="n">distinct</span><span class="p">()</span><span class="o">.</span><span class="n">count</span><span class="p">(),</span>
+    <span class="s1">'average_score'</span><span class="p">:</span> <span class="n">responses</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">is_correct</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span> <span class="o">/</span> <span class="n">responses</span><span class="o">.</span><span class="n">count</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="s1">'pass_rate'</span><span class="p">:</span> <span class="p">(</span>
         <span class="n">AbstractAssessmentResponse</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
             <span class="n">assessment</span><span class="o">=</span><span class="n">assessment</span><span class="p">,</span>
             <span class="n">score__gte</span><span class="o">=</span><span class="n">assessment</span><span class="o">.</span><span class="n">passing_score</span>
-        <span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">distinct</span><span class="p">()</span><span class="o">.</span><span class="n">count</span><span class="p">()</span> <span class="o">/</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="s1">'user'</span><span class="p">)</span><span class="o">.</span><span class="n">distinct</span><span class="p">()</span><span class="o">.</span><span class="n">count</span><span class="p">()</span> <span class="o">/</span>
         <span class="n">AbstractAssessmentResponse</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
             <span class="n">assessment</span><span class="o">=</span><span class="n">assessment</span>
-        <span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">distinct</span><span class="p">()</span><span class="o">.</span><span class="n">count</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="s1">'user'</span><span class="p">)</span><span class="o">.</span><span class="n">distinct</span><span class="p">()</span><span class="o">.</span><span class="n">count</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100</span>
     <span class="p">)</span>
 <span class="p">}</span>
 </code></pre></div>
@@ -3635,13 +3663,13 @@
     <span class="n">assessment</span><span class="o">=</span><span class="n">assessment</span>
 <span class="p">)</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
     <span class="n">correct_count</span><span class="o">=</span><span class="n">Count</span><span class="p">(</span>
-        <span class="s1">&#39;assessmentresponse&#39;</span><span class="p">,</span>
+        <span class="s1">'assessmentresponse'</span><span class="p">,</span>
         <span class="nb">filter</span><span class="o">=</span><span class="n">Q</span><span class="p">(</span><span class="n">assessmentresponse__is_correct</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="p">)</span>
 <span class="p">)</span>
 
 <span class="c1"># Sort by difficulty (fewer correct answers = harder)</span>
-<span class="n">difficult</span> <span class="o">=</span> <span class="n">questions</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s1">&#39;correct_count&#39;</span><span class="p">)</span>
+<span class="n">difficult</span> <span class="o">=</span> <span class="n">questions</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s1">'correct_count'</span><span class="p">)</span>
 </code></pre></div>
 <h3 id="timed-assessments">Timed Assessments<a class="headerlink" href="#timed-assessments" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">django.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">timezone</span>
@@ -3652,10 +3680,10 @@
 
 <span class="c1"># Check time limit</span>
 <span class="n">assessment_response</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;assessment&#39;</span><span class="p">:</span> <span class="n">assessment</span><span class="p">,</span>
-    <span class="s1">&#39;user&#39;</span><span class="p">:</span> <span class="n">user</span><span class="p">,</span>
-    <span class="s1">&#39;started_at&#39;</span><span class="p">:</span> <span class="n">start_time</span><span class="p">,</span>
-    <span class="s1">&#39;time_limit&#39;</span><span class="p">:</span> <span class="n">assessment</span><span class="o">.</span><span class="n">time_limit</span>
+    <span class="s1">'assessment'</span><span class="p">:</span> <span class="n">assessment</span><span class="p">,</span>
+    <span class="s1">'user'</span><span class="p">:</span> <span class="n">user</span><span class="p">,</span>
+    <span class="s1">'started_at'</span><span class="p">:</span> <span class="n">start_time</span><span class="p">,</span>
+    <span class="s1">'time_limit'</span><span class="p">:</span> <span class="n">assessment</span><span class="o">.</span><span class="n">time_limit</span>
 <span class="p">}</span>
 
 <span class="c1"># Check if time expired</span>
@@ -3672,7 +3700,7 @@
     <span class="n">answered</span> <span class="o">=</span> <span class="n">AbstractAssessmentResponse</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
         <span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span>
         <span class="n">assessment</span><span class="o">=</span><span class="n">assessment</span>
-    <span class="p">)</span><span class="o">.</span><span class="n">values_list</span><span class="p">(</span><span class="s1">&#39;question_id&#39;</span><span class="p">,</span> <span class="n">flat</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">values_list</span><span class="p">(</span><span class="s1">'question_id'</span><span class="p">,</span> <span class="n">flat</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
     <span class="c1"># Get unanswered questions</span>
     <span class="n">next_question</span> <span class="o">=</span> <span class="n">AbstractAssessmentQuestion</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
@@ -3713,7 +3741,7 @@
 <div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">AbstractAssessmentQuestion</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
     <span class="n">assessment</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">AbstractAssessment</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">)</span>
     <span class="n">text</span> <span class="o">=</span> <span class="n">TextField</span><span class="p">()</span>
-    <span class="n">question_type</span> <span class="o">=</span> <span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>  <span class="c1"># &#39;single_choice&#39;, &#39;multiple_choice&#39;, &#39;text&#39;</span>
+    <span class="n">question_type</span> <span class="o">=</span> <span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>  <span class="c1"># 'single_choice', 'multiple_choice', 'text'</span>
     <span class="n">order</span> <span class="o">=</span> <span class="n">IntegerField</span><span class="p">()</span>
 </code></pre></div>
 <h3 id="abstractassessmentquestionansweroption">AbstractAssessmentQuestionAnswerOption<a class="headerlink" href="#abstractassessmentquestionansweroption" title="Permanent link">&para;</a></h3>
@@ -3727,9 +3755,9 @@
 <div class="highlight"><pre><span></span><code><span class="c1"># settings.py</span>
 <span class="n">ASSESSMENT_PASSING_SCORE</span> <span class="o">=</span> <span class="mi">70</span>
 <span class="n">ASSESSMENT_QUESTION_TYPES</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">(</span><span class="s1">&#39;single_choice&#39;</span><span class="p">,</span> <span class="s1">&#39;Single Choice&#39;</span><span class="p">),</span>
-    <span class="p">(</span><span class="s1">&#39;multiple_choice&#39;</span><span class="p">,</span> <span class="s1">&#39;Multiple Choice&#39;</span><span class="p">),</span>
-    <span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="s1">&#39;Free Text&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">'single_choice'</span><span class="p">,</span> <span class="s1">'Single Choice'</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">'multiple_choice'</span><span class="p">,</span> <span class="s1">'Multiple Choice'</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">'text'</span><span class="p">,</span> <span class="s1">'Free Text'</span><span class="p">),</span>
 <span class="p">]</span>
 
 <span class="n">ASSESSMENT_RANDOMIZE_QUESTIONS</span> <span class="o">=</span> <span class="kc">True</span>

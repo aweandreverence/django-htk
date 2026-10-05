@@ -1452,6 +1452,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../native_auth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native browser authentication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../notifications/" class="md-nav__link">
         
   
@@ -3087,21 +3115,21 @@
 
 <span class="c1"># Create forum</span>
 <span class="n">forum</span> <span class="o">=</span> <span class="n">Forum</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
-    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;General Discussion&#39;</span><span class="p">,</span>
-    <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Discuss anything&#39;</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">'General Discussion'</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s1">'Discuss anything'</span>
 <span class="p">)</span>
 
 <span class="c1"># Create thread</span>
 <span class="n">thread</span> <span class="o">=</span> <span class="n">ForumThread</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
     <span class="n">forum</span><span class="o">=</span><span class="n">forum</span><span class="p">,</span>
-    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Welcome to our forum!&#39;</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="s1">'Welcome to our forum!'</span><span class="p">,</span>
     <span class="n">created_by</span><span class="o">=</span><span class="n">user</span>
 <span class="p">)</span>
 
 <span class="c1"># Add message</span>
 <span class="n">message</span> <span class="o">=</span> <span class="n">ForumMessage</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
     <span class="n">thread</span><span class="o">=</span><span class="n">thread</span><span class="p">,</span>
-    <span class="n">content</span><span class="o">=</span><span class="s1">&#39;Hello everyone!&#39;</span><span class="p">,</span>
+    <span class="n">content</span><span class="o">=</span><span class="s1">'Hello everyone!'</span><span class="p">,</span>
     <span class="n">created_by</span><span class="o">=</span><span class="n">user</span>
 <span class="p">)</span>
 </code></pre></div>
@@ -3118,10 +3146,10 @@
 <span class="n">forum</span><span class="o">.</span><span class="n">recent_message</span><span class="p">()</span>  <span class="c1"># Last message</span>
 
 <span class="c1"># Tag threads</span>
-<span class="n">thread</span><span class="o">.</span><span class="n">tags</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;announcement&#39;</span><span class="p">,</span> <span class="s1">&#39;important&#39;</span><span class="p">)</span>
+<span class="n">thread</span><span class="o">.</span><span class="n">tags</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">'announcement'</span><span class="p">,</span> <span class="s1">'important'</span><span class="p">)</span>
 
 <span class="c1"># Search threads</span>
-<span class="n">Forum</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">title__icontains</span><span class="o">=</span><span class="s1">&#39;django&#39;</span><span class="p">)</span>
+<span class="n">Forum</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">title__icontains</span><span class="o">=</span><span class="s1">'django'</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="url-patterns">URL Patterns<a class="headerlink" href="#url-patterns" title="Permanent link">&para;</a></h2>
 <ul>

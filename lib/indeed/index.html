@@ -1359,6 +1359,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../apps/native_auth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native browser authentication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../apps/notifications/" class="md-nav__link">
         
   
@@ -3067,11 +3095,11 @@
 <span class="n">disposition_api</span> <span class="o">=</span> <span class="n">IndeedDispositionSyncAPI</span><span class="p">()</span>
 
 <span class="c1"># Sync job</span>
-<span class="n">job_data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;Software Engineer&#39;</span><span class="p">,</span> <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;...&#39;</span><span class="p">}</span>
+<span class="n">job_data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'title'</span><span class="p">:</span> <span class="s1">'Software Engineer'</span><span class="p">,</span> <span class="s1">'description'</span><span class="p">:</span> <span class="s1">'...'</span><span class="p">}</span>
 <span class="n">job_api</span><span class="o">.</span><span class="n">create_job</span><span class="p">(</span><span class="n">job_data</span><span class="p">)</span>
 
 <span class="c1"># Update application status</span>
-<span class="n">disposition_api</span><span class="o">.</span><span class="n">post_disposition</span><span class="p">(</span><span class="n">applicant_id</span><span class="p">,</span> <span class="s1">&#39;hired&#39;</span><span class="p">)</span>
+<span class="n">disposition_api</span><span class="o">.</span><span class="n">post_disposition</span><span class="p">(</span><span class="n">applicant_id</span><span class="p">,</span> <span class="s1">'hired'</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="operations">Operations<a class="headerlink" href="#operations" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">htk.lib.indeed.api</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_access_token</span><span class="p">,</span> <span class="n">generate_access_token</span>
@@ -3086,8 +3114,8 @@
 </code></pre></div>
 <h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="c1"># settings.py</span>
-<span class="n">INDEED_CLIENT_ID</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;INDEED_CLIENT_ID&#39;</span><span class="p">)</span>
-<span class="n">INDEED_CLIENT_SECRET</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;INDEED_CLIENT_SECRET&#39;</span><span class="p">)</span>
+<span class="n">INDEED_CLIENT_ID</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'INDEED_CLIENT_ID'</span><span class="p">)</span>
+<span class="n">INDEED_CLIENT_SECRET</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'INDEED_CLIENT_SECRET'</span><span class="p">)</span>
 </code></pre></div>
 
 

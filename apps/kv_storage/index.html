@@ -1574,6 +1574,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../native_auth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native browser authentication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../notifications/" class="md-nav__link">
         
   
@@ -3340,30 +3368,30 @@
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">htk.apps.kv_storage.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">kv_put</span><span class="p">,</span> <span class="n">kv_get</span>
 
 <span class="c1"># Store a value</span>
-<span class="n">kv_put</span><span class="p">(</span><span class="s1">&#39;user_preferences&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;theme&#39;</span><span class="p">:</span> <span class="s1">&#39;dark&#39;</span><span class="p">,</span> <span class="s1">&#39;notifications&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">})</span>
+<span class="n">kv_put</span><span class="p">(</span><span class="s1">'user_preferences'</span><span class="p">,</span> <span class="p">{</span><span class="s1">'theme'</span><span class="p">:</span> <span class="s1">'dark'</span><span class="p">,</span> <span class="s1">'notifications'</span><span class="p">:</span> <span class="kc">True</span><span class="p">})</span>
 
 <span class="c1"># Retrieve a value</span>
-<span class="n">prefs</span> <span class="o">=</span> <span class="n">kv_get</span><span class="p">(</span><span class="s1">&#39;user_preferences&#39;</span><span class="p">)</span>
-<span class="c1"># {&#39;theme&#39;: &#39;dark&#39;, &#39;notifications&#39;: True}</span>
+<span class="n">prefs</span> <span class="o">=</span> <span class="n">kv_get</span><span class="p">(</span><span class="s1">'user_preferences'</span><span class="p">)</span>
+<span class="c1"># {'theme': 'dark', 'notifications': True}</span>
 
 <span class="c1"># Get with default</span>
-<span class="n">kv_get</span><span class="p">(</span><span class="s1">&#39;nonexistent_key&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="p">{})</span>
+<span class="n">kv_get</span><span class="p">(</span><span class="s1">'nonexistent_key'</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="p">{})</span>
 </code></pre></div>
 <h3 id="delete-values">Delete Values<a class="headerlink" href="#delete-values" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">htk.apps.kv_storage.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">kv_delete</span>
 
 <span class="c1"># Delete a key</span>
-<span class="n">kv_delete</span><span class="p">(</span><span class="s1">&#39;user_preferences&#39;</span><span class="p">)</span>
+<span class="n">kv_delete</span><span class="p">(</span><span class="s1">'user_preferences'</span><span class="p">)</span>
 
 <span class="c1"># Check if exists before deleting</span>
-<span class="k">if</span> <span class="n">kv_get</span><span class="p">(</span><span class="s1">&#39;key&#39;</span><span class="p">):</span>
-    <span class="n">kv_delete</span><span class="p">(</span><span class="s1">&#39;key&#39;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">kv_get</span><span class="p">(</span><span class="s1">'key'</span><span class="p">):</span>
+    <span class="n">kv_delete</span><span class="p">(</span><span class="s1">'key'</span><span class="p">)</span>
 </code></pre></div>
 <h3 id="cached-access">Cached Access<a class="headerlink" href="#cached-access" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">htk.apps.kv_storage.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">kv_get_cached</span>
 
 <span class="c1"># Get value from cache (fetches from DB if not cached)</span>
-<span class="n">value</span> <span class="o">=</span> <span class="n">kv_get_cached</span><span class="p">(</span><span class="s1">&#39;expensive_setting&#39;</span><span class="p">)</span>
+<span class="n">value</span> <span class="o">=</span> <span class="n">kv_get_cached</span><span class="p">(</span><span class="s1">'expensive_setting'</span><span class="p">)</span>
 
 <span class="c1"># Cached values auto-refresh based on TTL</span>
 </code></pre></div>
@@ -3376,64 +3404,64 @@
 
 <span class="k">class</span><span class="w"> </span><span class="nc">AppConfig</span><span class="p">(</span><span class="n">AbstractKVStorage</span><span class="p">):</span>
     <span class="k">class</span><span class="w"> </span><span class="nc">Meta</span><span class="p">:</span>
-        <span class="n">db_table</span> <span class="o">=</span> <span class="s1">&#39;app_config&#39;</span>
+        <span class="n">db_table</span> <span class="o">=</span> <span class="s1">'app_config'</span>
 </code></pre></div>
 <h2 id="common-patterns">Common Patterns<a class="headerlink" href="#common-patterns" title="Permanent link">&para;</a></h2>
 <h3 id="user-settings">User Settings<a class="headerlink" href="#user-settings" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="c1"># Store per-user settings</span>
 <span class="n">user_id</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="n">id</span>
-<span class="n">kv_put</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;user_settings:</span><span class="si">{</span><span class="n">user_id</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="p">{</span>
-    <span class="s1">&#39;language&#39;</span><span class="p">:</span> <span class="s1">&#39;en&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;timezone&#39;</span><span class="p">:</span> <span class="s1">&#39;America/New_York&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;email_digest&#39;</span><span class="p">:</span> <span class="s1">&#39;daily&#39;</span>
+<span class="n">kv_put</span><span class="p">(</span><span class="sa">f</span><span class="s1">'user_settings:</span><span class="si">{</span><span class="n">user_id</span><span class="si">}</span><span class="s1">'</span><span class="p">,</span> <span class="p">{</span>
+    <span class="s1">'language'</span><span class="p">:</span> <span class="s1">'en'</span><span class="p">,</span>
+    <span class="s1">'timezone'</span><span class="p">:</span> <span class="s1">'America/New_York'</span><span class="p">,</span>
+    <span class="s1">'email_digest'</span><span class="p">:</span> <span class="s1">'daily'</span>
 <span class="p">})</span>
 
 <span class="c1"># Retrieve user settings</span>
-<span class="n">settings</span> <span class="o">=</span> <span class="n">kv_get</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;user_settings:</span><span class="si">{</span><span class="n">user_id</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">settings</span> <span class="o">=</span> <span class="n">kv_get</span><span class="p">(</span><span class="sa">f</span><span class="s1">'user_settings:</span><span class="si">{</span><span class="n">user_id</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
 </code></pre></div>
 <h3 id="feature-configuration">Feature Configuration<a class="headerlink" href="#feature-configuration" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="c1"># Store feature settings without migrations</span>
-<span class="n">kv_put</span><span class="p">(</span><span class="s1">&#39;feature:analytics_config&#39;</span><span class="p">,</span> <span class="p">{</span>
-    <span class="s1">&#39;sampling_rate&#39;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
-    <span class="s1">&#39;retention_days&#39;</span><span class="p">:</span> <span class="mi">90</span><span class="p">,</span>
-    <span class="s1">&#39;debug&#39;</span><span class="p">:</span> <span class="kc">False</span>
+<span class="n">kv_put</span><span class="p">(</span><span class="s1">'feature:analytics_config'</span><span class="p">,</span> <span class="p">{</span>
+    <span class="s1">'sampling_rate'</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+    <span class="s1">'retention_days'</span><span class="p">:</span> <span class="mi">90</span><span class="p">,</span>
+    <span class="s1">'debug'</span><span class="p">:</span> <span class="kc">False</span>
 <span class="p">})</span>
 
-<span class="n">config</span> <span class="o">=</span> <span class="n">kv_get</span><span class="p">(</span><span class="s1">&#39;feature:analytics_config&#39;</span><span class="p">)</span>
+<span class="n">config</span> <span class="o">=</span> <span class="n">kv_get</span><span class="p">(</span><span class="s1">'feature:analytics_config'</span><span class="p">)</span>
 </code></pre></div>
 <h3 id="application-state">Application State<a class="headerlink" href="#application-state" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="c1"># Store transient application state</span>
-<span class="n">kv_put</span><span class="p">(</span><span class="s1">&#39;background_job:sync_users:status&#39;</span><span class="p">,</span> <span class="p">{</span>
-    <span class="s1">&#39;last_run&#39;</span><span class="p">:</span> <span class="s1">&#39;2024-11-13T15:30:00Z&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;processed&#39;</span><span class="p">:</span> <span class="mi">1243</span><span class="p">,</span>
-    <span class="s1">&#39;failed&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="s1">&#39;next_run&#39;</span><span class="p">:</span> <span class="s1">&#39;2024-11-13T16:00:00Z&#39;</span>
+<span class="n">kv_put</span><span class="p">(</span><span class="s1">'background_job:sync_users:status'</span><span class="p">,</span> <span class="p">{</span>
+    <span class="s1">'last_run'</span><span class="p">:</span> <span class="s1">'2024-11-13T15:30:00Z'</span><span class="p">,</span>
+    <span class="s1">'processed'</span><span class="p">:</span> <span class="mi">1243</span><span class="p">,</span>
+    <span class="s1">'failed'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s1">'next_run'</span><span class="p">:</span> <span class="s1">'2024-11-13T16:00:00Z'</span>
 <span class="p">})</span>
 
-<span class="n">status</span> <span class="o">=</span> <span class="n">kv_get</span><span class="p">(</span><span class="s1">&#39;background_job:sync_users:status&#39;</span><span class="p">)</span>
+<span class="n">status</span> <span class="o">=</span> <span class="n">kv_get</span><span class="p">(</span><span class="s1">'background_job:sync_users:status'</span><span class="p">)</span>
 </code></pre></div>
 <h3 id="caching-complex-data">Caching Complex Data<a class="headerlink" href="#caching-complex-data" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">htk.apps.kv_storage.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">kv_put</span><span class="p">,</span> <span class="n">kv_get_cached</span>
 
 <span class="c1"># Expensive operation - store result</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">expensive_computation</span><span class="p">()</span>
-<span class="n">kv_put</span><span class="p">(</span><span class="s1">&#39;expensive_result&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+<span class="n">kv_put</span><span class="p">(</span><span class="s1">'expensive_result'</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
 
 <span class="c1"># Later - retrieve from cache</span>
-<span class="n">cached_data</span> <span class="o">=</span> <span class="n">kv_get_cached</span><span class="p">(</span><span class="s1">&#39;expensive_result&#39;</span><span class="p">)</span>
+<span class="n">cached_data</span> <span class="o">=</span> <span class="n">kv_get_cached</span><span class="p">(</span><span class="s1">'expensive_result'</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="naming-conventions">Naming Conventions<a class="headerlink" href="#naming-conventions" title="Permanent link">&para;</a></h2>
 <p>Use descriptive, hierarchical keys:</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Good</span>
-<span class="s1">&#39;user_settings:1234&#39;</span>
-<span class="s1">&#39;feature:dark_mode:config&#39;</span>
-<span class="s1">&#39;cache:homepage:data&#39;</span>
-<span class="s1">&#39;state:import_job:123&#39;</span>
+<span class="s1">'user_settings:1234'</span>
+<span class="s1">'feature:dark_mode:config'</span>
+<span class="s1">'cache:homepage:data'</span>
+<span class="s1">'state:import_job:123'</span>
 
 <span class="c1"># Avoid</span>
-<span class="s1">&#39;data&#39;</span>
-<span class="s1">&#39;tmp&#39;</span>
-<span class="s1">&#39;x&#39;</span>
+<span class="s1">'data'</span>
+<span class="s1">'tmp'</span>
+<span class="s1">'x'</span>
 </code></pre></div>
 <h2 id="best-practices">Best Practices<a class="headerlink" href="#best-practices" title="Permanent link">&para;</a></h2>
 <ol>
@@ -3448,12 +3476,12 @@
 <h2 id="performance">Performance<a class="headerlink" href="#performance" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="c1"># Slow - multiple DB hits</span>
 <span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">users</span><span class="p">:</span>
-    <span class="n">prefs</span> <span class="o">=</span> <span class="n">kv_get</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;user_prefs:</span><span class="si">{</span><span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>  <span class="c1"># Each hit DB</span>
+    <span class="n">prefs</span> <span class="o">=</span> <span class="n">kv_get</span><span class="p">(</span><span class="sa">f</span><span class="s1">'user_prefs:</span><span class="si">{</span><span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>  <span class="c1"># Each hit DB</span>
 
 <span class="c1"># Better - batch get</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">htk.apps.kv_storage.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_kv_storage_model</span>
 <span class="n">KVStorage</span> <span class="o">=</span> <span class="n">get_kv_storage_model</span><span class="p">()</span>
-<span class="n">all_keys</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;user_prefs:</span><span class="si">{</span><span class="n">u</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">users</span><span class="p">]</span>
+<span class="n">all_keys</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s1">'user_prefs:</span><span class="si">{</span><span class="n">u</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s1">'</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">users</span><span class="p">]</span>
 <span class="n">prefs_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="o">.</span><span class="n">key</span><span class="p">:</span> <span class="n">k</span><span class="o">.</span><span class="n">value</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">KVStorage</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">key__in</span><span class="o">=</span><span class="n">all_keys</span><span class="p">)}</span>
 </code></pre></div>
 

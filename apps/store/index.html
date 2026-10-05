@@ -1361,6 +1361,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../native_auth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native browser authentication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../notifications/" class="md-nav__link">
         
   
@@ -3301,7 +3329,7 @@
 
 <span class="c1"># Create and use models</span>
 <span class="c1"># See models.py for available classes</span>
-<span class="n">instance</span> <span class="o">=</span> <span class="n">YourModel</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">field</span><span class="o">=</span><span class="s1">&#39;value&#39;</span><span class="p">)</span>
+<span class="n">instance</span> <span class="o">=</span> <span class="n">YourModel</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">field</span><span class="o">=</span><span class="s1">'value'</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="key-components">Key Components<a class="headerlink" href="#key-components" title="Permanent link">&para;</a></h2>
 <table>
@@ -3335,13 +3363,13 @@
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">htk.apps.store.models</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
 
 <span class="c1"># Create</span>
-<span class="n">obj</span> <span class="o">=</span> <span class="n">YourModel</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Example&#39;</span><span class="p">)</span>
+<span class="n">obj</span> <span class="o">=</span> <span class="n">YourModel</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'Example'</span><span class="p">)</span>
 
 <span class="c1"># Read</span>
 <span class="n">obj</span> <span class="o">=</span> <span class="n">YourModel</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="c1"># Update</span>
-<span class="n">obj</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Updated&#39;</span>
+<span class="n">obj</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">'Updated'</span>
 <span class="n">obj</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
 
 <span class="c1"># Delete</span>
@@ -3349,13 +3377,13 @@
 </code></pre></div>
 <h3 id="filtering-and-querying">Filtering and Querying<a class="headerlink" href="#filtering-and-querying" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="c1"># Filter by attributes</span>
-<span class="n">results</span> <span class="o">=</span> <span class="n">YourModel</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="s1">&#39;active&#39;</span><span class="p">)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">YourModel</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="s1">'active'</span><span class="p">)</span>
 
 <span class="c1"># Order by field</span>
-<span class="n">ordered</span> <span class="o">=</span> <span class="n">YourModel</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s1">&#39;-created_at&#39;</span><span class="p">)</span>
+<span class="n">ordered</span> <span class="o">=</span> <span class="n">YourModel</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s1">'-created_at'</span><span class="p">)</span>
 
 <span class="c1"># Count results</span>
-<span class="n">count</span> <span class="o">=</span> <span class="n">YourModel</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="s1">&#39;active&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<span class="n">count</span> <span class="o">=</span> <span class="n">YourModel</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="s1">'active'</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
 </code></pre></div>
 <h2 id="api-endpoints">API Endpoints<a class="headerlink" href="#api-endpoints" title="Permanent link">&para;</a></h2>
 <table>
@@ -3413,11 +3441,11 @@
 
 <span class="k">class</span><span class="w"> </span><span class="nc">StoreTestCase</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create test fixtures&quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">obj</span> <span class="o">=</span> <span class="n">YourModel</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">field</span><span class="o">=</span><span class="s1">&#39;value&#39;</span><span class="p">)</span>
+<span class="w">        </span><span class="sd">"""Create test fixtures"""</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">obj</span> <span class="o">=</span> <span class="n">YourModel</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">field</span><span class="o">=</span><span class="s1">'value'</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">test_model_creation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test creating an object&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Test creating an object"""</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNotNone</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="related-apps">Related Apps<a class="headerlink" href="#related-apps" title="Permanent link">&para;</a></h2>

@@ -1538,6 +1538,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../apps/native_auth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native browser authentication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../apps/notifications/" class="md-nav__link">
         
   
@@ -3272,7 +3300,7 @@
 
 <span class="c1"># Enable in settings.py</span>
 <span class="n">MIDDLEWARE</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s1">&#39;htk.middleware.classes.GlobalRequestMiddleware&#39;</span><span class="p">,</span>
+    <span class="s1">'htk.middleware.classes.GlobalRequestMiddleware'</span><span class="p">,</span>
     <span class="c1"># ...</span>
 <span class="p">]</span>
 
@@ -3292,7 +3320,7 @@
 
 <span class="c1"># Enable in settings.py</span>
 <span class="n">MIDDLEWARE</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s1">&#39;htk.middleware.classes.UserAgentMiddleware&#39;</span><span class="p">,</span>
+    <span class="s1">'htk.middleware.classes.UserAgentMiddleware'</span><span class="p">,</span>
     <span class="c1"># ...</span>
 <span class="p">]</span>
 
@@ -3300,11 +3328,11 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">my_view</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
     <span class="n">user_agent</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user_agent</span>
     <span class="c1"># {</span>
-    <span class="c1">#   &#39;is_mobile&#39;: True/False,</span>
-    <span class="c1">#   &#39;is_bot&#39;: True/False,</span>
-    <span class="c1">#   &#39;browser&#39;: &#39;Chrome&#39;,</span>
-    <span class="c1">#   &#39;os&#39;: &#39;Windows&#39;,</span>
-    <span class="c1">#   &#39;device&#39;: &#39;Desktop&#39;,</span>
+    <span class="c1">#   'is_mobile': True/False,</span>
+    <span class="c1">#   'is_bot': True/False,</span>
+    <span class="c1">#   'browser': 'Chrome',</span>
+    <span class="c1">#   'os': 'Windows',</span>
+    <span class="c1">#   'device': 'Desktop',</span>
     <span class="c1"># }</span>
 </code></pre></div>
 <h2 id="request-timing">Request Timing<a class="headerlink" href="#request-timing" title="Permanent link">&para;</a></h2>
@@ -3313,7 +3341,7 @@
 
 <span class="c1"># Enable in settings.py</span>
 <span class="n">MIDDLEWARE</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s1">&#39;htk.middleware.classes.RequestTimerMiddleware&#39;</span><span class="p">,</span>
+    <span class="s1">'htk.middleware.classes.RequestTimerMiddleware'</span><span class="p">,</span>
     <span class="c1"># ...</span>
 <span class="p">]</span>
 
@@ -3331,14 +3359,14 @@
 
 <span class="c1"># settings.py</span>
 <span class="n">ALLOWED_HOST_REGEXPS</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="sa">r</span><span class="s1">&#39;^example\.com$&#39;</span><span class="p">,</span>
-    <span class="sa">r</span><span class="s1">&#39;^subdomain\.example\.com$&#39;</span><span class="p">,</span>
-    <span class="sa">r</span><span class="s1">&#39;^localhost$&#39;</span><span class="p">,</span>
+    <span class="sa">r</span><span class="s1">'^example\.com$'</span><span class="p">,</span>
+    <span class="sa">r</span><span class="s1">'^subdomain\.example\.com$'</span><span class="p">,</span>
+    <span class="sa">r</span><span class="s1">'^localhost$'</span><span class="p">,</span>
 <span class="p">]</span>
 
 <span class="c1"># Enable middleware</span>
 <span class="n">MIDDLEWARE</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s1">&#39;htk.middleware.classes.AllowedHostsMiddleware&#39;</span><span class="p">,</span>
+    <span class="s1">'htk.middleware.classes.AllowedHostsMiddleware'</span><span class="p">,</span>
     <span class="c1"># ...</span>
 <span class="p">]</span>
 </code></pre></div>
@@ -3349,18 +3377,18 @@
 
 <span class="c1"># Enable in settings.py</span>
 <span class="n">MIDDLEWARE</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s1">&#39;htk.middleware.classes.HttpErrorResponseMiddleware&#39;</span><span class="p">,</span>
+    <span class="s1">'htk.middleware.classes.HttpErrorResponseMiddleware'</span><span class="p">,</span>
     <span class="c1"># ...</span>
 <span class="p">]</span>
 
 <span class="c1"># Raise errors in views</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">api_endpoint</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">is_authenticated</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">HttpErrorResponseError</span><span class="p">(</span><span class="mi">401</span><span class="p">,</span> <span class="s1">&#39;Unauthorized&#39;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">HttpErrorResponseError</span><span class="p">(</span><span class="mi">401</span><span class="p">,</span> <span class="s1">'Unauthorized'</span><span class="p">)</span>
     <span class="c1"># ...</span>
 
 <span class="c1"># Middleware catches and formats response</span>
-<span class="c1"># Returns: {&#39;error&#39;: &#39;Unauthorized&#39;} with 401 status</span>
+<span class="c1"># Returns: {'error': 'Unauthorized'} with 401 status</span>
 </code></pre></div>
 <h2 id="json-content-type-handling">JSON Content-Type Handling<a class="headerlink" href="#json-content-type-handling" title="Permanent link">&para;</a></h2>
 <p>Fix JSON response content type for IE compatibility:</p>
@@ -3368,7 +3396,7 @@
 
 <span class="c1"># Enable in settings.py</span>
 <span class="n">MIDDLEWARE</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s1">&#39;htk.middleware.classes.RewriteJsonResponseContentTypeMiddleware&#39;</span><span class="p">,</span>
+    <span class="s1">'htk.middleware.classes.RewriteJsonResponseContentTypeMiddleware'</span><span class="p">,</span>
     <span class="c1"># ...</span>
 <span class="p">]</span>
 
@@ -3380,7 +3408,7 @@
 
 <span class="c1"># Enable in settings.py</span>
 <span class="n">MIDDLEWARE</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s1">&#39;htk.middleware.classes.TimezoneMiddleware&#39;</span><span class="p">,</span>
+    <span class="s1">'htk.middleware.classes.TimezoneMiddleware'</span><span class="p">,</span>
     <span class="c1"># ...</span>
 <span class="p">]</span>
 
@@ -3393,7 +3421,7 @@
 
 <span class="c1"># Enable in settings.py</span>
 <span class="n">MIDDLEWARE</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s1">&#39;htk.middleware.classes.RequestDataTooBigMiddleware&#39;</span><span class="p">,</span>
+    <span class="s1">'htk.middleware.classes.RequestDataTooBigMiddleware'</span><span class="p">,</span>
     <span class="c1"># ...</span>
 <span class="p">]</span>
 
@@ -3402,29 +3430,29 @@
 <h2 id="complete-example">Complete Example<a class="headerlink" href="#complete-example" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="c1"># settings.py</span>
 <span class="n">MIDDLEWARE</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s1">&#39;django.middleware.security.SecurityMiddleware&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;django.contrib.sessions.middleware.SessionMiddleware&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;django.middleware.common.CommonMiddleware&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;django.middleware.csrf.CsrfViewMiddleware&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;django.contrib.auth.middleware.AuthenticationMiddleware&#39;</span><span class="p">,</span>
+    <span class="s1">'django.middleware.security.SecurityMiddleware'</span><span class="p">,</span>
+    <span class="s1">'django.contrib.sessions.middleware.SessionMiddleware'</span><span class="p">,</span>
+    <span class="s1">'django.middleware.common.CommonMiddleware'</span><span class="p">,</span>
+    <span class="s1">'django.middleware.csrf.CsrfViewMiddleware'</span><span class="p">,</span>
+    <span class="s1">'django.contrib.auth.middleware.AuthenticationMiddleware'</span><span class="p">,</span>
 
     <span class="c1"># HTK middleware</span>
-    <span class="s1">&#39;htk.middleware.classes.GlobalRequestMiddleware&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;htk.middleware.classes.UserAgentMiddleware&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;htk.middleware.classes.RequestTimerMiddleware&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;htk.middleware.classes.TimezoneMiddleware&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;htk.middleware.classes.AllowedHostsMiddleware&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;htk.middleware.classes.RewriteJsonResponseContentTypeMiddleware&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;htk.middleware.classes.HttpErrorResponseMiddleware&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;htk.middleware.classes.RequestDataTooBigMiddleware&#39;</span><span class="p">,</span>
+    <span class="s1">'htk.middleware.classes.GlobalRequestMiddleware'</span><span class="p">,</span>
+    <span class="s1">'htk.middleware.classes.UserAgentMiddleware'</span><span class="p">,</span>
+    <span class="s1">'htk.middleware.classes.RequestTimerMiddleware'</span><span class="p">,</span>
+    <span class="s1">'htk.middleware.classes.TimezoneMiddleware'</span><span class="p">,</span>
+    <span class="s1">'htk.middleware.classes.AllowedHostsMiddleware'</span><span class="p">,</span>
+    <span class="s1">'htk.middleware.classes.RewriteJsonResponseContentTypeMiddleware'</span><span class="p">,</span>
+    <span class="s1">'htk.middleware.classes.HttpErrorResponseMiddleware'</span><span class="p">,</span>
+    <span class="s1">'htk.middleware.classes.RequestDataTooBigMiddleware'</span><span class="p">,</span>
 
-    <span class="s1">&#39;django.contrib.messages.middleware.MessageMiddleware&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;django.middleware.clickjacking.XFrameOptionsMiddleware&#39;</span><span class="p">,</span>
+    <span class="s1">'django.contrib.messages.middleware.MessageMiddleware'</span><span class="p">,</span>
+    <span class="s1">'django.middleware.clickjacking.XFrameOptionsMiddleware'</span><span class="p">,</span>
 <span class="p">]</span>
 
 <span class="n">ALLOWED_HOST_REGEXPS</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="sa">r</span><span class="s1">&#39;^example\.com$&#39;</span><span class="p">,</span>
-    <span class="sa">r</span><span class="s1">&#39;^www\.example\.com$&#39;</span><span class="p">,</span>
+    <span class="sa">r</span><span class="s1">'^example\.com$'</span><span class="p">,</span>
+    <span class="sa">r</span><span class="s1">'^www\.example\.com$'</span><span class="p">,</span>
 <span class="p">]</span>
 </code></pre></div>
 <h2 id="best-practices">Best Practices<a class="headerlink" href="#best-practices" title="Permanent link">&para;</a></h2>

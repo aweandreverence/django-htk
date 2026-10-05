@@ -1361,6 +1361,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../native_auth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native browser authentication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../notifications/" class="md-nav__link">
         
   
@@ -3109,14 +3137,14 @@
 
 <span class="c1"># Create short URL</span>
 <span class="n">short</span> <span class="o">=</span> <span class="n">HTKShortUrl</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
-    <span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://example.com/very/long/url?param=value&#39;</span>
+    <span class="n">url</span><span class="o">=</span><span class="s1">'https://example.com/very/long/url?param=value'</span>
 <span class="p">)</span>
 
-<span class="n">code</span> <span class="o">=</span> <span class="n">short</span><span class="o">.</span><span class="n">code</span>  <span class="c1"># e.g., &#39;a7f2&#39;</span>
+<span class="n">code</span> <span class="o">=</span> <span class="n">short</span><span class="o">.</span><span class="n">code</span>  <span class="c1"># e.g., 'a7f2'</span>
 <span class="c1"># Share as: example.com/s/a7f2</span>
 
 <span class="c1"># Get original URL</span>
-<span class="n">short</span> <span class="o">=</span> <span class="n">HTKShortUrl</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">code</span><span class="o">=</span><span class="s1">&#39;a7f2&#39;</span><span class="p">)</span>
+<span class="n">short</span> <span class="o">=</span> <span class="n">HTKShortUrl</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">code</span><span class="o">=</span><span class="s1">'a7f2'</span><span class="p">)</span>
 <span class="n">original</span> <span class="o">=</span> <span class="n">short</span><span class="o">.</span><span class="n">url</span>
 </code></pre></div>
 <h2 id="models">Models<a class="headerlink" href="#models" title="Permanent link">&para;</a></h2>
@@ -3137,7 +3165,7 @@
 <span class="c1"># Resolve raw ID</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">htk.apps.url_shortener.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">resolve_raw_id</span>
 
-<span class="n">raw_id</span> <span class="o">=</span> <span class="n">resolve_raw_id</span><span class="p">(</span><span class="s1">&#39;a7f2&#39;</span><span class="p">)</span>
+<span class="n">raw_id</span> <span class="o">=</span> <span class="n">resolve_raw_id</span><span class="p">(</span><span class="s1">'a7f2'</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="url-pattern">URL Pattern<a class="headerlink" href="#url-pattern" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="c1"># GET /s/&lt;code&gt;/</span>
@@ -3145,8 +3173,8 @@
 </code></pre></div>
 <h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="c1"># settings.py</span>
-<span class="n">SHORT_URL_DOMAIN</span> <span class="o">=</span> <span class="s1">&#39;short.example.com&#39;</span>
-<span class="n">SHORT_URL_ALPHABET</span> <span class="o">=</span> <span class="s1">&#39;0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz&#39;</span>
+<span class="n">SHORT_URL_DOMAIN</span> <span class="o">=</span> <span class="s1">'short.example.com'</span>
+<span class="n">SHORT_URL_ALPHABET</span> <span class="o">=</span> <span class="s1">'0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'</span>
 </code></pre></div>
 
 

@@ -1359,6 +1359,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../apps/native_auth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native browser authentication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../apps/notifications/" class="md-nav__link">
         
   
@@ -3063,8 +3091,8 @@
 <h2 id="image-generation">Image generation<a class="headerlink" href="#image-generation" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">htk.lib.qrcode.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_qr_code_image</span>
 
-<span class="n">png_image</span> <span class="o">=</span> <span class="n">make_qr_code_image</span><span class="p">(</span><span class="s1">&#39;https://example.com&#39;</span><span class="p">)</span>
-<span class="n">svg_image</span> <span class="o">=</span> <span class="n">make_qr_code_image</span><span class="p">(</span><span class="s1">&#39;https://example.com&#39;</span><span class="p">,</span> <span class="n">image_format</span><span class="o">=</span><span class="s1">&#39;svg&#39;</span><span class="p">)</span>
+<span class="n">png_image</span> <span class="o">=</span> <span class="n">make_qr_code_image</span><span class="p">(</span><span class="s1">'https://example.com'</span><span class="p">)</span>
+<span class="n">svg_image</span> <span class="o">=</span> <span class="n">make_qr_code_image</span><span class="p">(</span><span class="s1">'https://example.com'</span><span class="p">,</span> <span class="n">image_format</span><span class="o">=</span><span class="s1">'svg'</span><span class="p">)</span>
 </code></pre></div>
 <p>Supported <code>image_format</code> values:</p>
 <ul>
@@ -3075,21 +3103,21 @@
 <h2 id="django-responses">Django responses<a class="headerlink" href="#django-responses" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">htk.lib.qrcode.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">qrcode_image_response</span>
 
-<span class="n">response</span> <span class="o">=</span> <span class="n">qrcode_image_response</span><span class="p">(</span><span class="s1">&#39;https://example.com&#39;</span><span class="p">)</span>
-<span class="n">svg_response</span> <span class="o">=</span> <span class="n">qrcode_image_response</span><span class="p">(</span><span class="s1">&#39;https://example.com&#39;</span><span class="p">,</span> <span class="n">image_format</span><span class="o">=</span><span class="s1">&#39;svg&#39;</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">qrcode_image_response</span><span class="p">(</span><span class="s1">'https://example.com'</span><span class="p">)</span>
+<span class="n">svg_response</span> <span class="o">=</span> <span class="n">qrcode_image_response</span><span class="p">(</span><span class="s1">'https://example.com'</span><span class="p">,</span> <span class="n">image_format</span><span class="o">=</span><span class="s1">'svg'</span><span class="p">)</span>
 </code></pre></div>
 <p>Restricted responses validate the generated key before serving the image:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">htk.lib.qrcode.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">generate_qr_key</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">htk.lib.qrcode.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">restricted_qrcode_image_response</span>
 
-<span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://example.com&#39;</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s1">'https://example.com'</span>
 <span class="n">key</span> <span class="o">=</span> <span class="n">generate_qr_key</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-<span class="n">response</span> <span class="o">=</span> <span class="n">restricted_qrcode_image_response</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">key</span><span class="p">,</span> <span class="n">image_format</span><span class="o">=</span><span class="s1">&#39;svg&#39;</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">restricted_qrcode_image_response</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">key</span><span class="p">,</span> <span class="n">image_format</span><span class="o">=</span><span class="s1">'svg'</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="template-tag">Template tag<a class="headerlink" href="#template-tag" title="Permanent link">&para;</a></h2>
 <p>The <code>qrcode_image_url</code> tag accepts an optional format argument:</p>
 <div class="highlight"><pre><span></span><code><span class="cp">{%</span> <span class="k">load</span> <span class="nv">htk_tags</span> <span class="cp">%}</span>
-<span class="x">&lt;img src=&quot;</span><span class="cp">{%</span> <span class="k">qrcode_image_url</span> <span class="nv">cpq_url</span> <span class="s1">&#39;svg&#39;</span> <span class="cp">%}</span><span class="x">&quot; alt=&quot;QR code&quot; /&gt;</span>
+<span class="x">&lt;img src="</span><span class="cp">{%</span> <span class="k">qrcode_image_url</span> <span class="nv">cpq_url</span> <span class="s1">'svg'</span> <span class="cp">%}</span><span class="x">" alt="QR code" /&gt;</span>
 </code></pre></div>
 <p>The endpoint still requires <code>HTK_QR_IMAGE_URL_NAME</code> and <code>HTK_QR_SECRET</code> settings for signed QR image URLs.</p>
 

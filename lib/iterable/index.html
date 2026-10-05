@@ -1359,6 +1359,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../apps/native_auth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native browser authentication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../apps/notifications/" class="md-nav__link">
         
   
@@ -3066,7 +3094,7 @@
 <span class="n">client</span> <span class="o">=</span> <span class="n">get_iterable_api_client</span><span class="p">()</span>
 
 <span class="c1"># Track event</span>
-<span class="n">client</span><span class="o">.</span><span class="n">track_event</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span> <span class="s1">&#39;purchase&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;amount&#39;</span><span class="p">:</span> <span class="mi">100</span><span class="p">})</span>
+<span class="n">client</span><span class="o">.</span><span class="n">track_event</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span> <span class="s1">'purchase'</span><span class="p">,</span> <span class="p">{</span><span class="s1">'amount'</span><span class="p">:</span> <span class="mi">100</span><span class="p">})</span>
 
 <span class="c1"># Notify sign up</span>
 <span class="n">client</span><span class="o">.</span><span class="n">notify_sign_up</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
@@ -3079,19 +3107,19 @@
 </code></pre></div>
 <h2 id="common-operations">Common Operations<a class="headerlink" href="#common-operations" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="c1"># Get campaign/list/workflow IDs</span>
-<span class="n">campaign_id</span> <span class="o">=</span> <span class="n">get_campaign_id</span><span class="p">(</span><span class="s1">&#39;welcome_series&#39;</span><span class="p">)</span>
-<span class="n">list_id</span> <span class="o">=</span> <span class="n">get_list_id</span><span class="p">(</span><span class="s1">&#39;active_users&#39;</span><span class="p">)</span>
-<span class="n">workflow_id</span> <span class="o">=</span> <span class="n">get_workflow_id</span><span class="p">(</span><span class="s1">&#39;onboarding&#39;</span><span class="p">)</span>
+<span class="n">campaign_id</span> <span class="o">=</span> <span class="n">get_campaign_id</span><span class="p">(</span><span class="s1">'welcome_series'</span><span class="p">)</span>
+<span class="n">list_id</span> <span class="o">=</span> <span class="n">get_list_id</span><span class="p">(</span><span class="s1">'active_users'</span><span class="p">)</span>
+<span class="n">workflow_id</span> <span class="o">=</span> <span class="n">get_workflow_id</span><span class="p">(</span><span class="s1">'onboarding'</span><span class="p">)</span>
 
 <span class="c1"># Get person data</span>
-<span class="n">person</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_person</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="s1">&#39;user@example.com&#39;</span><span class="p">)</span>
+<span class="n">person</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_person</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="s1">'user@example.com'</span><span class="p">)</span>
 
 <span class="c1"># Get batch of people</span>
-<span class="n">people</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_persons</span><span class="p">([</span><span class="s1">&#39;user1@example.com&#39;</span><span class="p">,</span> <span class="s1">&#39;user2@example.com&#39;</span><span class="p">])</span>
+<span class="n">people</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_persons</span><span class="p">([</span><span class="s1">'user1@example.com'</span><span class="p">,</span> <span class="s1">'user2@example.com'</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="c1"># settings.py</span>
-<span class="n">ITERABLE_API_KEY</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;ITERABLE_API_KEY&#39;</span><span class="p">)</span>
+<span class="n">ITERABLE_API_KEY</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'ITERABLE_API_KEY'</span><span class="p">)</span>
 </code></pre></div>
 
 

@@ -1361,6 +1361,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../native_auth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native browser authentication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../notifications/" class="md-nav__link">
         
   
@@ -3392,7 +3420,7 @@
 <span class="n">name</span> <span class="o">=</span> <span class="n">site</span><span class="o">.</span><span class="n">name</span>
 
 <span class="c1"># Build absolute URL</span>
-<span class="n">url</span> <span class="o">=</span> <span class="n">build_absolute_url</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;/path/to/resource/&#39;</span><span class="p">)</span>
+<span class="n">url</span> <span class="o">=</span> <span class="n">build_absolute_url</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">'/path/to/resource/'</span><span class="p">)</span>
 
 <span class="c1"># Use in templates</span>
 <span class="n">site_domain</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">domain</span>
@@ -3409,8 +3437,8 @@
 <span class="n">site1</span> <span class="o">=</span> <span class="n">Site</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get_or_create</span><span class="p">(</span>
     <span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
     <span class="n">defaults</span><span class="o">=</span><span class="p">{</span>
-        <span class="s1">&#39;domain&#39;</span><span class="p">:</span> <span class="s1">&#39;example.com&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Example&#39;</span>
+        <span class="s1">'domain'</span><span class="p">:</span> <span class="s1">'example.com'</span><span class="p">,</span>
+        <span class="s1">'name'</span><span class="p">:</span> <span class="s1">'Example'</span>
     <span class="p">}</span>
 <span class="p">)</span>
 
@@ -3418,8 +3446,8 @@
 <span class="n">site2</span> <span class="o">=</span> <span class="n">Site</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get_or_create</span><span class="p">(</span>
     <span class="nb">id</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
     <span class="n">defaults</span><span class="o">=</span><span class="p">{</span>
-        <span class="s1">&#39;domain&#39;</span><span class="p">:</span> <span class="s1">&#39;example.co.uk&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Example UK&#39;</span>
+        <span class="s1">'domain'</span><span class="p">:</span> <span class="s1">'example.co.uk'</span><span class="p">,</span>
+        <span class="s1">'name'</span><span class="p">:</span> <span class="s1">'Example UK'</span>
     <span class="p">}</span>
 <span class="p">)</span>
 </code></pre></div>
@@ -3438,66 +3466,66 @@
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">django.contrib.sites.shortcuts</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_current_site</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">build_absolute_url</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Build absolute URL with domain&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Build absolute URL with domain"""</span>
     <span class="n">site</span> <span class="o">=</span> <span class="n">get_current_site</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
-    <span class="n">protocol</span> <span class="o">=</span> <span class="s1">&#39;https&#39;</span> <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">is_secure</span><span class="p">()</span> <span class="k">else</span> <span class="s1">&#39;http&#39;</span>
-    <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">protocol</span><span class="si">}</span><span class="s1">://</span><span class="si">{</span><span class="n">site</span><span class="o">.</span><span class="n">domain</span><span class="si">}{</span><span class="n">path</span><span class="si">}</span><span class="s1">&#39;</span>
+    <span class="n">protocol</span> <span class="o">=</span> <span class="s1">'https'</span> <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">is_secure</span><span class="p">()</span> <span class="k">else</span> <span class="s1">'http'</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">protocol</span><span class="si">}</span><span class="s1">://</span><span class="si">{</span><span class="n">site</span><span class="o">.</span><span class="n">domain</span><span class="si">}{</span><span class="n">path</span><span class="si">}</span><span class="s1">'</span>
 
 <span class="c1"># Usage</span>
-<span class="n">reset_link</span> <span class="o">=</span> <span class="n">build_absolute_url</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;/auth/reset/</span><span class="si">{</span><span class="n">token</span><span class="si">}</span><span class="s1">/&#39;</span><span class="p">)</span>
+<span class="n">reset_link</span> <span class="o">=</span> <span class="n">build_absolute_url</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="sa">f</span><span class="s1">'/auth/reset/</span><span class="si">{</span><span class="n">token</span><span class="si">}</span><span class="s1">/'</span><span class="p">)</span>
 </code></pre></div>
 <h3 id="site-specific-settings">Site-Specific Settings<a class="headerlink" href="#site-specific-settings" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">django.contrib.sites.shortcuts</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_current_site</span>
 
 <span class="k">class</span><span class="w"> </span><span class="nc">SiteConfig</span><span class="p">:</span>
     <span class="n">CONFIGS</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;example.com&#39;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s1">&#39;theme&#39;</span><span class="p">:</span> <span class="s1">&#39;default&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;language&#39;</span><span class="p">:</span> <span class="s1">&#39;en&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;timezone&#39;</span><span class="p">:</span> <span class="s1">&#39;US/Eastern&#39;</span>
+        <span class="s1">'example.com'</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">'theme'</span><span class="p">:</span> <span class="s1">'default'</span><span class="p">,</span>
+            <span class="s1">'language'</span><span class="p">:</span> <span class="s1">'en'</span><span class="p">,</span>
+            <span class="s1">'timezone'</span><span class="p">:</span> <span class="s1">'US/Eastern'</span>
         <span class="p">},</span>
-        <span class="s1">&#39;example.co.uk&#39;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s1">&#39;theme&#39;</span><span class="p">:</span> <span class="s1">&#39;uk&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;language&#39;</span><span class="p">:</span> <span class="s1">&#39;en-GB&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;timezone&#39;</span><span class="p">:</span> <span class="s1">&#39;Europe/London&#39;</span>
+        <span class="s1">'example.co.uk'</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">'theme'</span><span class="p">:</span> <span class="s1">'uk'</span><span class="p">,</span>
+            <span class="s1">'language'</span><span class="p">:</span> <span class="s1">'en-GB'</span><span class="p">,</span>
+            <span class="s1">'timezone'</span><span class="p">:</span> <span class="s1">'Europe/London'</span>
         <span class="p">}</span>
     <span class="p">}</span>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_config</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">domain</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">CONFIGS</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">domain</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">CONFIGS</span><span class="p">[</span><span class="s1">&#39;example.com&#39;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">CONFIGS</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">domain</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">CONFIGS</span><span class="p">[</span><span class="s1">'example.com'</span><span class="p">])</span>
 
 <span class="c1"># Usage</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">my_view</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
     <span class="n">site</span> <span class="o">=</span> <span class="n">get_current_site</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
     <span class="n">config</span> <span class="o">=</span> <span class="n">SiteConfig</span><span class="o">.</span><span class="n">get_config</span><span class="p">(</span><span class="n">site</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;view.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;config&#39;</span><span class="p">:</span> <span class="n">config</span><span class="p">})</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">'view.html'</span><span class="p">,</span> <span class="p">{</span><span class="s1">'config'</span><span class="p">:</span> <span class="n">config</span><span class="p">})</span>
 </code></pre></div>
 <h3 id="site-specific-email-templates">Site-Specific Email Templates<a class="headerlink" href="#site-specific-email-templates" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">django.contrib.sites.shortcuts</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_current_site</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">django.template.loader</span><span class="w"> </span><span class="kn">import</span> <span class="n">render_to_string</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">send_site_email</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="n">template_name</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Send email with site-specific template&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Send email with site-specific template"""</span>
     <span class="n">site</span> <span class="o">=</span> <span class="n">get_current_site</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
 
     <span class="c1"># Try site-specific template first</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">html</span> <span class="o">=</span> <span class="n">render_to_string</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s1">&#39;emails/</span><span class="si">{</span><span class="n">site</span><span class="o">.</span><span class="n">domain</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="n">template_name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s1">'emails/</span><span class="si">{</span><span class="n">site</span><span class="o">.</span><span class="n">domain</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="n">template_name</span><span class="si">}</span><span class="s1">'</span><span class="p">,</span>
             <span class="n">context</span>
         <span class="p">)</span>
     <span class="k">except</span> <span class="n">TemplateDoesNotExist</span><span class="p">:</span>
         <span class="c1"># Fall back to default</span>
         <span class="n">html</span> <span class="o">=</span> <span class="n">render_to_string</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s1">&#39;emails/</span><span class="si">{</span><span class="n">template_name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s1">'emails/</span><span class="si">{</span><span class="n">template_name</span><span class="si">}</span><span class="s1">'</span><span class="p">,</span>
             <span class="n">context</span>
         <span class="p">)</span>
 
     <span class="n">send_mail</span><span class="p">(</span>
-        <span class="n">subject</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Message from </span><span class="si">{</span><span class="n">site</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+        <span class="n">subject</span><span class="o">=</span><span class="sa">f</span><span class="s1">'Message from </span><span class="si">{</span><span class="n">site</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">'</span><span class="p">,</span>
         <span class="n">message</span><span class="o">=</span><span class="n">html</span><span class="p">,</span>
-        <span class="n">from_email</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;noreply@</span><span class="si">{</span><span class="n">site</span><span class="o">.</span><span class="n">domain</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+        <span class="n">from_email</span><span class="o">=</span><span class="sa">f</span><span class="s1">'noreply@</span><span class="si">{</span><span class="n">site</span><span class="o">.</span><span class="n">domain</span><span class="si">}</span><span class="s1">'</span><span class="p">,</span>
         <span class="n">recipient_list</span><span class="o">=</span><span class="p">[</span><span class="n">user</span><span class="o">.</span><span class="n">email</span><span class="p">]</span>
     <span class="p">)</span>
 </code></pre></div>
@@ -3512,33 +3540,33 @@
     <span class="n">created</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateTimeField</span><span class="p">(</span><span class="n">auto_now_add</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">get_site_articles</span><span class="p">(</span><span class="n">site</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get articles for specific site&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Get articles for specific site"""</span>
     <span class="k">return</span> <span class="n">Article</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">sites</span><span class="o">=</span><span class="n">site</span><span class="p">)</span>
 </code></pre></div>
 <h3 id="canonical-urls">Canonical URLs<a class="headerlink" href="#canonical-urls" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">django.contrib.sites.shortcuts</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_current_site</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">get_canonical_url</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get canonical URL for SEO&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Get canonical URL for SEO"""</span>
     <span class="n">site</span> <span class="o">=</span> <span class="n">get_current_site</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
-    <span class="n">protocol</span> <span class="o">=</span> <span class="s1">&#39;https&#39;</span>
-    <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">protocol</span><span class="si">}</span><span class="s1">://</span><span class="si">{</span><span class="n">site</span><span class="o">.</span><span class="n">domain</span><span class="si">}{</span><span class="n">path</span><span class="si">}</span><span class="s1">&#39;</span>
+    <span class="n">protocol</span> <span class="o">=</span> <span class="s1">'https'</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">protocol</span><span class="si">}</span><span class="s1">://</span><span class="si">{</span><span class="n">site</span><span class="o">.</span><span class="n">domain</span><span class="si">}{</span><span class="n">path</span><span class="si">}</span><span class="s1">'</span>
 
 <span class="c1"># Usage in template</span>
 <span class="p">{</span><span class="o">%</span> <span class="n">load</span> <span class="n">sites</span> <span class="o">%</span><span class="p">}</span>
-<span class="o">&lt;</span><span class="n">link</span> <span class="n">rel</span><span class="o">=</span><span class="s2">&quot;canonical&quot;</span> <span class="n">href</span><span class="o">=</span><span class="s2">&quot;{{ canonical_url }}&quot;</span> <span class="o">/&gt;</span>
+<span class="o">&lt;</span><span class="n">link</span> <span class="n">rel</span><span class="o">=</span><span class="s2">"canonical"</span> <span class="n">href</span><span class="o">=</span><span class="s2">"{{ canonical_url }}"</span> <span class="o">/&gt;</span>
 </code></pre></div>
 <h3 id="redirect-to-site-domain">Redirect to Site Domain<a class="headerlink" href="#redirect-to-site-domain" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">django.contrib.sites.shortcuts</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_current_site</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">django.shortcuts</span><span class="w"> </span><span class="kn">import</span> <span class="n">redirect</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">enforce_site_domain</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Redirect if accessing from wrong domain&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Redirect if accessing from wrong domain"""</span>
     <span class="n">site</span> <span class="o">=</span> <span class="n">get_current_site</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">get_host</span><span class="p">()</span> <span class="o">!=</span> <span class="n">site</span><span class="o">.</span><span class="n">domain</span><span class="p">:</span>
-        <span class="n">protocol</span> <span class="o">=</span> <span class="s1">&#39;https&#39;</span> <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">is_secure</span><span class="p">()</span> <span class="k">else</span> <span class="s1">&#39;http&#39;</span>
-        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">protocol</span><span class="si">}</span><span class="s1">://</span><span class="si">{</span><span class="n">site</span><span class="o">.</span><span class="n">domain</span><span class="si">}{</span><span class="n">request</span><span class="o">.</span><span class="n">path</span><span class="si">}</span><span class="s1">&#39;</span>
+        <span class="n">protocol</span> <span class="o">=</span> <span class="s1">'https'</span> <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">is_secure</span><span class="p">()</span> <span class="k">else</span> <span class="s1">'http'</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">protocol</span><span class="si">}</span><span class="s1">://</span><span class="si">{</span><span class="n">site</span><span class="o">.</span><span class="n">domain</span><span class="si">}{</span><span class="n">request</span><span class="o">.</span><span class="n">path</span><span class="si">}</span><span class="s1">'</span>
         <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">permanent</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="template-usage">Template Usage<a class="headerlink" href="#template-usage" title="Permanent link">&para;</a></h2>
@@ -3548,11 +3576,11 @@
 <span class="x">&lt;!-- Get current site --&gt;</span>
 <span class="x">&lt;footer&gt;</span>
 <span class="x">    &lt;p&gt;&amp;copy; </span><span class="cp">{{</span> <span class="nv">request.site.name</span> <span class="cp">}}</span><span class="x">&lt;/p&gt;</span>
-<span class="x">    &lt;a href=&quot;https://</span><span class="cp">{{</span> <span class="nv">request.site.domain</span> <span class="cp">}}</span><span class="x">/&quot;&gt;Home&lt;/a&gt;</span>
+<span class="x">    &lt;a href="https://</span><span class="cp">{{</span> <span class="nv">request.site.domain</span> <span class="cp">}}</span><span class="x">/"&gt;Home&lt;/a&gt;</span>
 <span class="x">&lt;/footer&gt;</span>
 
 <span class="x">&lt;!-- Link to site URL --&gt;</span>
-<span class="x">&lt;a href=&quot;https://</span><span class="cp">{{</span> <span class="nv">request.site.domain</span> <span class="cp">}}</span><span class="x">/about/&quot;&gt;About Us&lt;/a&gt;</span>
+<span class="x">&lt;a href="https://</span><span class="cp">{{</span> <span class="nv">request.site.domain</span> <span class="cp">}}</span><span class="x">/about/"&gt;About Us&lt;/a&gt;</span>
 
 <span class="x">&lt;!-- Email footer --&gt;</span>
 <span class="x">&lt;p&gt;Contact: support@</span><span class="cp">{{</span> <span class="nv">request.site.domain</span> <span class="cp">}}</span><span class="x">&lt;/p&gt;</span>
@@ -3560,8 +3588,8 @@
 <h3 id="dynamic-base-url">Dynamic Base URL<a class="headerlink" href="#dynamic-base-url" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="cp">{%</span> <span class="k">load</span> <span class="nv">sites</span> <span class="cp">%}</span>
 
-<span class="cp">{%</span> <span class="k">url</span> <span class="s1">&#39;home&#39;</span> <span class="k">as</span> <span class="nv">home_url</span> <span class="cp">%}</span>
-<span class="x">&lt;a href=&quot;https://</span><span class="cp">{{</span> <span class="nv">request.site.domain</span> <span class="cp">}}{{</span> <span class="nv">home_url</span> <span class="cp">}}</span><span class="x">&quot;&gt;</span>
+<span class="cp">{%</span> <span class="k">url</span> <span class="s1">'home'</span> <span class="k">as</span> <span class="nv">home_url</span> <span class="cp">%}</span>
+<span class="x">&lt;a href="https://</span><span class="cp">{{</span> <span class="nv">request.site.domain</span> <span class="cp">}}{{</span> <span class="nv">home_url</span> <span class="cp">}}</span><span class="x">"&gt;</span>
 <span class="x">    Go Home</span>
 <span class="x">&lt;/a&gt;</span>
 </code></pre></div>
@@ -3571,22 +3599,22 @@
 
 <span class="c1"># Enable sites framework</span>
 <span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s1">&#39;django.contrib.sites&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;htk.apps.sites&#39;</span><span class="p">,</span>
+    <span class="s1">'django.contrib.sites'</span><span class="p">,</span>
+    <span class="s1">'htk.apps.sites'</span><span class="p">,</span>
     <span class="c1"># ...</span>
 <span class="p">]</span>
 
 <span class="c1"># Site-specific settings</span>
 <span class="n">SITE_DOMAINS</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="mi">1</span><span class="p">:</span> <span class="s1">&#39;example.com&#39;</span><span class="p">,</span>
-    <span class="mi">2</span><span class="p">:</span> <span class="s1">&#39;example.co.uk&#39;</span><span class="p">,</span>
-    <span class="mi">3</span><span class="p">:</span> <span class="s1">&#39;example.de&#39;</span><span class="p">,</span>
+    <span class="mi">1</span><span class="p">:</span> <span class="s1">'example.com'</span><span class="p">,</span>
+    <span class="mi">2</span><span class="p">:</span> <span class="s1">'example.co.uk'</span><span class="p">,</span>
+    <span class="mi">3</span><span class="p">:</span> <span class="s1">'example.de'</span><span class="p">,</span>
 <span class="p">}</span>
 
 <span class="n">SITE_THEMES</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;example.com&#39;</span><span class="p">:</span> <span class="s1">&#39;default&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;example.co.uk&#39;</span><span class="p">:</span> <span class="s1">&#39;uk&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;example.de&#39;</span><span class="p">:</span> <span class="s1">&#39;de&#39;</span><span class="p">,</span>
+    <span class="s1">'example.com'</span><span class="p">:</span> <span class="s1">'default'</span><span class="p">,</span>
+    <span class="s1">'example.co.uk'</span><span class="p">:</span> <span class="s1">'uk'</span><span class="p">,</span>
+    <span class="s1">'example.de'</span><span class="p">:</span> <span class="s1">'de'</span><span class="p">,</span>
 <span class="p">}</span>
 </code></pre></div>
 <h2 id="best-practices">Best Practices<a class="headerlink" href="#best-practices" title="Permanent link">&para;</a></h2>

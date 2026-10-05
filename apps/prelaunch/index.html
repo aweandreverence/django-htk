@@ -1361,6 +1361,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../native_auth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native browser authentication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../notifications/" class="md-nav__link">
         
   
@@ -3444,13 +3472,13 @@
 
 <span class="c1"># Create signup</span>
 <span class="n">signup</span> <span class="o">=</span> <span class="n">PrelaunchSignup</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
-    <span class="n">email</span><span class="o">=</span><span class="s1">&#39;user@example.com&#39;</span><span class="p">,</span>
-    <span class="n">referral_code</span><span class="o">=</span><span class="s1">&#39;friend123&#39;</span>
+    <span class="n">email</span><span class="o">=</span><span class="s1">'user@example.com'</span><span class="p">,</span>
+    <span class="n">referral_code</span><span class="o">=</span><span class="s1">'friend123'</span>
 <span class="p">)</span>
 
 <span class="c1"># Get or create</span>
 <span class="n">signup</span><span class="p">,</span> <span class="n">created</span> <span class="o">=</span> <span class="n">PrelaunchSignup</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get_or_create_by_email</span><span class="p">(</span>
-    <span class="n">email</span><span class="o">=</span><span class="s1">&#39;user@example.com&#39;</span>
+    <span class="n">email</span><span class="o">=</span><span class="s1">'user@example.com'</span>
 <span class="p">)</span>
 
 <span class="c1"># Grant early access</span>
@@ -3467,14 +3495,14 @@
 
 <span class="c1"># Manual signup</span>
 <span class="n">signup</span> <span class="o">=</span> <span class="n">PrelaunchSignup</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
-    <span class="n">email</span><span class="o">=</span><span class="s1">&#39;user@example.com&#39;</span><span class="p">,</span>
-    <span class="n">first_name</span><span class="o">=</span><span class="s1">&#39;John&#39;</span><span class="p">,</span>
-    <span class="n">last_name</span><span class="o">=</span><span class="s1">&#39;Doe&#39;</span><span class="p">,</span>
-    <span class="n">referral_code</span><span class="o">=</span><span class="s1">&#39;code123&#39;</span>
+    <span class="n">email</span><span class="o">=</span><span class="s1">'user@example.com'</span><span class="p">,</span>
+    <span class="n">first_name</span><span class="o">=</span><span class="s1">'John'</span><span class="p">,</span>
+    <span class="n">last_name</span><span class="o">=</span><span class="s1">'Doe'</span><span class="p">,</span>
+    <span class="n">referral_code</span><span class="o">=</span><span class="s1">'code123'</span>
 <span class="p">)</span>
 
 <span class="c1"># Bulk import</span>
-<span class="n">emails</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;user1@example.com&#39;</span><span class="p">,</span> <span class="s1">&#39;user2@example.com&#39;</span><span class="p">,</span> <span class="s1">&#39;user3@example.com&#39;</span><span class="p">]</span>
+<span class="n">emails</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'user1@example.com'</span><span class="p">,</span> <span class="s1">'user2@example.com'</span><span class="p">,</span> <span class="s1">'user3@example.com'</span><span class="p">]</span>
 <span class="k">for</span> <span class="n">email</span> <span class="ow">in</span> <span class="n">emails</span><span class="p">:</span>
     <span class="n">PrelaunchSignup</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get_or_create</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="n">email</span><span class="p">)</span>
 </code></pre></div>
@@ -3482,11 +3510,11 @@
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">htk.apps.prelaunch.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">PrelaunchSignup</span>
 
 <span class="c1"># Grant access to one user</span>
-<span class="n">signup</span> <span class="o">=</span> <span class="n">PrelaunchSignup</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="s1">&#39;user@example.com&#39;</span><span class="p">)</span>
+<span class="n">signup</span> <span class="o">=</span> <span class="n">PrelaunchSignup</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="s1">'user@example.com'</span><span class="p">)</span>
 <span class="n">signup</span><span class="o">.</span><span class="n">grant_early_access</span><span class="p">()</span>
 
 <span class="c1"># Grant to multiple users</span>
-<span class="n">signups</span> <span class="o">=</span> <span class="n">PrelaunchSignup</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">email__endswith</span><span class="o">=</span><span class="s1">&#39;@company.com&#39;</span><span class="p">)</span>
+<span class="n">signups</span> <span class="o">=</span> <span class="n">PrelaunchSignup</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">email__endswith</span><span class="o">=</span><span class="s1">'@company.com'</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">signup</span> <span class="ow">in</span> <span class="n">signups</span><span class="p">:</span>
     <span class="n">signup</span><span class="o">.</span><span class="n">grant_early_access</span><span class="p">()</span>
 
@@ -3511,7 +3539,7 @@
 
 <span class="n">daily_signups</span> <span class="o">=</span> <span class="n">PrelaunchSignup</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
     <span class="n">created__date__gte</span><span class="o">=</span><span class="n">week_ago</span>
-<span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="s1">&#39;created__date&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">count</span><span class="o">=</span><span class="n">Count</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">))</span>
+<span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="s1">'created__date'</span><span class="p">)</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">count</span><span class="o">=</span><span class="n">Count</span><span class="p">(</span><span class="s1">'id'</span><span class="p">))</span>
 </code></pre></div>
 <h2 id="prelaunch-mode">Prelaunch Mode<a class="headerlink" href="#prelaunch-mode" title="Permanent link">&para;</a></h2>
 <h3 id="enabledisable-prelaunch">Enable/Disable Prelaunch<a class="headerlink" href="#enabledisable-prelaunch" title="Permanent link">&para;</a></h3>
@@ -3532,7 +3560,7 @@
 <span class="c1"># In settings.py</span>
 <span class="n">MIDDLEWARE</span> <span class="o">=</span> <span class="p">[</span>
     <span class="c1"># ... other middleware ...</span>
-    <span class="s1">&#39;htk.apps.prelaunch.middleware.PrelaunchMiddleware&#39;</span><span class="p">,</span>
+    <span class="s1">'htk.apps.prelaunch.middleware.PrelaunchMiddleware'</span><span class="p">,</span>
 <span class="p">]</span>
 
 <span class="c1"># When prelaunch is active:</span>
@@ -3543,23 +3571,23 @@
 <h3 id="exception-paths">Exception Paths<a class="headerlink" href="#exception-paths" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="c1"># settings.py</span>
 <span class="n">PRELAUNCH_EXCEPTED_PATHS</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s1">&#39;/health/&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;/api/status/&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;/static/&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;/media/&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;/prelaunch/&#39;</span><span class="p">,</span>
+    <span class="s1">'/health/'</span><span class="p">,</span>
+    <span class="s1">'/api/status/'</span><span class="p">,</span>
+    <span class="s1">'/static/'</span><span class="p">,</span>
+    <span class="s1">'/media/'</span><span class="p">,</span>
+    <span class="s1">'/prelaunch/'</span><span class="p">,</span>
 <span class="p">]</span>
 
-<span class="n">PRELAUNCH_REDIRECT_URL</span> <span class="o">=</span> <span class="s1">&#39;/prelaunch/&#39;</span>
+<span class="n">PRELAUNCH_REDIRECT_URL</span> <span class="o">=</span> <span class="s1">'/prelaunch/'</span>
 </code></pre></div>
 <h2 id="common-patterns">Common Patterns<a class="headerlink" href="#common-patterns" title="Permanent link">&para;</a></h2>
 <h3 id="referral-system">Referral System<a class="headerlink" href="#referral-system" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">htk.apps.prelaunch.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">PrelaunchSignup</span>
 
 <span class="c1"># Track referrals</span>
-<span class="n">referrer</span> <span class="o">=</span> <span class="n">PrelaunchSignup</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">referral_code</span><span class="o">=</span><span class="s1">&#39;ABC123&#39;</span><span class="p">)</span>
+<span class="n">referrer</span> <span class="o">=</span> <span class="n">PrelaunchSignup</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">referral_code</span><span class="o">=</span><span class="s1">'ABC123'</span><span class="p">)</span>
 <span class="n">referred</span> <span class="o">=</span> <span class="n">PrelaunchSignup</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
-    <span class="n">email</span><span class="o">=</span><span class="s1">&#39;friend@example.com&#39;</span><span class="p">,</span>
+    <span class="n">email</span><span class="o">=</span><span class="s1">'friend@example.com'</span><span class="p">,</span>
     <span class="n">referred_by</span><span class="o">=</span><span class="n">referrer</span>
 <span class="p">)</span>
 
@@ -3583,9 +3611,9 @@
         <span class="c1"># Send confirmation email</span>
         <span class="n">notify</span><span class="p">(</span>
             <span class="n">instance</span><span class="p">,</span>
-            <span class="sa">f</span><span class="s1">&#39;You</span><span class="se">\&#39;</span><span class="s1">ve been added to the waitlist for </span><span class="si">{</span><span class="n">position</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
-            <span class="n">channel</span><span class="o">=</span><span class="s1">&#39;email&#39;</span><span class="p">,</span>
-            <span class="n">subject</span><span class="o">=</span><span class="s1">&#39;Waitlist Confirmation&#39;</span>
+            <span class="sa">f</span><span class="s1">'You</span><span class="se">\'</span><span class="s1">ve been added to the waitlist for </span><span class="si">{</span><span class="n">position</span><span class="si">}</span><span class="s1">'</span><span class="p">,</span>
+            <span class="n">channel</span><span class="o">=</span><span class="s1">'email'</span><span class="p">,</span>
+            <span class="n">subject</span><span class="o">=</span><span class="s1">'Waitlist Confirmation'</span>
         <span class="p">)</span>
 
 <span class="nd">@receiver</span><span class="p">(</span><span class="n">post_save</span><span class="p">,</span> <span class="n">sender</span><span class="o">=</span><span class="n">PrelaunchSignup</span><span class="p">)</span>
@@ -3593,9 +3621,9 @@
     <span class="k">if</span> <span class="n">instance</span><span class="o">.</span><span class="n">has_early_access</span><span class="p">:</span>
         <span class="n">notify</span><span class="p">(</span>
             <span class="n">instance</span><span class="p">,</span>
-            <span class="s1">&#39;You now have early access!&#39;</span><span class="p">,</span>
-            <span class="n">channel</span><span class="o">=</span><span class="s1">&#39;email&#39;</span><span class="p">,</span>
-            <span class="n">subject</span><span class="o">=</span><span class="s1">&#39;Early Access Granted&#39;</span>
+            <span class="s1">'You now have early access!'</span><span class="p">,</span>
+            <span class="n">channel</span><span class="o">=</span><span class="s1">'email'</span><span class="p">,</span>
+            <span class="n">subject</span><span class="o">=</span><span class="s1">'Early Access Granted'</span>
         <span class="p">)</span>
 </code></pre></div>
 <h3 id="phased-rollout">Phased Rollout<a class="headerlink" href="#phased-rollout" title="Permanent link">&para;</a></h3>
@@ -3610,7 +3638,7 @@
 <span class="n">wave1_count</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">total_signups</span> <span class="o">*</span> <span class="mf">0.1</span><span class="p">)</span>
 <span class="n">wave1</span> <span class="o">=</span> <span class="n">PrelaunchSignup</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
     <span class="n">has_early_access</span><span class="o">=</span><span class="kc">False</span>
-<span class="p">)</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s1">&#39;created&#39;</span><span class="p">)[:</span><span class="n">wave1_count</span><span class="p">]</span>
+<span class="p">)</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s1">'created'</span><span class="p">)[:</span><span class="n">wave1_count</span><span class="p">]</span>
 
 <span class="k">for</span> <span class="n">signup</span> <span class="ow">in</span> <span class="n">wave1</span><span class="p">:</span>
     <span class="n">signup</span><span class="o">.</span><span class="n">has_early_access</span> <span class="o">=</span> <span class="kc">True</span>
@@ -3622,7 +3650,7 @@
 <span class="n">wave2</span> <span class="o">=</span> <span class="n">PrelaunchSignup</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
     <span class="n">has_early_access</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">created__lte</span><span class="o">=</span><span class="n">wave2_date</span>
-<span class="p">)</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s1">&#39;created&#39;</span><span class="p">)[:</span><span class="n">wave2_count</span><span class="p">]</span>
+<span class="p">)</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s1">'created'</span><span class="p">)[:</span><span class="n">wave2_count</span><span class="p">]</span>
 
 <span class="k">for</span> <span class="n">signup</span> <span class="ow">in</span> <span class="n">wave2</span><span class="p">:</span>
     <span class="n">signup</span><span class="o">.</span><span class="n">grant_early_access</span><span class="p">()</span>
@@ -3631,7 +3659,7 @@
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">htk.apps.prelaunch.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">PrelaunchSignup</span>
 
 <span class="c1"># Track unsubscribes</span>
-<span class="n">signup</span> <span class="o">=</span> <span class="n">PrelaunchSignup</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="s1">&#39;user@example.com&#39;</span><span class="p">)</span>
+<span class="n">signup</span> <span class="o">=</span> <span class="n">PrelaunchSignup</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="s1">'user@example.com'</span><span class="p">)</span>
 <span class="n">signup</span><span class="o">.</span><span class="n">is_subscribed</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="n">signup</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
 
@@ -3640,7 +3668,7 @@
 
 <span class="c1"># Send to active only</span>
 <span class="k">for</span> <span class="n">signup</span> <span class="ow">in</span> <span class="n">active</span><span class="p">:</span>
-    <span class="n">send_email</span><span class="p">(</span><span class="n">signup</span><span class="o">.</span><span class="n">email</span><span class="p">,</span> <span class="s1">&#39;Launch announcement!&#39;</span><span class="p">)</span>
+    <span class="n">send_email</span><span class="p">(</span><span class="n">signup</span><span class="o">.</span><span class="n">email</span><span class="p">,</span> <span class="s1">'Launch announcement!'</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="models">Models<a class="headerlink" href="#models" title="Permanent link">&para;</a></h2>
 <h3 id="prelaunchsignup">PrelaunchSignup<a class="headerlink" href="#prelaunchsignup" title="Permanent link">&para;</a></h3>
@@ -3649,7 +3677,7 @@
     <span class="n">first_name</span> <span class="o">=</span> <span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">last_name</span> <span class="o">=</span> <span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">referral_code</span> <span class="o">=</span> <span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">unique</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">referred_by</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="s1">&#39;self&#39;</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">SET_NULL</span><span class="p">)</span>
+    <span class="n">referred_by</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="s1">'self'</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">SET_NULL</span><span class="p">)</span>
     <span class="n">has_early_access</span> <span class="o">=</span> <span class="n">BooleanField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">is_subscribed</span> <span class="o">=</span> <span class="n">BooleanField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">created</span> <span class="o">=</span> <span class="n">DateTimeField</span><span class="p">(</span><span class="n">auto_now_add</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -3658,16 +3686,16 @@
 <h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="c1"># settings.py</span>
 <span class="n">PRELAUNCH_ENABLED</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="n">PRELAUNCH_REDIRECT_URL</span> <span class="o">=</span> <span class="s1">&#39;/early-access/&#39;</span>
+<span class="n">PRELAUNCH_REDIRECT_URL</span> <span class="o">=</span> <span class="s1">'/early-access/'</span>
 
 <span class="c1"># Paths that bypass prelaunch check</span>
 <span class="n">PRELAUNCH_EXCEPTED_PATHS</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s1">&#39;/health/&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;/api/status/&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;/static/&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;/media/&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;/prelaunch/&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;/admin/&#39;</span><span class="p">,</span>
+    <span class="s1">'/health/'</span><span class="p">,</span>
+    <span class="s1">'/api/status/'</span><span class="p">,</span>
+    <span class="s1">'/static/'</span><span class="p">,</span>
+    <span class="s1">'/media/'</span><span class="p">,</span>
+    <span class="s1">'/prelaunch/'</span><span class="p">,</span>
+    <span class="s1">'/admin/'</span><span class="p">,</span>
 <span class="p">]</span>
 
 <span class="c1"># Early access paths (accessible with early access)</span>

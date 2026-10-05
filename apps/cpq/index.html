@@ -1574,6 +1574,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../native_auth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native browser authentication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../notifications/" class="md-nav__link">
         
   
@@ -3342,15 +3370,15 @@
 
 <span class="c1"># Create quote</span>
 <span class="n">quote</span> <span class="o">=</span> <span class="n">BaseCPQQuote</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
-    <span class="n">customer_name</span><span class="o">=</span><span class="s1">&#39;Acme Corp&#39;</span><span class="p">,</span>
-    <span class="n">customer_email</span><span class="o">=</span><span class="s1">&#39;procurement@acme.com&#39;</span><span class="p">,</span>
+    <span class="n">customer_name</span><span class="o">=</span><span class="s1">'Acme Corp'</span><span class="p">,</span>
+    <span class="n">customer_email</span><span class="o">=</span><span class="s1">'procurement@acme.com'</span><span class="p">,</span>
     <span class="n">expires_at</span><span class="o">=</span><span class="n">timezone</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
 <span class="p">)</span>
 
 <span class="c1"># Add line items</span>
 <span class="n">line_item</span> <span class="o">=</span> <span class="n">BaseCPQQuoteLineItem</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
     <span class="n">quote</span><span class="o">=</span><span class="n">quote</span><span class="p">,</span>
-    <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Enterprise License&#39;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s1">'Enterprise License'</span><span class="p">,</span>
     <span class="n">quantity</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
     <span class="n">unit_price</span><span class="o">=</span><span class="mf">1000.00</span>
 <span class="p">)</span>
@@ -3362,7 +3390,7 @@
 <span class="n">quote</span><span class="o">.</span><span class="n">approve_and_pay</span><span class="p">(</span>
     <span class="n">line_item_ids</span><span class="o">=</span><span class="p">[</span><span class="n">line_item</span><span class="o">.</span><span class="n">id</span><span class="p">],</span>
     <span class="n">amount</span><span class="o">=</span><span class="mf">1000.00</span><span class="p">,</span>
-    <span class="n">stripe_token</span><span class="o">=</span><span class="s1">&#39;tok_xxx&#39;</span>
+    <span class="n">stripe_token</span><span class="o">=</span><span class="s1">'tok_xxx'</span>
 <span class="p">)</span>
 
 <span class="c1"># Creates invoice automatically</span>
@@ -3372,7 +3400,7 @@
 
 <span class="c1"># Create group quote (for parent-child relationships)</span>
 <span class="n">group_quote</span> <span class="o">=</span> <span class="n">BaseCPQGroupQuote</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
-    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Q4 Regional Sales&#39;</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">'Q4 Regional Sales'</span>
 <span class="p">)</span>
 
 <span class="c1"># Add sub-quotes</span>
@@ -3412,13 +3440,13 @@ Customer Pays
 <span class="c1"># Send quote to customer</span>
 <span class="n">send_quote_email</span><span class="p">(</span>
     <span class="n">quote</span><span class="o">=</span><span class="n">quote</span><span class="p">,</span>
-    <span class="n">recipient_email</span><span class="o">=</span><span class="s1">&#39;buyer@acme.com&#39;</span>
+    <span class="n">recipient_email</span><span class="o">=</span><span class="s1">'buyer@acme.com'</span>
 <span class="p">)</span>
 </code></pre></div>
 <h3 id="payment-recording">Payment Recording<a class="headerlink" href="#payment-recording" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="c1"># Record Stripe payment</span>
 <span class="n">quote</span><span class="o">.</span><span class="n">record_payment</span><span class="p">(</span>
-    <span class="n">charge_id</span><span class="o">=</span><span class="s1">&#39;ch_xxx&#39;</span><span class="p">,</span>
+    <span class="n">charge_id</span><span class="o">=</span><span class="s1">'ch_xxx'</span><span class="p">,</span>
     <span class="n">amount</span><span class="o">=</span><span class="mf">1000.00</span><span class="p">,</span>
     <span class="n">line_items</span><span class="o">=</span><span class="p">[</span><span class="n">line_item</span><span class="p">]</span>
 <span class="p">)</span>

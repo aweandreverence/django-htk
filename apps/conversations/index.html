@@ -1574,6 +1574,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../native_auth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native browser authentication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../notifications/" class="md-nav__link">
         
   
@@ -3340,14 +3368,14 @@
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">htk.apps.conversations.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseConversation</span>
 
 <span class="c1"># Create new conversation</span>
-<span class="n">convo</span> <span class="o">=</span> <span class="n">BaseConversation</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">subject</span><span class="o">=</span><span class="s1">&#39;Project Discussion&#39;</span><span class="p">)</span>
+<span class="n">convo</span> <span class="o">=</span> <span class="n">BaseConversation</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">subject</span><span class="o">=</span><span class="s1">'Project Discussion'</span><span class="p">)</span>
 
 <span class="c1"># Add participants</span>
 <span class="n">convo</span><span class="o">.</span><span class="n">add_participant</span><span class="p">(</span><span class="n">user1</span><span class="p">)</span>
 <span class="n">convo</span><span class="o">.</span><span class="n">add_participants</span><span class="p">([</span><span class="n">user2</span><span class="p">,</span> <span class="n">user3</span><span class="p">])</span>
 
 <span class="c1"># Send message</span>
-<span class="n">message</span> <span class="o">=</span> <span class="n">convo</span><span class="o">.</span><span class="n">add_message</span><span class="p">(</span><span class="n">sender</span><span class="o">=</span><span class="n">user1</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s1">&#39;Hello everyone!&#39;</span><span class="p">)</span>
+<span class="n">message</span> <span class="o">=</span> <span class="n">convo</span><span class="o">.</span><span class="n">add_message</span><span class="p">(</span><span class="n">sender</span><span class="o">=</span><span class="n">user1</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s1">'Hello everyone!'</span><span class="p">)</span>
 </code></pre></div>
 <h3 id="find-conversations">Find Conversations<a class="headerlink" href="#find-conversations" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="c1"># Find all conversations for a user</span>
@@ -3361,10 +3389,10 @@
 <span class="n">messages</span> <span class="o">=</span> <span class="n">convo</span><span class="o">.</span><span class="n">messages</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
 
 <span class="c1"># Add reaction to message</span>
-<span class="n">message</span><span class="o">.</span><span class="n">add_reaction</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span> <span class="n">emoji</span><span class="o">=</span><span class="s1">&#39;👍&#39;</span><span class="p">)</span>
+<span class="n">message</span><span class="o">.</span><span class="n">add_reaction</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span> <span class="n">emoji</span><span class="o">=</span><span class="s1">'👍'</span><span class="p">)</span>
 
 <span class="c1"># Remove reaction</span>
-<span class="n">message</span><span class="o">.</span><span class="n">remove_reaction</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span> <span class="n">emoji</span><span class="o">=</span><span class="s1">&#39;👍&#39;</span><span class="p">)</span>
+<span class="n">message</span><span class="o">.</span><span class="n">remove_reaction</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span> <span class="n">emoji</span><span class="o">=</span><span class="s1">'👍'</span><span class="p">)</span>
 
 <span class="c1"># Get reactions</span>
 <span class="n">reactions</span> <span class="o">=</span> <span class="n">message</span><span class="o">.</span><span class="n">reactions</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
@@ -3390,30 +3418,30 @@
 <h3 id="direct-message-between-users">Direct Message Between Users<a class="headerlink" href="#direct-message-between-users" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">htk.apps.conversations.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseConversation</span>
 
-<span class="n">user1</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s1">&#39;alice&#39;</span><span class="p">)</span>
-<span class="n">user2</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s1">&#39;bob&#39;</span><span class="p">)</span>
+<span class="n">user1</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s1">'alice'</span><span class="p">)</span>
+<span class="n">user2</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s1">'bob'</span><span class="p">)</span>
 
 <span class="c1"># Find or create DM</span>
 <span class="n">convo</span> <span class="o">=</span> <span class="n">BaseConversation</span><span class="o">.</span><span class="n">find_by_participants</span><span class="p">([</span><span class="n">user1</span><span class="p">,</span> <span class="n">user2</span><span class="p">])</span>
 <span class="k">if</span> <span class="ow">not</span> <span class="n">convo</span><span class="p">:</span>
-    <span class="n">convo</span> <span class="o">=</span> <span class="n">BaseConversation</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">subject</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">user1</span><span class="si">}</span><span class="s1"> &amp; </span><span class="si">{</span><span class="n">user2</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">convo</span> <span class="o">=</span> <span class="n">BaseConversation</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">subject</span><span class="o">=</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">user1</span><span class="si">}</span><span class="s1"> &amp; </span><span class="si">{</span><span class="n">user2</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
     <span class="n">convo</span><span class="o">.</span><span class="n">add_participants</span><span class="p">([</span><span class="n">user1</span><span class="p">,</span> <span class="n">user2</span><span class="p">])</span>
 
 <span class="c1"># Send message</span>
-<span class="n">convo</span><span class="o">.</span><span class="n">add_message</span><span class="p">(</span><span class="n">sender</span><span class="o">=</span><span class="n">user1</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s1">&#39;Hey Bob!&#39;</span><span class="p">)</span>
+<span class="n">convo</span><span class="o">.</span><span class="n">add_message</span><span class="p">(</span><span class="n">sender</span><span class="o">=</span><span class="n">user1</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s1">'Hey Bob!'</span><span class="p">)</span>
 </code></pre></div>
 <h3 id="group-chat">Group Chat<a class="headerlink" href="#group-chat" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="c1"># Create group conversation</span>
-<span class="n">group</span> <span class="o">=</span> <span class="n">BaseConversation</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">subject</span><span class="o">=</span><span class="s1">&#39;Engineering Team&#39;</span><span class="p">)</span>
+<span class="n">group</span> <span class="o">=</span> <span class="n">BaseConversation</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">subject</span><span class="o">=</span><span class="s1">'Engineering Team'</span><span class="p">)</span>
 <span class="n">group</span><span class="o">.</span><span class="n">add_participants</span><span class="p">([</span><span class="n">user1</span><span class="p">,</span> <span class="n">user2</span><span class="p">,</span> <span class="n">user3</span><span class="p">,</span> <span class="n">user4</span><span class="p">])</span>
 
 <span class="c1"># Broadcast message to group</span>
-<span class="n">group</span><span class="o">.</span><span class="n">add_message</span><span class="p">(</span><span class="n">sender</span><span class="o">=</span><span class="n">moderator</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s1">&#39;Important announcement&#39;</span><span class="p">)</span>
+<span class="n">group</span><span class="o">.</span><span class="n">add_message</span><span class="p">(</span><span class="n">sender</span><span class="o">=</span><span class="n">moderator</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s1">'Important announcement'</span><span class="p">)</span>
 </code></pre></div>
 <h3 id="mark-messages-as-read">Mark Messages as Read<a class="headerlink" href="#mark-messages-as-read" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="c1"># Extend BaseConversationMessage to add read tracking</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">Message</span><span class="p">(</span><span class="n">BaseConversationMessage</span><span class="p">):</span>
-    <span class="n">read_by</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ManyToManyField</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;read_messages&#39;</span><span class="p">)</span>
+    <span class="n">read_by</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ManyToManyField</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">'read_messages'</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">mark_read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">read_by</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
@@ -3444,7 +3472,7 @@
         <span class="c1"># Notify participants</span>
         <span class="k">for</span> <span class="n">participant</span> <span class="ow">in</span> <span class="n">instance</span><span class="o">.</span><span class="n">conversation</span><span class="o">.</span><span class="n">participants</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
             <span class="k">if</span> <span class="n">participant</span><span class="o">.</span><span class="n">user</span> <span class="o">!=</span> <span class="n">instance</span><span class="o">.</span><span class="n">sender</span><span class="p">:</span>
-                <span class="n">notify</span><span class="p">(</span><span class="n">participant</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;New message in </span><span class="si">{</span><span class="n">instance</span><span class="o">.</span><span class="n">conversation</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+                <span class="n">notify</span><span class="p">(</span><span class="n">participant</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="sa">f</span><span class="s1">'New message in </span><span class="si">{</span><span class="n">instance</span><span class="o">.</span><span class="n">conversation</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
 </code></pre></div>
 
 

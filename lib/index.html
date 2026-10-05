@@ -1359,6 +1359,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../apps/native_auth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native browser authentication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../apps/notifications/" class="md-nav__link">
         
   
@@ -3966,7 +3994,7 @@
 <p>Send messages, handle webhooks, and integrate with Slack:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">htk.lib.slack.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">webhook_call</span>
 
-<span class="n">webhook_call</span><span class="p">({</span><span class="s1">&#39;text&#39;</span><span class="p">:</span> <span class="s1">&#39;Hello from HTK!&#39;</span><span class="p">,</span> <span class="s1">&#39;channel&#39;</span><span class="p">:</span> <span class="s1">&#39;#notifications&#39;</span><span class="p">})</span>
+<span class="n">webhook_call</span><span class="p">({</span><span class="s1">'text'</span><span class="p">:</span> <span class="s1">'Hello from HTK!'</span><span class="p">,</span> <span class="s1">'channel'</span><span class="p">:</span> <span class="s1">'#notifications'</span><span class="p">})</span>
 </code></pre></div>
 <p><strong>Features:</strong>
 - Webhook event handling
@@ -3994,8 +4022,8 @@
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">htk.lib.aws.s3.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">S3Manager</span>
 
 <span class="n">s3</span> <span class="o">=</span> <span class="n">S3Manager</span><span class="p">()</span>
-<span class="n">s3</span><span class="o">.</span><span class="n">put_file</span><span class="p">(</span><span class="s1">&#39;bucket&#39;</span><span class="p">,</span> <span class="s1">&#39;key&#39;</span><span class="p">,</span> <span class="n">file_obj</span><span class="p">)</span>
-<span class="n">s3</span><span class="o">.</span><span class="n">get_url</span><span class="p">(</span><span class="s1">&#39;bucket&#39;</span><span class="p">,</span> <span class="s1">&#39;key&#39;</span><span class="p">)</span>
+<span class="n">s3</span><span class="o">.</span><span class="n">put_file</span><span class="p">(</span><span class="s1">'bucket'</span><span class="p">,</span> <span class="s1">'key'</span><span class="p">,</span> <span class="n">file_obj</span><span class="p">)</span>
+<span class="n">s3</span><span class="o">.</span><span class="n">get_url</span><span class="p">(</span><span class="s1">'bucket'</span><span class="p">,</span> <span class="s1">'key'</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Classes:</strong> <code>S3Manager</code>, <code>S3MediaAsset</code></p>
 <h3 id="google-cloud">Google Cloud<a class="headerlink" href="#google-cloud" title="Permanent link">&para;</a></h3>
@@ -4003,7 +4031,7 @@
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">htk.lib.google.sheets.api</span><span class="w"> </span><span class="kn">import</span> <span class="n">spreadsheets_values_append</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">htk.lib.google.translate.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">translate</span>
 
-<span class="n">translate</span><span class="p">(</span><span class="s1">&#39;Hello&#39;</span><span class="p">,</span> <span class="s1">&#39;en&#39;</span><span class="p">,</span> <span class="s1">&#39;es&#39;</span><span class="p">)</span>
+<span class="n">translate</span><span class="p">(</span><span class="s1">'Hello'</span><span class="p">,</span> <span class="s1">'en'</span><span class="p">,</span> <span class="s1">'es'</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="maps-location">Maps &amp; Location<a class="headerlink" href="#maps-location" title="Permanent link">&para;</a></h2>
 <h3 id="google-maps">Google Maps<a class="headerlink" href="#google-maps" title="Permanent link">&para;</a></h3>
@@ -4041,14 +4069,14 @@
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">htk.lib.airtable.api</span><span class="w"> </span><span class="kn">import</span> <span class="n">AirtableAPI</span>
 
 <span class="n">api</span> <span class="o">=</span> <span class="n">AirtableAPI</span><span class="p">()</span>
-<span class="n">records</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">fetch_records</span><span class="p">(</span><span class="s1">&#39;table_name&#39;</span><span class="p">)</span>
+<span class="n">records</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">fetch_records</span><span class="p">(</span><span class="s1">'table_name'</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="data-crm">Data &amp; CRM<a class="headerlink" href="#data-crm" title="Permanent link">&para;</a></h2>
 <h3 id="full-contact">Full Contact<a class="headerlink" href="#full-contact" title="Permanent link">&para;</a></h3>
 <p>Person lookup and data enrichment:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">htk.lib.fullcontact.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">find_person_by_email</span>
 
-<span class="n">person</span> <span class="o">=</span> <span class="n">find_person_by_email</span><span class="p">(</span><span class="s1">&#39;user@example.com&#39;</span><span class="p">)</span>
+<span class="n">person</span> <span class="o">=</span> <span class="n">find_person_by_email</span><span class="p">(</span><span class="s1">'user@example.com'</span><span class="p">)</span>
 </code></pre></div>
 <h3 id="indeed">Indeed<a class="headerlink" href="#indeed" title="Permanent link">&para;</a></h3>
 <p>Job posting and applicant tracking:</p>
@@ -4076,13 +4104,13 @@
 <p>Business search and reviews:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">htk.lib.yelp.api</span><span class="w"> </span><span class="kn">import</span> <span class="n">business_lookup</span>
 
-<span class="n">business</span> <span class="o">=</span> <span class="n">business_lookup</span><span class="p">(</span><span class="s1">&#39;business_name&#39;</span><span class="p">,</span> <span class="n">location</span><span class="p">)</span>
+<span class="n">business</span> <span class="o">=</span> <span class="n">business_lookup</span><span class="p">(</span><span class="s1">'business_name'</span><span class="p">,</span> <span class="n">location</span><span class="p">)</span>
 </code></pre></div>
 <h3 id="github">GitHub<a class="headerlink" href="#github" title="Permanent link">&para;</a></h3>
 <p>GitHub API integration:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">htk.lib.github.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_repository</span><span class="p">,</span> <span class="n">sync_repository_releases</span>
 
-<span class="n">repo</span> <span class="o">=</span> <span class="n">get_repository</span><span class="p">(</span><span class="s1">&#39;owner/repo&#39;</span><span class="p">)</span>
+<span class="n">repo</span> <span class="o">=</span> <span class="n">get_repository</span><span class="p">(</span><span class="s1">'owner/repo'</span><span class="p">)</span>
 <span class="n">sync_repository_releases</span><span class="p">(</span><span class="n">repo</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="utilities-helpers">Utilities &amp; Helpers<a class="headerlink" href="#utilities-helpers" title="Permanent link">&para;</a></h2>
@@ -4090,7 +4118,7 @@
 <p>Generate QR codes:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">htk.lib.qrcode.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">qrcode_image_response</span>
 
-<span class="k">return</span> <span class="n">qrcode_image_response</span><span class="p">(</span><span class="s1">&#39;https://example.com&#39;</span><span class="p">)</span>
+<span class="k">return</span> <span class="n">qrcode_image_response</span><span class="p">(</span><span class="s1">'https://example.com'</span><span class="p">)</span>
 </code></pre></div>
 <h3 id="weather">Weather<a class="headerlink" href="#weather" title="Permanent link">&para;</a></h3>
 <p>Weather data:</p>
@@ -4100,7 +4128,7 @@
 <p>IP-based location lookup:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">htk.lib.geoip.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_country_code_by_ip</span><span class="p">,</span> <span class="n">get_timezone_by_ip</span>
 
-<span class="n">country</span> <span class="o">=</span> <span class="n">get_country_code_by_ip</span><span class="p">(</span><span class="s1">&#39;8.8.8.8&#39;</span><span class="p">)</span>
+<span class="n">country</span> <span class="o">=</span> <span class="n">get_country_code_by_ip</span><span class="p">(</span><span class="s1">'8.8.8.8'</span><span class="p">)</span>
 </code></pre></div>
 <h3 id="openai">OpenAI<a class="headerlink" href="#openai" title="Permanent link">&para;</a></h3>
 <p>Chat completions and AI:</p>
@@ -4112,9 +4140,9 @@
 <h3 id="authentication">Authentication<a class="headerlink" href="#authentication" title="Permanent link">&para;</a></h3>
 <p>Most integrations require API keys in settings:</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># settings.py</span>
-<span class="n">STRIPE_API_KEY</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;STRIPE_API_KEY&#39;</span><span class="p">)</span>
-<span class="n">SLACK_WEBHOOK_URL</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;SLACK_WEBHOOK_URL&#39;</span><span class="p">)</span>
-<span class="n">AWS_ACCESS_KEY_ID</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;AWS_ACCESS_KEY_ID&#39;</span><span class="p">)</span>
+<span class="n">STRIPE_API_KEY</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'STRIPE_API_KEY'</span><span class="p">)</span>
+<span class="n">SLACK_WEBHOOK_URL</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'SLACK_WEBHOOK_URL'</span><span class="p">)</span>
+<span class="n">AWS_ACCESS_KEY_ID</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'AWS_ACCESS_KEY_ID'</span><span class="p">)</span>
 </code></pre></div>
 <h3 id="error-handling">Error Handling<a class="headerlink" href="#error-handling" title="Permanent link">&para;</a></h3>
 <p>Use safe wrappers for API calls:</p>
@@ -4123,7 +4151,7 @@
 <span class="k">try</span><span class="p">:</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">safe_stripe_call</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">stripe</span><span class="o">.</span><span class="n">Charge</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="o">...</span><span class="p">))</span>
 <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-    <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Stripe error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Stripe error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="quick-reference-by-use-case">Quick Reference by Use Case<a class="headerlink" href="#quick-reference-by-use-case" title="Permanent link">&para;</a></h2>
 <p><strong>Need to charge a card?</strong> → Stripe

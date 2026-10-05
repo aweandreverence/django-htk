@@ -1452,6 +1452,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../native_auth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native browser authentication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../notifications/" class="md-nav__link">
         
   
@@ -3088,15 +3116,15 @@
 
 <span class="c1"># Create location</span>
 <span class="n">location</span> <span class="o">=</span> <span class="n">AbstractGeolocation</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
-    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;San Francisco HQ&#39;</span><span class="p">,</span>
-    <span class="n">address</span><span class="o">=</span><span class="s1">&#39;123 Market St, San Francisco, CA&#39;</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">'San Francisco HQ'</span><span class="p">,</span>
+    <span class="n">address</span><span class="o">=</span><span class="s1">'123 Market St, San Francisco, CA'</span>
 <span class="p">)</span>
 
 <span class="c1"># Geocode (get lat/lng)</span>
 <span class="n">location</span><span class="o">.</span><span class="n">geocode</span><span class="p">()</span>  <span class="c1"># Populates latitude, longitude</span>
 
 <span class="c1"># Get latlng from address</span>
-<span class="n">lat</span><span class="p">,</span> <span class="n">lng</span> <span class="o">=</span> <span class="n">get_latlng</span><span class="p">(</span><span class="s1">&#39;New York, NY&#39;</span><span class="p">)</span>
+<span class="n">lat</span><span class="p">,</span> <span class="n">lng</span> <span class="o">=</span> <span class="n">get_latlng</span><span class="p">(</span><span class="s1">'New York, NY'</span><span class="p">)</span>
 
 <span class="c1"># Find nearby locations</span>
 <span class="n">nearby</span> <span class="o">=</span> <span class="n">AbstractGeolocation</span><span class="o">.</span><span class="n">find_near_latlng</span><span class="p">(</span>
@@ -3116,8 +3144,8 @@
 <div class="highlight"><pre><span></span><code><span class="c1"># Convert distance units</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">htk.apps.geolocations.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">convert_distance_to_meters</span><span class="p">,</span> <span class="n">convert_meters</span>
 
-<span class="n">meters</span> <span class="o">=</span> <span class="n">convert_distance_to_meters</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;miles&#39;</span><span class="p">)</span>
-<span class="n">km</span> <span class="o">=</span> <span class="n">convert_meters</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="s1">&#39;km&#39;</span><span class="p">)</span>
+<span class="n">meters</span> <span class="o">=</span> <span class="n">convert_distance_to_meters</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="s1">'miles'</span><span class="p">)</span>
+<span class="n">km</span> <span class="o">=</span> <span class="n">convert_meters</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="s1">'km'</span><span class="p">)</span>
 
 <span class="c1"># Get bounding box</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">htk.apps.geolocations.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_bounding_box</span>
@@ -3132,7 +3160,7 @@
 <h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="c1"># settings.py</span>
 <span class="n">GEOLOCATIONS_CACHE_TTL</span> <span class="o">=</span> <span class="mi">86400</span>  <span class="c1"># 1 day</span>
-<span class="n">GEOLOCATIONS_DEFAULT_DISTANCE_UNIT</span> <span class="o">=</span> <span class="s1">&#39;miles&#39;</span>
+<span class="n">GEOLOCATIONS_DEFAULT_DISTANCE_UNIT</span> <span class="o">=</span> <span class="s1">'miles'</span>
 </code></pre></div>
 
 

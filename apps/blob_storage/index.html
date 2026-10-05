@@ -1630,6 +1630,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../native_auth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native browser authentication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../notifications/" class="md-nav__link">
         
   
@@ -3443,9 +3471,9 @@
 
 <span class="c1"># Store binary data</span>
 <span class="n">blob</span> <span class="o">=</span> <span class="n">Blob</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
-    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;document.pdf&#39;</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">'document.pdf'</span><span class="p">,</span>
     <span class="n">data</span><span class="o">=</span><span class="n">pdf_bytes</span><span class="p">,</span>
-    <span class="n">content_type</span><span class="o">=</span><span class="s1">&#39;application/pdf&#39;</span><span class="p">,</span>
+    <span class="n">content_type</span><span class="o">=</span><span class="s1">'application/pdf'</span><span class="p">,</span>
     <span class="n">user</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">user</span>
 <span class="p">)</span>
 
@@ -3461,7 +3489,7 @@
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">htk.apps.blob_storage.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Blob</span>
 
 <span class="c1"># Store from file upload</span>
-<span class="n">uploaded_file</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">FILES</span><span class="p">[</span><span class="s1">&#39;file&#39;</span><span class="p">]</span>
+<span class="n">uploaded_file</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">FILES</span><span class="p">[</span><span class="s1">'file'</span><span class="p">]</span>
 <span class="n">blob</span> <span class="o">=</span> <span class="n">Blob</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
     <span class="n">name</span><span class="o">=</span><span class="n">uploaded_file</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
     <span class="n">data</span><span class="o">=</span><span class="n">uploaded_file</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span>
@@ -3474,15 +3502,15 @@
 
 <span class="c1"># Store with additional info</span>
 <span class="n">blob</span> <span class="o">=</span> <span class="n">Blob</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
-    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;report.xlsx&#39;</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">'report.xlsx'</span><span class="p">,</span>
     <span class="n">data</span><span class="o">=</span><span class="n">excel_bytes</span><span class="p">,</span>
-    <span class="n">content_type</span><span class="o">=</span><span class="s1">&#39;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet&#39;</span><span class="p">,</span>
+    <span class="n">content_type</span><span class="o">=</span><span class="s1">'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'</span><span class="p">,</span>
     <span class="n">user</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">,</span>
     <span class="n">is_private</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="c1"># Access control</span>
     <span class="n">metadata</span><span class="o">=</span><span class="p">{</span>
-        <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="s1">&#39;1.0&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;created_by&#39;</span><span class="p">:</span> <span class="s1">&#39;system&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;source&#39;</span><span class="p">:</span> <span class="s1">&#39;export&#39;</span>
+        <span class="s1">'version'</span><span class="p">:</span> <span class="s1">'1.0'</span><span class="p">,</span>
+        <span class="s1">'created_by'</span><span class="p">:</span> <span class="s1">'system'</span><span class="p">,</span>
+        <span class="s1">'source'</span><span class="p">:</span> <span class="s1">'export'</span>
     <span class="p">}</span>
 <span class="p">)</span>
 </code></pre></div>
@@ -3493,7 +3521,7 @@
 
 <span class="k">def</span><span class="w"> </span><span class="nf">store_blob_safe</span><span class="p">(</span><span class="n">file_obj</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">file_obj</span><span class="o">.</span><span class="n">size</span> <span class="o">&gt;</span> <span class="n">MAX_BLOB_SIZE</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;File too large: </span><span class="si">{</span><span class="n">file_obj</span><span class="o">.</span><span class="n">size</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">'File too large: </span><span class="si">{</span><span class="n">file_obj</span><span class="o">.</span><span class="n">size</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
 
     <span class="n">blob</span> <span class="o">=</span> <span class="n">Blob</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
         <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
@@ -3518,8 +3546,8 @@
 
     <span class="c1"># Return file download</span>
     <span class="n">response</span> <span class="o">=</span> <span class="n">FileResponse</span><span class="p">(</span><span class="n">blob</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
-    <span class="n">response</span><span class="p">[</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">blob</span><span class="o">.</span><span class="n">content_type</span>
-    <span class="n">response</span><span class="p">[</span><span class="s1">&#39;Content-Disposition&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;attachment; filename=&quot;</span><span class="si">{</span><span class="n">blob</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">&quot;&#39;</span>
+    <span class="n">response</span><span class="p">[</span><span class="s1">'Content-Type'</span><span class="p">]</span> <span class="o">=</span> <span class="n">blob</span><span class="o">.</span><span class="n">content_type</span>
+    <span class="n">response</span><span class="p">[</span><span class="s1">'Content-Disposition'</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">'attachment; filename="</span><span class="si">{</span><span class="n">blob</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">"'</span>
     <span class="k">return</span> <span class="n">response</span>
 </code></pre></div>
 <h3 id="list-users-blobs">List User's Blobs<a class="headerlink" href="#list-users-blobs" title="Permanent link">&para;</a></h3>
@@ -3529,10 +3557,10 @@
 <span class="n">user_blobs</span> <span class="o">=</span> <span class="n">Blob</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span>
 
 <span class="c1"># Filter by type</span>
-<span class="n">documents</span> <span class="o">=</span> <span class="n">user_blobs</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">content_type</span><span class="o">=</span><span class="s1">&#39;application/pdf&#39;</span><span class="p">)</span>
+<span class="n">documents</span> <span class="o">=</span> <span class="n">user_blobs</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">content_type</span><span class="o">=</span><span class="s1">'application/pdf'</span><span class="p">)</span>
 
 <span class="c1"># Get recent blobs</span>
-<span class="n">recent</span> <span class="o">=</span> <span class="n">user_blobs</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s1">&#39;-created&#39;</span><span class="p">)[:</span><span class="mi">10</span><span class="p">]</span>
+<span class="n">recent</span> <span class="o">=</span> <span class="n">user_blobs</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s1">'-created'</span><span class="p">)[:</span><span class="mi">10</span><span class="p">]</span>
 </code></pre></div>
 <h2 id="common-patterns">Common Patterns<a class="headerlink" href="#common-patterns" title="Permanent link">&para;</a></h2>
 <h3 id="virus-scanning">Virus Scanning<a class="headerlink" href="#virus-scanning" title="Permanent link">&para;</a></h3>
@@ -3540,7 +3568,7 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">scan_blob_for_virus</span><span class="p">(</span><span class="n">blob</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Scan uploaded file with ClamAV&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Scan uploaded file with ClamAV"""</span>
     <span class="c1"># Write to temp file</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">tempfile</span>
     <span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">NamedTemporaryFile</span><span class="p">()</span> <span class="k">as</span> <span class="n">tmp</span><span class="p">:</span>
@@ -3549,7 +3577,7 @@
 
         <span class="c1"># Run scan</span>
         <span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
-            <span class="p">[</span><span class="s1">&#39;clamscan&#39;</span><span class="p">,</span> <span class="n">tmp</span><span class="o">.</span><span class="n">name</span><span class="p">],</span>
+            <span class="p">[</span><span class="s1">'clamscan'</span><span class="p">,</span> <span class="n">tmp</span><span class="o">.</span><span class="n">name</span><span class="p">],</span>
             <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span>
         <span class="p">)</span>
 
@@ -3560,13 +3588,13 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">htk.apps.blob_storage.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Blob</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">store_blob_compressed</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">user</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Store blob with compression&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Store blob with compression"""</span>
     <span class="n">compressed</span> <span class="o">=</span> <span class="n">zlib</span><span class="o">.</span><span class="n">compress</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 
     <span class="n">blob</span> <span class="o">=</span> <span class="n">Blob</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
         <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
         <span class="n">data</span><span class="o">=</span><span class="n">compressed</span><span class="p">,</span>
-        <span class="n">content_type</span><span class="o">=</span><span class="s1">&#39;application/x-gzip&#39;</span><span class="p">,</span>
+        <span class="n">content_type</span><span class="o">=</span><span class="s1">'application/x-gzip'</span><span class="p">,</span>
         <span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span>
         <span class="n">is_compressed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
         <span class="n">original_size</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">),</span>
@@ -3575,7 +3603,7 @@
     <span class="k">return</span> <span class="n">blob</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">retrieve_blob_decompressed</span><span class="p">(</span><span class="n">blob</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Retrieve and decompress&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Retrieve and decompress"""</span>
     <span class="k">if</span> <span class="n">blob</span><span class="o">.</span><span class="n">is_compressed</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">zlib</span><span class="o">.</span><span class="n">decompress</span><span class="p">(</span><span class="n">blob</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">blob</span><span class="o">.</span><span class="n">data</span>
@@ -3585,12 +3613,12 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">htk.lib.aws.s3.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">S3Manager</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">store_blob_to_s3</span><span class="p">(</span><span class="n">file_data</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">user</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Store blob to S3 instead of database&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Store blob to S3 instead of database"""</span>
     <span class="n">s3</span> <span class="o">=</span> <span class="n">S3Manager</span><span class="p">()</span>
 
     <span class="c1"># Upload to S3</span>
-    <span class="n">s3_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;blobs/</span><span class="si">{</span><span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">&#39;</span>
-    <span class="n">s3</span><span class="o">.</span><span class="n">put_file</span><span class="p">(</span><span class="s1">&#39;data-bucket&#39;</span><span class="p">,</span> <span class="n">s3_path</span><span class="p">,</span> <span class="n">file_data</span><span class="p">)</span>
+    <span class="n">s3_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">'blobs/</span><span class="si">{</span><span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">'</span>
+    <span class="n">s3</span><span class="o">.</span><span class="n">put_file</span><span class="p">(</span><span class="s1">'data-bucket'</span><span class="p">,</span> <span class="n">s3_path</span><span class="p">,</span> <span class="n">file_data</span><span class="p">)</span>
 
     <span class="c1"># Create record pointing to S3</span>
     <span class="n">blob</span> <span class="o">=</span> <span class="n">Blob</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
@@ -3607,7 +3635,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">htk.apps.blob_storage.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Blob</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">create_temporary_blob</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="n">ttl_hours</span><span class="o">=</span><span class="mi">24</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create blob that expires after TTL&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Create blob that expires after TTL"""</span>
     <span class="n">expiry</span> <span class="o">=</span> <span class="n">timezone</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">hours</span><span class="o">=</span><span class="n">ttl_hours</span><span class="p">)</span>
 
     <span class="n">blob</span> <span class="o">=</span> <span class="n">Blob</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
@@ -3619,7 +3647,7 @@
     <span class="k">return</span> <span class="n">blob</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">cleanup_expired_blobs</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Delete expired blobs&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Delete expired blobs"""</span>
     <span class="n">Blob</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
         <span class="n">expires_at__lt</span><span class="o">=</span><span class="n">timezone</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
     <span class="p">)</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
@@ -3628,16 +3656,16 @@
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">htk.apps.blob_storage.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Blob</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">get_blob_safe</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">blob_id</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get blob only if user has access&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Get blob only if user has access"""</span>
     <span class="n">blob</span> <span class="o">=</span> <span class="n">Blob</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">blob_id</span><span class="p">)</span>
 
     <span class="c1"># Check ownership</span>
     <span class="k">if</span> <span class="n">blob</span><span class="o">.</span><span class="n">user</span> <span class="o">!=</span> <span class="n">user</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">PermissionDenied</span><span class="p">(</span><span class="s1">&#39;Cannot access this blob&#39;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">PermissionDenied</span><span class="p">(</span><span class="s1">'Cannot access this blob'</span><span class="p">)</span>
 
     <span class="c1"># Check if private</span>
     <span class="k">if</span> <span class="n">blob</span><span class="o">.</span><span class="n">is_private</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">blob</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">is_staff</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">PermissionDenied</span><span class="p">(</span><span class="s1">&#39;Blob is private&#39;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">PermissionDenied</span><span class="p">(</span><span class="s1">'Blob is private'</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">blob</span>
 </code></pre></div>
@@ -3658,10 +3686,10 @@
 <div class="highlight"><pre><span></span><code><span class="c1"># settings.py</span>
 <span class="n">BLOB_STORAGE_MAX_SIZE</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span>  <span class="c1"># 100MB</span>
 <span class="n">BLOB_STORAGE_ALLOWED_TYPES</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s1">&#39;application/pdf&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;image/jpeg&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;image/png&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;application/zip&#39;</span><span class="p">,</span>
+    <span class="s1">'application/pdf'</span><span class="p">,</span>
+    <span class="s1">'image/jpeg'</span><span class="p">,</span>
+    <span class="s1">'image/png'</span><span class="p">,</span>
+    <span class="s1">'application/zip'</span><span class="p">,</span>
 <span class="p">]</span>
 
 <span class="n">BLOB_STORAGE_ENABLE_COMPRESSION</span> <span class="o">=</span> <span class="kc">False</span>

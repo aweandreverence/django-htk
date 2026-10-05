@@ -1359,6 +1359,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../apps/native_auth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native browser authentication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../apps/notifications/" class="md-nav__link">
         
   
@@ -3131,17 +3159,17 @@
 
 <span class="c1"># Send message</span>
 <span class="n">webhook_call</span><span class="p">({</span>
-    <span class="s1">&#39;text&#39;</span><span class="p">:</span> <span class="s1">&#39;Hello from Django!&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;channel&#39;</span><span class="p">:</span> <span class="s1">&#39;#notifications&#39;</span>
+    <span class="s1">'text'</span><span class="p">:</span> <span class="s1">'Hello from Django!'</span><span class="p">,</span>
+    <span class="s1">'channel'</span><span class="p">:</span> <span class="s1">'#notifications'</span>
 <span class="p">})</span>
 
 <span class="c1"># With formatting</span>
 <span class="n">webhook_call</span><span class="p">({</span>
-    <span class="s1">&#39;text&#39;</span><span class="p">:</span> <span class="s1">&#39;Important update&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;attachments&#39;</span><span class="p">:</span> <span class="p">[{</span>
-        <span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;good&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;Task Complete&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;text&#39;</span><span class="p">:</span> <span class="s1">&#39;Deployment finished successfully&#39;</span>
+    <span class="s1">'text'</span><span class="p">:</span> <span class="s1">'Important update'</span><span class="p">,</span>
+    <span class="s1">'attachments'</span><span class="p">:</span> <span class="p">[{</span>
+        <span class="s1">'color'</span><span class="p">:</span> <span class="s1">'good'</span><span class="p">,</span>
+        <span class="s1">'title'</span><span class="p">:</span> <span class="s1">'Task Complete'</span><span class="p">,</span>
+        <span class="s1">'text'</span><span class="p">:</span> <span class="s1">'Deployment finished successfully'</span>
     <span class="p">}]</span>
 <span class="p">})</span>
 </code></pre></div>
@@ -3174,9 +3202,9 @@
 </code></pre></div>
 <h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="c1"># settings.py</span>
-<span class="n">SLACK_WEBHOOK_URL</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;SLACK_WEBHOOK_URL&#39;</span><span class="p">)</span>
-<span class="n">SLACK_BOT_TOKEN</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;SLACK_BOT_TOKEN&#39;</span><span class="p">)</span>
-<span class="n">SLACK_SIGNING_SECRET</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;SLACK_SIGNING_SECRET&#39;</span><span class="p">)</span>
+<span class="n">SLACK_WEBHOOK_URL</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'SLACK_WEBHOOK_URL'</span><span class="p">)</span>
+<span class="n">SLACK_BOT_TOKEN</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'SLACK_BOT_TOKEN'</span><span class="p">)</span>
+<span class="n">SLACK_SIGNING_SECRET</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'SLACK_SIGNING_SECRET'</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="features">Features<a class="headerlink" href="#features" title="Permanent link">&para;</a></h2>
 <ul>

@@ -1359,6 +1359,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../apps/native_auth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native browser authentication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../apps/notifications/" class="md-nav__link">
         
   
@@ -3069,7 +3097,7 @@
 </code></pre></div>
 <h2 id="operations">Operations<a class="headerlink" href="#operations" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="c1"># Manage lists</span>
-<span class="n">api</span><span class="o">.</span><span class="n">create_list</span><span class="p">(</span><span class="s1">&#39;Newsletter&#39;</span><span class="p">,</span> <span class="n">contact</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;company&#39;</span><span class="p">:</span> <span class="s1">&#39;Acme&#39;</span><span class="p">})</span>
+<span class="n">api</span><span class="o">.</span><span class="n">create_list</span><span class="p">(</span><span class="s1">'Newsletter'</span><span class="p">,</span> <span class="n">contact</span><span class="o">=</span><span class="p">{</span><span class="s1">'company'</span><span class="p">:</span> <span class="s1">'Acme'</span><span class="p">})</span>
 <span class="n">api</span><span class="o">.</span><span class="n">subscribe_to_list</span><span class="p">(</span><span class="n">list_id</span><span class="p">,</span> <span class="n">email</span><span class="p">)</span>
 <span class="n">api</span><span class="o">.</span><span class="n">unsubscribe_from_list</span><span class="p">(</span><span class="n">list_id</span><span class="p">,</span> <span class="n">email</span><span class="p">)</span>
 
@@ -3079,7 +3107,7 @@
 </code></pre></div>
 <h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="c1"># settings.py</span>
-<span class="n">MAILCHIMP_API_KEY</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;MAILCHIMP_API_KEY&#39;</span><span class="p">)</span>
+<span class="n">MAILCHIMP_API_KEY</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'MAILCHIMP_API_KEY'</span><span class="p">)</span>
 </code></pre></div>
 
 

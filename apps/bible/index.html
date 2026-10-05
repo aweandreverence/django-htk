@@ -1441,6 +1441,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../native_auth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native browser authentication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../notifications/" class="md-nav__link">
         
   
@@ -3069,7 +3097,7 @@
 <span class="p">)</span>
 
 <span class="c1"># Create book</span>
-<span class="n">book</span> <span class="o">=</span> <span class="n">AbstractBibleBook</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Genesis&#39;</span><span class="p">,</span> <span class="n">abbreviation</span><span class="o">=</span><span class="s1">&#39;Gen&#39;</span><span class="p">)</span>
+<span class="n">book</span> <span class="o">=</span> <span class="n">AbstractBibleBook</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'Genesis'</span><span class="p">,</span> <span class="n">abbreviation</span><span class="o">=</span><span class="s1">'Gen'</span><span class="p">)</span>
 
 <span class="c1"># Create chapter</span>
 <span class="n">chapter</span> <span class="o">=</span> <span class="n">AbstractBibleChapter</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">book</span><span class="o">=</span><span class="n">book</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -3078,7 +3106,7 @@
 <span class="n">verse</span> <span class="o">=</span> <span class="n">AbstractBibleVerse</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
     <span class="n">chapter</span><span class="o">=</span><span class="n">chapter</span><span class="p">,</span>
     <span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-    <span class="n">text</span><span class="o">=</span><span class="s1">&#39;In the beginning God created the heavens and the earth.&#39;</span>
+    <span class="n">text</span><span class="o">=</span><span class="s1">'In the beginning God created the heavens and the earth.'</span>
 <span class="p">)</span>
 
 <span class="c1"># Create passage (multiple verses)</span>
@@ -3094,10 +3122,10 @@
 <div class="highlight"><pre><span></span><code><span class="c1"># Get scripture references</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">htk.apps.bible.utils.references</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_scripture_references_compact</span>
 
-<span class="n">refs</span> <span class="o">=</span> <span class="n">get_scripture_references_compact</span><span class="p">(</span><span class="s1">&#39;John 3:16&#39;</span><span class="p">)</span>
+<span class="n">refs</span> <span class="o">=</span> <span class="n">get_scripture_references_compact</span><span class="p">(</span><span class="s1">'John 3:16'</span><span class="p">)</span>
 
 <span class="c1"># Query verses</span>
-<span class="n">john</span> <span class="o">=</span> <span class="n">AbstractBibleBook</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">abbreviation</span><span class="o">=</span><span class="s1">&#39;John&#39;</span><span class="p">)</span>
+<span class="n">john</span> <span class="o">=</span> <span class="n">AbstractBibleBook</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">abbreviation</span><span class="o">=</span><span class="s1">'John'</span><span class="p">)</span>
 <span class="n">chapter3</span> <span class="o">=</span> <span class="n">john</span><span class="o">.</span><span class="n">chapters</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="n">verse16</span> <span class="o">=</span> <span class="n">chapter3</span><span class="o">.</span><span class="n">verses</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
 </code></pre></div>

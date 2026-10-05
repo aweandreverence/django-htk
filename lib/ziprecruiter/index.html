@@ -1359,6 +1359,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../apps/native_auth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native browser authentication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../apps/notifications/" class="md-nav__link">
         
   
@@ -3045,20 +3073,20 @@
 
 <span class="c1"># Create job</span>
 <span class="n">job</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">create_job</span><span class="p">({</span>
-    <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;Software Engineer&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Job description...&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;location&#39;</span><span class="p">:</span> <span class="s1">&#39;San Francisco, CA&#39;</span>
+    <span class="s1">'title'</span><span class="p">:</span> <span class="s1">'Software Engineer'</span><span class="p">,</span>
+    <span class="s1">'description'</span><span class="p">:</span> <span class="s1">'Job description...'</span><span class="p">,</span>
+    <span class="s1">'location'</span><span class="p">:</span> <span class="s1">'San Francisco, CA'</span>
 <span class="p">})</span>
 
 <span class="c1"># Update job</span>
-<span class="n">api</span><span class="o">.</span><span class="n">update_job</span><span class="p">(</span><span class="n">job_id</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;Senior Software Engineer&#39;</span><span class="p">})</span>
+<span class="n">api</span><span class="o">.</span><span class="n">update_job</span><span class="p">(</span><span class="n">job_id</span><span class="p">,</span> <span class="p">{</span><span class="s1">'title'</span><span class="p">:</span> <span class="s1">'Senior Software Engineer'</span><span class="p">})</span>
 
 <span class="c1"># Delete job</span>
 <span class="n">api</span><span class="o">.</span><span class="n">delete_job</span><span class="p">(</span><span class="n">job_id</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="c1"># settings.py</span>
-<span class="n">ZIPRECRUITER_API_KEY</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;ZIPRECRUITER_API_KEY&#39;</span><span class="p">)</span>
+<span class="n">ZIPRECRUITER_API_KEY</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'ZIPRECRUITER_API_KEY'</span><span class="p">)</span>
 </code></pre></div>
 
 

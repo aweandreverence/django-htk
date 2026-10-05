@@ -1511,6 +1511,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../apps/native_auth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native browser authentication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../apps/notifications/" class="md-nav__link">
         
   
@@ -3211,10 +3239,10 @@
 <span class="p">)</span>
 
 <span class="c1"># Get state abbreviation</span>
-<span class="n">state_code</span> <span class="o">=</span> <span class="n">US_STATE_CODES_LOOKUP</span><span class="p">[</span><span class="s1">&#39;California&#39;</span><span class="p">]</span>  <span class="c1"># &#39;CA&#39;</span>
+<span class="n">state_code</span> <span class="o">=</span> <span class="n">US_STATE_CODES_LOOKUP</span><span class="p">[</span><span class="s1">'California'</span><span class="p">]</span>  <span class="c1"># 'CA'</span>
 
 <span class="c1"># Get state name from code</span>
-<span class="n">state_name</span> <span class="o">=</span> <span class="n">US_STATES_LOOKUP</span><span class="p">[</span><span class="s1">&#39;NY&#39;</span><span class="p">]</span>  <span class="c1"># &#39;New York&#39;</span>
+<span class="n">state_name</span> <span class="o">=</span> <span class="n">US_STATES_LOOKUP</span><span class="p">[</span><span class="s1">'NY'</span><span class="p">]</span>  <span class="c1"># 'New York'</span>
 
 <span class="c1"># List of all states (dicts with name/code pairs)</span>
 <span class="n">all_states</span> <span class="o">=</span> <span class="n">US_STATES</span>
@@ -3230,7 +3258,7 @@
 
 <span class="c1"># Check if weekday</span>
 <span class="k">if</span> <span class="n">isoweekday</span> <span class="ow">in</span> <span class="n">ISOWEEKDAY_WEEKDAYS</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Weekday&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Weekday"</span><span class="p">)</span>
 </code></pre></div>
 <h3 id="http-status-codes">HTTP Status Codes<a class="headerlink" href="#http-status-codes" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">htk.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTTPStatus</span>
@@ -3244,7 +3272,7 @@
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">htk.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">ALPHABET_CAPS</span>
 
 <span class="c1"># Get list of capital letters</span>
-<span class="n">letters</span> <span class="o">=</span> <span class="n">ALPHABET_CAPS</span>  <span class="c1"># [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, ..., &#39;Z&#39;]</span>
+<span class="n">letters</span> <span class="o">=</span> <span class="n">ALPHABET_CAPS</span>  <span class="c1"># ['A', 'B', 'C', ..., 'Z']</span>
 </code></pre></div>
 <h3 id="configuration-settings">Configuration Settings<a class="headerlink" href="#configuration-settings" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">htk.constants</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
@@ -3252,10 +3280,10 @@
     <span class="n">HTK_DEFAULT_COUNTRY</span><span class="p">,</span> <span class="n">HTK_HANDLE_MAX_LENGTH</span>
 <span class="p">)</span>
 
-<span class="n">HTK_DEFAULT_DOMAIN</span> <span class="o">=</span> <span class="s1">&#39;hacktoolkit.com&#39;</span>
-<span class="n">HTK_SITE_NAME</span> <span class="o">=</span> <span class="s1">&#39;Hacktoolkit&#39;</span>
-<span class="n">HTK_DEFAULT_TIMEZONE</span> <span class="o">=</span> <span class="s1">&#39;America/Los_Angeles&#39;</span>
-<span class="n">HTK_DEFAULT_COUNTRY</span> <span class="o">=</span> <span class="s1">&#39;US&#39;</span>
+<span class="n">HTK_DEFAULT_DOMAIN</span> <span class="o">=</span> <span class="s1">'hacktoolkit.com'</span>
+<span class="n">HTK_SITE_NAME</span> <span class="o">=</span> <span class="s1">'Hacktoolkit'</span>
+<span class="n">HTK_DEFAULT_TIMEZONE</span> <span class="o">=</span> <span class="s1">'America/Los_Angeles'</span>
+<span class="n">HTK_DEFAULT_COUNTRY</span> <span class="o">=</span> <span class="s1">'US'</span>
 <span class="n">HTK_HANDLE_MAX_LENGTH</span> <span class="o">=</span> <span class="mi">64</span>
 </code></pre></div>
 <h2 id="subdirectories">Subdirectories<a class="headerlink" href="#subdirectories" title="Permanent link">&para;</a></h2>
@@ -3266,9 +3294,9 @@
 </ul>
 <h2 id="customization">Customization<a class="headerlink" href="#customization" title="Permanent link">&para;</a></h2>
 <p>Override defaults in <code>settings.py</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="n">HTK_SITE_NAME</span> <span class="o">=</span> <span class="s1">&#39;My Site&#39;</span>
-<span class="n">HTK_DEFAULT_TIMEZONE</span> <span class="o">=</span> <span class="s1">&#39;UTC&#39;</span>
-<span class="n">HTK_DEFAULT_DOMAIN</span> <span class="o">=</span> <span class="s1">&#39;example.com&#39;</span>
+<div class="highlight"><pre><span></span><code><span class="n">HTK_SITE_NAME</span> <span class="o">=</span> <span class="s1">'My Site'</span>
+<span class="n">HTK_DEFAULT_TIMEZONE</span> <span class="o">=</span> <span class="s1">'UTC'</span>
+<span class="n">HTK_DEFAULT_DOMAIN</span> <span class="o">=</span> <span class="s1">'example.com'</span>
 </code></pre></div>
 
 

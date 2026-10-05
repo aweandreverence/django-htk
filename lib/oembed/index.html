@@ -1359,6 +1359,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../apps/native_auth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native browser authentication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../apps/notifications/" class="md-nav__link">
         
   
@@ -3042,14 +3070,14 @@
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">htk.lib.oembed.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_oembed_html</span><span class="p">,</span> <span class="n">get_oembed_type</span>
 
 <span class="c1"># Get embedding HTML for a URL</span>
-<span class="n">html</span> <span class="o">=</span> <span class="n">get_oembed_html</span><span class="p">(</span><span class="s1">&#39;https://www.youtube.com/watch?v=dQw4w9WgXcQ&#39;</span><span class="p">)</span>
+<span class="n">html</span> <span class="o">=</span> <span class="n">get_oembed_html</span><span class="p">(</span><span class="s1">'https://www.youtube.com/watch?v=dQw4w9WgXcQ'</span><span class="p">)</span>
 
 <span class="c1"># Get oEmbed type</span>
-<span class="n">embed_type</span> <span class="o">=</span> <span class="n">get_oembed_type</span><span class="p">(</span><span class="s1">&#39;https://www.youtube.com/watch?v=dQw4w9WgXcQ&#39;</span><span class="p">)</span>
+<span class="n">embed_type</span> <span class="o">=</span> <span class="n">get_oembed_type</span><span class="p">(</span><span class="s1">'https://www.youtube.com/watch?v=dQw4w9WgXcQ'</span><span class="p">)</span>
 <span class="c1"># Returns: YouTube, Vimeo, etc</span>
 
 <span class="c1"># Get HTML for specific service</span>
-<span class="n">vimeo_html</span> <span class="o">=</span> <span class="n">get_oembed_html_for_service</span><span class="p">(</span><span class="s1">&#39;vimeo&#39;</span><span class="p">,</span> <span class="s1">&#39;https://vimeo.com/123456&#39;</span><span class="p">)</span>
+<span class="n">vimeo_html</span> <span class="o">=</span> <span class="n">get_oembed_html_for_service</span><span class="p">(</span><span class="s1">'vimeo'</span><span class="p">,</span> <span class="s1">'https://vimeo.com/123456'</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="c1"># settings.py</span>

@@ -1359,6 +1359,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../apps/native_auth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native browser authentication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../apps/notifications/" class="md-nav__link">
         
   
@@ -3067,8 +3095,8 @@
 
 <span class="c1"># Get activity data</span>
 <span class="n">steps</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">get_activity_steps_for_period</span><span class="p">(</span><span class="n">start_date</span><span class="p">,</span> <span class="n">end_date</span><span class="p">)</span>
-<span class="n">weight_logs</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">get_weight_logs</span><span class="p">(</span><span class="s1">&#39;2024-01-01&#39;</span><span class="p">)</span>
-<span class="n">body_fat</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">get_body_fat_logs</span><span class="p">(</span><span class="s1">&#39;2024-01-01&#39;</span><span class="p">)</span>
+<span class="n">weight_logs</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">get_weight_logs</span><span class="p">(</span><span class="s1">'2024-01-01'</span><span class="p">)</span>
+<span class="n">body_fat</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">get_body_fat_logs</span><span class="p">(</span><span class="s1">'2024-01-01'</span><span class="p">)</span>
 
 <span class="c1"># List devices</span>
 <span class="n">devices</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">get_devices</span><span class="p">()</span>
@@ -3079,14 +3107,14 @@
 <span class="n">steps_past_year</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">get_activity_steps_past_year</span><span class="p">()</span>
 
 <span class="c1"># Custom API requests</span>
-<span class="n">api</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;/resource&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;value&#39;</span><span class="p">})</span>
-<span class="n">api</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/resource&#39;</span><span class="p">)</span>
+<span class="n">api</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">'/resource'</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">'key'</span><span class="p">:</span> <span class="s1">'value'</span><span class="p">})</span>
+<span class="n">api</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'/resource'</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="c1"># settings.py</span>
-<span class="n">FITBIT_CLIENT_ID</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;FITBIT_CLIENT_ID&#39;</span><span class="p">)</span>
-<span class="n">FITBIT_CLIENT_SECRET</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;FITBIT_CLIENT_SECRET&#39;</span><span class="p">)</span>
-<span class="n">FITBIT_ACCESS_TOKEN</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;FITBIT_ACCESS_TOKEN&#39;</span><span class="p">)</span>
+<span class="n">FITBIT_CLIENT_ID</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'FITBIT_CLIENT_ID'</span><span class="p">)</span>
+<span class="n">FITBIT_CLIENT_SECRET</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'FITBIT_CLIENT_SECRET'</span><span class="p">)</span>
+<span class="n">FITBIT_ACCESS_TOKEN</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'FITBIT_ACCESS_TOKEN'</span><span class="p">)</span>
 </code></pre></div>
 
 

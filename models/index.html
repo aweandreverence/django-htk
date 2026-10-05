@@ -1617,6 +1617,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../apps/native_auth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native browser authentication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../apps/notifications/" class="md-nav__link">
         
   
@@ -3447,7 +3475,7 @@
     <span class="n">email</span> <span class="o">=</span> <span class="n">EmailField</span><span class="p">(</span><span class="n">unique</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="c1"># Usage</span>
-<span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="s1">&#39;user@example.com&#39;</span><span class="p">)</span>
+<span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="s1">'user@example.com'</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>  <span class="c1"># 01ARZ3NDEKTSV4RRFFQ69G5FAV</span>
 </code></pre></div>
 <p><strong>Advantages over UUID:</strong>
@@ -3477,10 +3505,10 @@
 
     <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">{</span>
-            <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">),</span>
-            <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">title</span><span class="p">,</span>
-            <span class="s1">&#39;author&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">author</span><span class="p">,</span>
-            <span class="s1">&#39;created&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">created</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),</span>
+            <span class="s1">'id'</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">),</span>
+            <span class="s1">'title'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">title</span><span class="p">,</span>
+            <span class="s1">'author'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">author</span><span class="p">,</span>
+            <span class="s1">'created'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">created</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),</span>
         <span class="p">}</span>
 
 <span class="c1"># Usage</span>
@@ -3492,24 +3520,24 @@
 
 <span class="c1"># Normalize value for a specific field</span>
 <span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
-<span class="n">normalized</span> <span class="o">=</span> <span class="n">normalize_model_field_value</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="s1">&#39;birth_date&#39;</span><span class="p">,</span> <span class="s1">&#39;2000-01-15&#39;</span><span class="p">)</span>
+<span class="n">normalized</span> <span class="o">=</span> <span class="n">normalize_model_field_value</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="s1">'birth_date'</span><span class="p">,</span> <span class="s1">'2000-01-15'</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="attribute-holder-pattern">Attribute Holder Pattern<a class="headerlink" href="#attribute-holder-pattern" title="Permanent link">&para;</a></h2>
 <p>Store arbitrary attributes on models without creating new fields:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">htk.models.classes</span><span class="w"> </span><span class="kn">import</span> <span class="n">AbstractAttribute</span><span class="p">,</span> <span class="n">AbstractAttributeHolderClassFactory</span>
 
 <span class="c1"># Create model for storing attributes</span>
-<span class="n">AttributeHolder</span> <span class="o">=</span> <span class="n">AbstractAttributeHolderClassFactory</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="s1">&#39;user_id&#39;</span><span class="p">)</span>
+<span class="n">AttributeHolder</span> <span class="o">=</span> <span class="n">AbstractAttributeHolderClassFactory</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="s1">'user_id'</span><span class="p">)</span>
 
 <span class="c1"># Store attributes</span>
 <span class="n">attr</span> <span class="o">=</span> <span class="n">AttributeHolder</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
     <span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span>
-    <span class="n">key</span><span class="o">=</span><span class="s1">&#39;preferences&#39;</span><span class="p">,</span>
-    <span class="n">value</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;theme&#39;</span><span class="p">:</span> <span class="s1">&#39;dark&#39;</span><span class="p">,</span> <span class="s1">&#39;notifications&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
+    <span class="n">key</span><span class="o">=</span><span class="s1">'preferences'</span><span class="p">,</span>
+    <span class="n">value</span><span class="o">=</span><span class="p">{</span><span class="s1">'theme'</span><span class="p">:</span> <span class="s1">'dark'</span><span class="p">,</span> <span class="s1">'notifications'</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
 <span class="p">)</span>
 
 <span class="c1"># Retrieve attributes</span>
-<span class="n">prefs</span> <span class="o">=</span> <span class="n">AttributeHolder</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s1">&#39;preferences&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>
+<span class="n">prefs</span> <span class="o">=</span> <span class="n">AttributeHolder</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s1">'preferences'</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>
 </code></pre></div>
 <p><strong>Benefits:</strong>
 - Flexible schema without migrations
@@ -3528,7 +3556,7 @@
     <span class="n">published</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">BooleanField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
     <span class="k">class</span><span class="w"> </span><span class="nc">Meta</span><span class="p">:</span>
-        <span class="n">ordering</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;-created&#39;</span><span class="p">]</span>  <span class="c1"># Newest first</span>
+        <span class="n">ordering</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'-created'</span><span class="p">]</span>  <span class="c1"># Newest first</span>
 
 <span class="c1"># Inherited fields:</span>
 <span class="c1"># - id: ULIDField (auto)</span>
@@ -3545,7 +3573,7 @@
 
 <span class="c1"># Usage</span>
 <span class="n">product</span> <span class="o">=</span> <span class="n">Product</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
-    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Widget&#39;</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">'Widget'</span><span class="p">,</span>
     <span class="n">price</span><span class="o">=</span><span class="mf">19.99</span>
 <span class="p">)</span>
 <span class="c1"># ID is automatically generated as ULID</span>

@@ -1580,6 +1580,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../native_auth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native browser authentication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../notifications/" class="md-nav__link">
         
   
@@ -3344,17 +3372,17 @@
 
 <span class="c1"># Check if request from mobile</span>
 <span class="k">if</span> <span class="n">is_mobile_request</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
-    <span class="n">template</span> <span class="o">=</span> <span class="s1">&#39;mobile_view.html&#39;</span>
+    <span class="n">template</span> <span class="o">=</span> <span class="s1">'mobile_view.html'</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="n">template</span> <span class="o">=</span> <span class="s1">&#39;desktop_view.html&#39;</span>
+    <span class="n">template</span> <span class="o">=</span> <span class="s1">'desktop_view.html'</span>
 
 <span class="c1"># Register device</span>
 <span class="n">device</span> <span class="o">=</span> <span class="n">MobileDevice</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
     <span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span>
-    <span class="n">device_id</span><span class="o">=</span><span class="s1">&#39;device_123_abc&#39;</span><span class="p">,</span>
-    <span class="n">platform</span><span class="o">=</span><span class="s1">&#39;ios&#39;</span><span class="p">,</span>  <span class="c1"># &#39;ios&#39; or &#39;android&#39;</span>
-    <span class="n">version</span><span class="o">=</span><span class="s1">&#39;17.0&#39;</span><span class="p">,</span>
-    <span class="n">device_name</span><span class="o">=</span><span class="s1">&#39;iPhone 15&#39;</span>
+    <span class="n">device_id</span><span class="o">=</span><span class="s1">'device_123_abc'</span><span class="p">,</span>
+    <span class="n">platform</span><span class="o">=</span><span class="s1">'ios'</span><span class="p">,</span>  <span class="c1"># 'ios' or 'android'</span>
+    <span class="n">version</span><span class="o">=</span><span class="s1">'17.0'</span><span class="p">,</span>
+    <span class="n">device_name</span><span class="o">=</span><span class="s1">'iPhone 15'</span>
 <span class="p">)</span>
 
 <span class="c1"># Track active devices</span>
@@ -3367,20 +3395,20 @@
 <span class="c1"># Create device with push token</span>
 <span class="n">device</span> <span class="o">=</span> <span class="n">MobileDevice</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
     <span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span>
-    <span class="n">device_id</span><span class="o">=</span><span class="s1">&#39;uuid-123&#39;</span><span class="p">,</span>
-    <span class="n">platform</span><span class="o">=</span><span class="s1">&#39;android&#39;</span><span class="p">,</span>
-    <span class="n">version</span><span class="o">=</span><span class="s1">&#39;14&#39;</span><span class="p">,</span>
-    <span class="n">push_token</span><span class="o">=</span><span class="s1">&#39;firebase_token_123&#39;</span><span class="p">,</span>
-    <span class="n">device_name</span><span class="o">=</span><span class="s1">&#39;Samsung Galaxy S24&#39;</span>
+    <span class="n">device_id</span><span class="o">=</span><span class="s1">'uuid-123'</span><span class="p">,</span>
+    <span class="n">platform</span><span class="o">=</span><span class="s1">'android'</span><span class="p">,</span>
+    <span class="n">version</span><span class="o">=</span><span class="s1">'14'</span><span class="p">,</span>
+    <span class="n">push_token</span><span class="o">=</span><span class="s1">'firebase_token_123'</span><span class="p">,</span>
+    <span class="n">device_name</span><span class="o">=</span><span class="s1">'Samsung Galaxy S24'</span>
 <span class="p">)</span>
 
 <span class="c1"># Or update existing device</span>
 <span class="n">device</span><span class="p">,</span> <span class="n">created</span> <span class="o">=</span> <span class="n">MobileDevice</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">update_or_create</span><span class="p">(</span>
     <span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span>
-    <span class="n">device_id</span><span class="o">=</span><span class="s1">&#39;uuid-123&#39;</span><span class="p">,</span>
+    <span class="n">device_id</span><span class="o">=</span><span class="s1">'uuid-123'</span><span class="p">,</span>
     <span class="n">defaults</span><span class="o">=</span><span class="p">{</span>
-        <span class="s1">&#39;push_token&#39;</span><span class="p">:</span> <span class="s1">&#39;new_firebase_token&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;is_active&#39;</span><span class="p">:</span> <span class="kc">True</span>
+        <span class="s1">'push_token'</span><span class="p">:</span> <span class="s1">'new_firebase_token'</span><span class="p">,</span>
+        <span class="s1">'is_active'</span><span class="p">:</span> <span class="kc">True</span>
     <span class="p">}</span>
 <span class="p">)</span>
 </code></pre></div>
@@ -3390,23 +3418,23 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">my_view</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">is_mobile_request</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
         <span class="c1"># Return mobile optimized response</span>
-        <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">({</span><span class="s1">&#39;mobile&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">})</span>
+        <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">({</span><span class="s1">'mobile'</span><span class="p">:</span> <span class="kc">True</span><span class="p">})</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="c1"># Return desktop response</span>
-        <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">({</span><span class="s1">&#39;mobile&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">})</span>
+        <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">({</span><span class="s1">'mobile'</span><span class="p">:</span> <span class="kc">False</span><span class="p">})</span>
 </code></pre></div>
 <h3 id="send-push-notifications">Send Push Notifications<a class="headerlink" href="#send-push-notifications" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">htk.apps.mobile.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">MobileDevice</span>
 
-<span class="c1"># Get user&#39;s devices</span>
+<span class="c1"># Get user's devices</span>
 <span class="n">devices</span> <span class="o">=</span> <span class="n">MobileDevice</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span> <span class="n">is_active</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="c1"># Send push to all devices</span>
 <span class="k">for</span> <span class="n">device</span> <span class="ow">in</span> <span class="n">devices</span><span class="p">:</span>
     <span class="n">device</span><span class="o">.</span><span class="n">send_push_notification</span><span class="p">(</span>
-        <span class="n">title</span><span class="o">=</span><span class="s1">&#39;New Message&#39;</span><span class="p">,</span>
-        <span class="n">message</span><span class="o">=</span><span class="s1">&#39;You have a new message from John&#39;</span><span class="p">,</span>
-        <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;message_id&#39;</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span> <span class="s1">&#39;sender_id&#39;</span><span class="p">:</span> <span class="mi">456</span><span class="p">}</span>
+        <span class="n">title</span><span class="o">=</span><span class="s1">'New Message'</span><span class="p">,</span>
+        <span class="n">message</span><span class="o">=</span><span class="s1">'You have a new message from John'</span><span class="p">,</span>
+        <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">'message_id'</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span> <span class="s1">'sender_id'</span><span class="p">:</span> <span class="mi">456</span><span class="p">}</span>
     <span class="p">)</span>
 </code></pre></div>
 <h2 id="common-patterns">Common Patterns<a class="headerlink" href="#common-patterns" title="Permanent link">&para;</a></h2>
@@ -3420,10 +3448,10 @@
 <span class="p">)</span>
 
 <span class="c1"># Send notification to all devices</span>
-<span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;Important update available&#39;</span>
+<span class="n">message</span> <span class="o">=</span> <span class="s1">'Important update available'</span>
 <span class="k">for</span> <span class="n">device</span> <span class="ow">in</span> <span class="n">active_devices</span><span class="p">:</span>
     <span class="n">device</span><span class="o">.</span><span class="n">send_push_notification</span><span class="p">(</span>
-        <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Update&#39;</span><span class="p">,</span>
+        <span class="n">title</span><span class="o">=</span><span class="s1">'Update'</span><span class="p">,</span>
         <span class="n">message</span><span class="o">=</span><span class="n">message</span>
     <span class="p">)</span>
 
@@ -3447,25 +3475,25 @@
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">htk.apps.mobile.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">MobileDevice</span>
 
 <span class="c1"># Send different notifications by platform</span>
-<span class="n">ios_devices</span> <span class="o">=</span> <span class="n">MobileDevice</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span> <span class="n">platform</span><span class="o">=</span><span class="s1">&#39;ios&#39;</span><span class="p">)</span>
-<span class="n">android_devices</span> <span class="o">=</span> <span class="n">MobileDevice</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span> <span class="n">platform</span><span class="o">=</span><span class="s1">&#39;android&#39;</span><span class="p">)</span>
+<span class="n">ios_devices</span> <span class="o">=</span> <span class="n">MobileDevice</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span> <span class="n">platform</span><span class="o">=</span><span class="s1">'ios'</span><span class="p">)</span>
+<span class="n">android_devices</span> <span class="o">=</span> <span class="n">MobileDevice</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span> <span class="n">platform</span><span class="o">=</span><span class="s1">'android'</span><span class="p">)</span>
 
 <span class="c1"># iOS specific</span>
 <span class="k">for</span> <span class="n">device</span> <span class="ow">in</span> <span class="n">ios_devices</span><span class="p">:</span>
     <span class="n">device</span><span class="o">.</span><span class="n">send_push_notification</span><span class="p">(</span>
-        <span class="n">title</span><span class="o">=</span><span class="s1">&#39;iOS Notification&#39;</span><span class="p">,</span>
-        <span class="n">message</span><span class="o">=</span><span class="s1">&#39;This is iOS specific&#39;</span><span class="p">,</span>
-        <span class="n">sound</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">,</span>
+        <span class="n">title</span><span class="o">=</span><span class="s1">'iOS Notification'</span><span class="p">,</span>
+        <span class="n">message</span><span class="o">=</span><span class="s1">'This is iOS specific'</span><span class="p">,</span>
+        <span class="n">sound</span><span class="o">=</span><span class="s1">'default'</span><span class="p">,</span>
         <span class="n">badge</span><span class="o">=</span><span class="mi">1</span>
     <span class="p">)</span>
 
 <span class="c1"># Android specific</span>
 <span class="k">for</span> <span class="n">device</span> <span class="ow">in</span> <span class="n">android_devices</span><span class="p">:</span>
     <span class="n">device</span><span class="o">.</span><span class="n">send_push_notification</span><span class="p">(</span>
-        <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Android Notification&#39;</span><span class="p">,</span>
-        <span class="n">message</span><span class="o">=</span><span class="s1">&#39;This is Android specific&#39;</span><span class="p">,</span>
-        <span class="n">priority</span><span class="o">=</span><span class="s1">&#39;high&#39;</span><span class="p">,</span>
-        <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#FF5722&#39;</span>
+        <span class="n">title</span><span class="o">=</span><span class="s1">'Android Notification'</span><span class="p">,</span>
+        <span class="n">message</span><span class="o">=</span><span class="s1">'This is Android specific'</span><span class="p">,</span>
+        <span class="n">priority</span><span class="o">=</span><span class="s1">'high'</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="s1">'#FF5722'</span>
     <span class="p">)</span>
 </code></pre></div>
 <h3 id="track-device-usage">Track Device Usage<a class="headerlink" href="#track-device-usage" title="Permanent link">&para;</a></h3>
@@ -3478,7 +3506,7 @@
 <span class="n">device</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
 
 <span class="c1"># Get most recently active devices</span>
-<span class="n">recent</span> <span class="o">=</span> <span class="n">MobileDevice</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">)</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s1">&#39;-last_seen&#39;</span><span class="p">)[:</span><span class="mi">5</span><span class="p">]</span>
+<span class="n">recent</span> <span class="o">=</span> <span class="n">MobileDevice</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">)</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s1">'-last_seen'</span><span class="p">)[:</span><span class="mi">5</span><span class="p">]</span>
 
 <span class="c1"># Identify inactive devices</span>
 <span class="n">inactive_cutoff</span> <span class="o">=</span> <span class="n">timezone</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
@@ -3493,7 +3521,7 @@
 <div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">MobileDevice</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
     <span class="n">user</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">)</span>
     <span class="n">device_id</span> <span class="o">=</span> <span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">unique</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># UUID</span>
-    <span class="n">platform</span> <span class="o">=</span> <span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>  <span class="c1"># &#39;ios&#39; or &#39;android&#39;</span>
+    <span class="n">platform</span> <span class="o">=</span> <span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>  <span class="c1"># 'ios' or 'android'</span>
     <span class="n">version</span> <span class="o">=</span> <span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
     <span class="n">push_token</span> <span class="o">=</span> <span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">device_name</span> <span class="o">=</span> <span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -3503,15 +3531,15 @@
 </code></pre></div>
 <h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="c1"># settings.py</span>
-<span class="n">MOBILE_PUSH_PROVIDER</span> <span class="o">=</span> <span class="s1">&#39;firebase&#39;</span>  <span class="c1"># or &#39;apns&#39; for iOS</span>
+<span class="n">MOBILE_PUSH_PROVIDER</span> <span class="o">=</span> <span class="s1">'firebase'</span>  <span class="c1"># or 'apns' for iOS</span>
 
 <span class="c1"># Firebase configuration</span>
-<span class="n">FIREBASE_CREDENTIALS</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;FIREBASE_CREDENTIALS&#39;</span><span class="p">)</span>
-<span class="n">FIREBASE_PROJECT_ID</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;FIREBASE_PROJECT_ID&#39;</span><span class="p">)</span>
+<span class="n">FIREBASE_CREDENTIALS</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'FIREBASE_CREDENTIALS'</span><span class="p">)</span>
+<span class="n">FIREBASE_PROJECT_ID</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'FIREBASE_PROJECT_ID'</span><span class="p">)</span>
 
 <span class="c1"># Apple Push Notification Service (APNS)</span>
-<span class="n">APNS_CERTIFICATE_PATH</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;APNS_CERTIFICATE_PATH&#39;</span><span class="p">)</span>
-<span class="n">APNS_KEY_PATH</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;APNS_KEY_PATH&#39;</span><span class="p">)</span>
+<span class="n">APNS_CERTIFICATE_PATH</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'APNS_CERTIFICATE_PATH'</span><span class="p">)</span>
+<span class="n">APNS_KEY_PATH</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'APNS_KEY_PATH'</span><span class="p">)</span>
 
 <span class="c1"># Device tracking</span>
 <span class="n">MOBILE_DEVICE_RETENTION_DAYS</span> <span class="o">=</span> <span class="mi">180</span>  <span class="c1"># Keep inactive devices for 6 months</span>

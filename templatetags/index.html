@@ -1561,6 +1561,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../apps/native_auth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native browser authentication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../apps/notifications/" class="md-nav__link">
         
   
@@ -3313,11 +3341,11 @@
 <span class="cp">{{</span> <span class="nv">encoded</span><span class="o">|</span><span class="nf">atob</span> <span class="cp">}}</span>
 
 <span class="x">&lt;!-- Phone formatting --&gt;</span>
-<span class="cp">{{</span> <span class="nv">phone_number</span><span class="o">|</span><span class="nf">phonenumber</span><span class="s2">:&quot;US&quot;</span> <span class="cp">}}</span>
+<span class="cp">{{</span> <span class="nv">phone_number</span><span class="o">|</span><span class="nf">phonenumber</span><span class="s2">:"US"</span> <span class="cp">}}</span>
 
 <span class="x">&lt;!-- QR codes --&gt;</span>
 <span class="cp">{%</span> <span class="k">qrcode_image_url</span> <span class="nv">text</span> <span class="k">as</span> <span class="nv">qr_url</span> <span class="cp">%}</span>
-<span class="x">&lt;img src=&quot;</span><span class="cp">{{</span> <span class="nv">qr_url</span> <span class="cp">}}</span><span class="x">&quot; alt=&quot;QR Code&quot;&gt;</span>
+<span class="x">&lt;img src="</span><span class="cp">{{</span> <span class="nv">qr_url</span> <span class="cp">}}</span><span class="x">" alt="QR Code"&gt;</span>
 </code></pre></div>
 <h2 id="available-tags">Available Tags<a class="headerlink" href="#available-tags" title="Permanent link">&para;</a></h2>
 <h3 id="text-processing">Text Processing<a class="headerlink" href="#text-processing" title="Permanent link">&para;</a></h3>
@@ -3331,7 +3359,7 @@
 <span class="cp">{{</span> <span class="nv">email</span><span class="o">|</span><span class="nf">obfuscate_mailto</span> <span class="cp">}}</span>
 
 <span class="x">&lt;!-- Format phone number --&gt;</span>
-<span class="cp">{{</span> <span class="s2">&quot;2025551234&quot;</span><span class="o">|</span><span class="nf">phonenumber</span><span class="s2">:&quot;US&quot;</span> <span class="cp">}}</span>
+<span class="cp">{{</span> <span class="s2">"2025551234"</span><span class="o">|</span><span class="nf">phonenumber</span><span class="s2">:"US"</span> <span class="cp">}}</span>
 </code></pre></div>
 <h3 id="encodingdecoding">Encoding/Decoding<a class="headerlink" href="#encodingdecoding" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="x">&lt;!-- Base64 encode --&gt;</span>
@@ -3342,17 +3370,17 @@
 </code></pre></div>
 <h3 id="django-settings">Django Settings<a class="headerlink" href="#django-settings" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="x">&lt;!-- Get Django setting --&gt;</span>
-<span class="cp">{%</span> <span class="k">get_django_setting</span> <span class="s2">&quot;DEBUG&quot;</span> <span class="k">as</span> <span class="nv">debug_mode</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">get_django_setting</span> <span class="s2">"DEBUG"</span> <span class="k">as</span> <span class="nv">debug_mode</span> <span class="cp">%}</span>
 <span class="cp">{%</span> <span class="k">if</span> <span class="nv">debug_mode</span> <span class="cp">%}</span>
 <span class="x">  &lt;div&gt;Debug mode enabled&lt;/div&gt;</span>
 <span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
 </code></pre></div>
 <h3 id="asset-versions">Asset Versions<a class="headerlink" href="#asset-versions" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="x">&lt;!-- Include CSS with version --&gt;</span>
-<span class="cp">{%</span> <span class="k">lesscss</span> <span class="s2">&quot;main.css&quot;</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">lesscss</span> <span class="s2">"main.css"</span> <span class="cp">%}</span>
 
 <span class="x">&lt;!-- Include JS with version --&gt;</span>
-<span class="cp">{%</span> <span class="k">loadjs</span> <span class="s2">&quot;app.js&quot;</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">loadjs</span> <span class="s2">"app.js"</span> <span class="cp">%}</span>
 </code></pre></div>
 <h3 id="template-rendering">Template Rendering<a class="headerlink" href="#template-rendering" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="x">&lt;!-- Render template string --&gt;</span>
@@ -3360,27 +3388,27 @@
 </code></pre></div>
 <h3 id="redirect-links">Redirect Links<a class="headerlink" href="#redirect-links" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="x">&lt;!-- Create redirect link --&gt;</span>
-<span class="cp">{%</span> <span class="k">redir</span> <span class="s2">&quot;example.com&quot;</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">redir</span> <span class="s2">"example.com"</span> <span class="cp">%}</span>
 
 <span class="x">&lt;!-- Create truncated redirect link --&gt;</span>
-<span class="cp">{%</span> <span class="k">redir_trunc</span> <span class="s2">&quot;https://example.com/very/long/url&quot;</span> <span class="nv">max_length</span><span class="o">=</span><span class="m">30</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">redir_trunc</span> <span class="s2">"https://example.com/very/long/url"</span> <span class="nv">max_length</span><span class="o">=</span><span class="m">30</span> <span class="cp">%}</span>
 </code></pre></div>
 <h2 id="common-patterns">Common Patterns<a class="headerlink" href="#common-patterns" title="Permanent link">&para;</a></h2>
 <h3 id="dynamic-content-with-markdown">Dynamic Content with Markdown<a class="headerlink" href="#dynamic-content-with-markdown" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">&lt;div class=&quot;content&quot;&gt;</span>
+<div class="highlight"><pre><span></span><code><span class="x">&lt;div class="content"&gt;</span>
 <span class="x">  </span><span class="cp">{{</span> <span class="nv">post.content</span><span class="o">|</span><span class="nf">markdownify</span> <span class="cp">}}</span>
 <span class="x">&lt;/div&gt;</span>
 </code></pre></div>
 <h3 id="email-obfuscation">Email Obfuscation<a class="headerlink" href="#email-obfuscation" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="x">&lt;!-- Prevent email harvesting --&gt;</span>
-<span class="x">&lt;p&gt;Contact us: </span><span class="cp">{{</span> <span class="s2">&quot;support@example.com&quot;</span><span class="o">|</span><span class="nf">obfuscate_mailto</span> <span class="cp">}}</span><span class="x">&lt;/p&gt;</span>
+<span class="x">&lt;p&gt;Contact us: </span><span class="cp">{{</span> <span class="s2">"support@example.com"</span><span class="o">|</span><span class="nf">obfuscate_mailto</span> <span class="cp">}}</span><span class="x">&lt;/p&gt;</span>
 </code></pre></div>
 <h3 id="qr-code-generation">QR Code Generation<a class="headerlink" href="#qr-code-generation" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="cp">{%</span> <span class="k">qrcode_image_url</span> <span class="nv">request.build_absolute_uri</span> <span class="k">as</span> <span class="nv">qr_url</span> <span class="cp">%}</span>
-<span class="x">&lt;img src=&quot;</span><span class="cp">{{</span> <span class="nv">qr_url</span> <span class="cp">}}</span><span class="x">&quot; alt=&quot;Share this page&quot;&gt;</span>
+<span class="x">&lt;img src="</span><span class="cp">{{</span> <span class="nv">qr_url</span> <span class="cp">}}</span><span class="x">" alt="Share this page"&gt;</span>
 </code></pre></div>
 <h3 id="http-header-formatting">HTTP Header Formatting<a class="headerlink" href="#http-header-formatting" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="cp">{%</span> <span class="k">http_header</span> <span class="s2">&quot;CONTENT_TYPE&quot;</span> <span class="cp">%}</span>
+<div class="highlight"><pre><span></span><code><span class="cp">{%</span> <span class="k">http_header</span> <span class="s2">"CONTENT_TYPE"</span> <span class="cp">%}</span>
 </code></pre></div>
 
 

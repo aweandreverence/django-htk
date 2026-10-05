@@ -1563,6 +1563,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../native_auth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native browser authentication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../notifications/" class="md-nav__link">
         
   
@@ -3332,7 +3360,7 @@
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">django.contrib.auth.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">User</span>
 
 <span class="c1"># Users who can access during maintenance</span>
-<span class="n">admin_user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s1">&#39;admin&#39;</span><span class="p">)</span>
+<span class="n">admin_user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s1">'admin'</span><span class="p">)</span>
 <span class="n">add_maintenance_exception</span><span class="p">(</span><span class="n">admin_user</span><span class="p">)</span>
 
 <span class="c1"># Remove exception</span>
@@ -3341,20 +3369,20 @@
 <h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="c1"># settings.py</span>
 <span class="n">MIDDLEWARE</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s1">&#39;htk.apps.maintenance_mode.middleware.MaintenanceModeMiddleware&#39;</span><span class="p">,</span>
+    <span class="s1">'htk.apps.maintenance_mode.middleware.MaintenanceModeMiddleware'</span><span class="p">,</span>
     <span class="c1"># ...</span>
 <span class="p">]</span>
 
 <span class="c1"># Customize maintenance page template</span>
-<span class="n">MAINTENANCE_MODE_TEMPLATE</span> <span class="o">=</span> <span class="s1">&#39;maintenance.html&#39;</span>
+<span class="n">MAINTENANCE_MODE_TEMPLATE</span> <span class="o">=</span> <span class="s1">'maintenance.html'</span>
 <span class="n">MAINTENANCE_MODE_STATUS_CODE</span> <span class="o">=</span> <span class="mi">503</span>  <span class="c1"># Service Unavailable</span>
 </code></pre></div>
 <h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="c1"># settings.py</span>
 <span class="n">HTK_MAINTENANCE_MODE</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># Set via env or dynamically</span>
 <span class="n">MAINTENANCE_MODE_IGNORE_PATHS</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s1">&#39;/health/&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;/status/&#39;</span><span class="p">,</span>
+    <span class="s1">'/health/'</span><span class="p">,</span>
+    <span class="s1">'/status/'</span><span class="p">,</span>
 <span class="p">]</span>
 <span class="n">MAINTENANCE_MODE_IGNORE_ADMIN</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># Auto-allow superusers</span>
 </code></pre></div>
@@ -3379,7 +3407,7 @@
     <span class="n">disable_maintenance_mode</span><span class="p">()</span>
 
 <span class="c1"># Schedule for specific time</span>
-<span class="n">schedule</span><span class="o">.</span><span class="n">every</span><span class="p">()</span><span class="o">.</span><span class="n">day</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="s1">&#39;02:00&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">do</span><span class="p">(</span><span class="n">maintenance_window</span><span class="p">)</span>
+<span class="n">schedule</span><span class="o">.</span><span class="n">every</span><span class="p">()</span><span class="o">.</span><span class="n">day</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="s1">'02:00'</span><span class="p">)</span><span class="o">.</span><span class="n">do</span><span class="p">(</span><span class="n">maintenance_window</span><span class="p">)</span>
 </code></pre></div>
 <h3 id="custom-maintenance-page">Custom Maintenance Page<a class="headerlink" href="#custom-maintenance-page" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="cm">&lt;!-- templates/maintenance.html --&gt;</span>
@@ -3389,8 +3417,8 @@
     <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Maintenance<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>We&#39;re undergoing maintenance<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>We&#39;ll be back online shortly. Thank you for your patience.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>We're undergoing maintenance<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>We'll be back online shortly. Thank you for your patience.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
     <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Expected completion: 02:00 AM EST<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
@@ -3412,7 +3440,7 @@
 <h2 id="api-integration">API Integration<a class="headerlink" href="#api-integration" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="c1"># API endpoints return 503 with JSON</span>
 <span class="c1"># GET /api/endpoint/</span>
-<span class="c1"># Returns: {&#39;error&#39;: &#39;Service under maintenance&#39;}</span>
+<span class="c1"># Returns: {'error': 'Service under maintenance'}</span>
 </code></pre></div>
 
 

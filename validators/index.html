@@ -1511,6 +1511,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../apps/native_auth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native browser authentication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../apps/notifications/" class="md-nav__link">
         
   
@@ -3216,10 +3244,10 @@
     <span class="n">phone</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">is_valid_phone</span><span class="p">],</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <span class="c1"># Test validators</span>
-<span class="k">assert</span> <span class="n">is_valid_email</span><span class="p">(</span><span class="s1">&#39;user@example.com&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="kc">True</span>
-<span class="k">assert</span> <span class="n">is_valid_email</span><span class="p">(</span><span class="s1">&#39;invalid&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="kc">False</span>
-<span class="k">assert</span> <span class="n">is_valid_url</span><span class="p">(</span><span class="s1">&#39;https://example.com&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="kc">True</span>
-<span class="k">assert</span> <span class="n">is_valid_phone</span><span class="p">(</span><span class="s1">&#39;+1-555-0123&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="kc">True</span>
+<span class="k">assert</span> <span class="n">is_valid_email</span><span class="p">(</span><span class="s1">'user@example.com'</span><span class="p">)</span> <span class="o">==</span> <span class="kc">True</span>
+<span class="k">assert</span> <span class="n">is_valid_email</span><span class="p">(</span><span class="s1">'invalid'</span><span class="p">)</span> <span class="o">==</span> <span class="kc">False</span>
+<span class="k">assert</span> <span class="n">is_valid_url</span><span class="p">(</span><span class="s1">'https://example.com'</span><span class="p">)</span> <span class="o">==</span> <span class="kc">True</span>
+<span class="k">assert</span> <span class="n">is_valid_phone</span><span class="p">(</span><span class="s1">'+1-555-0123'</span><span class="p">)</span> <span class="o">==</span> <span class="kc">True</span>
 </code></pre></div>
 <h2 id="key-components">Key Components<a class="headerlink" href="#key-components" title="Permanent link">&para;</a></h2>
 <table>
@@ -3254,14 +3282,14 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">django.db</span><span class="w"> </span><span class="kn">import</span> <span class="n">models</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">validate_positive</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate value is positive&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Validate value is positive"""</span>
     <span class="k">if</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="s2">&quot;Value must be positive&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="s2">"Value must be positive"</span><span class="p">)</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">validate_age</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate age is between 0 and 150&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Validate age is between 0 and 150"""</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="mi">150</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="s2">&quot;Age must be between 0 and 150&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="s2">"Age must be between 0 and 150"</span><span class="p">)</span>
 
 <span class="c1"># In model</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">Person</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
@@ -3287,17 +3315,17 @@
         <span class="n">cleaned_data</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">clean</span><span class="p">()</span>
 
         <span class="c1"># Verify emails match</span>
-        <span class="k">if</span> <span class="n">cleaned_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;email&#39;</span><span class="p">)</span> <span class="o">!=</span> <span class="n">cleaned_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;email_confirm&#39;</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="s2">&quot;Emails do not match&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">cleaned_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'email'</span><span class="p">)</span> <span class="o">!=</span> <span class="n">cleaned_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'email_confirm'</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="s2">"Emails do not match"</span><span class="p">)</span>
 
         <span class="c1"># Verify passwords match</span>
-        <span class="k">if</span> <span class="n">cleaned_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;password&#39;</span><span class="p">)</span> <span class="o">!=</span> <span class="n">cleaned_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;password_confirm&#39;</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="s2">&quot;Passwords do not match&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">cleaned_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'password'</span><span class="p">)</span> <span class="o">!=</span> <span class="n">cleaned_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'password_confirm'</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="s2">"Passwords do not match"</span><span class="p">)</span>
 
         <span class="c1"># Ensure email not already registered</span>
-        <span class="n">email</span> <span class="o">=</span> <span class="n">cleaned_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;email&#39;</span><span class="p">)</span>
+        <span class="n">email</span> <span class="o">=</span> <span class="n">cleaned_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'email'</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="n">email</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">add_error</span><span class="p">(</span><span class="s1">&#39;email&#39;</span><span class="p">,</span> <span class="s2">&quot;Email already registered&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_error</span><span class="p">(</span><span class="s1">'email'</span><span class="p">,</span> <span class="s2">"Email already registered"</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">cleaned_data</span>
 </code></pre></div>
@@ -3305,17 +3333,17 @@
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">django.core.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">ValidationError</span>
 
 <span class="k">class</span><span class="w"> </span><span class="nc">PercentValidator</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate percentage value (0-100)&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Validate percentage value (0-100)"""</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="mi">100</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="s2">&quot;Percentage must be between 0-100&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="s2">"Percentage must be between 0-100"</span><span class="p">)</span>
 
 <span class="k">class</span><span class="w"> </span><span class="nc">SKUValidator</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate SKU format (3 letters + 6 digits)&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Validate SKU format (3 letters + 6 digits)"""</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^[A-Z]</span><span class="si">{3}</span><span class="s1">[0-9]</span><span class="si">{6}</span><span class="s1">$&#39;</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="s2">&quot;SKU must be 3 letters followed by 6 digits&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s1">'^[A-Z]</span><span class="si">{3}</span><span class="s1">[0-9]</span><span class="si">{6}</span><span class="s1">$'</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="s2">"SKU must be 3 letters followed by 6 digits"</span><span class="p">)</span>
 
 <span class="c1"># Use in models</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">Product</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
@@ -3337,32 +3365,32 @@
 
 <span class="k">class</span><span class="w"> </span><span class="nc">ValidatorTestCase</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">test_email_validation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test email validation with valid and invalid inputs&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Test email validation with valid and invalid inputs"""</span>
         <span class="n">valid_emails</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="s1">&#39;user@example.com&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;user.name@example.co.uk&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;user+tag@example.com&#39;</span><span class="p">,</span>
+            <span class="s1">'user@example.com'</span><span class="p">,</span>
+            <span class="s1">'user.name@example.co.uk'</span><span class="p">,</span>
+            <span class="s1">'user+tag@example.com'</span><span class="p">,</span>
         <span class="p">]</span>
         <span class="k">for</span> <span class="n">email</span> <span class="ow">in</span> <span class="n">valid_emails</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">is_valid_email</span><span class="p">(</span><span class="n">email</span><span class="p">))</span>
 
-        <span class="n">invalid_emails</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;invalid&#39;</span><span class="p">,</span> <span class="s1">&#39;user@&#39;</span><span class="p">,</span> <span class="s1">&#39;@example.com&#39;</span><span class="p">,</span> <span class="s1">&#39;user @example.com&#39;</span><span class="p">]</span>
+        <span class="n">invalid_emails</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'invalid'</span><span class="p">,</span> <span class="s1">'user@'</span><span class="p">,</span> <span class="s1">'@example.com'</span><span class="p">,</span> <span class="s1">'user @example.com'</span><span class="p">]</span>
         <span class="k">for</span> <span class="n">email</span> <span class="ow">in</span> <span class="n">invalid_emails</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="n">is_valid_email</span><span class="p">(</span><span class="n">email</span><span class="p">))</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">test_url_validation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test URL validation&quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">is_valid_url</span><span class="p">(</span><span class="s1">&#39;https://example.com&#39;</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">is_valid_url</span><span class="p">(</span><span class="s1">&#39;http://sub.example.com/path&#39;</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="n">is_valid_url</span><span class="p">(</span><span class="s1">&#39;not a url&#39;</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="n">is_valid_url</span><span class="p">(</span><span class="s1">&#39;example.com&#39;</span><span class="p">))</span>  <span class="c1"># Missing scheme</span>
+<span class="w">        </span><span class="sd">"""Test URL validation"""</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">is_valid_url</span><span class="p">(</span><span class="s1">'https://example.com'</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">is_valid_url</span><span class="p">(</span><span class="s1">'http://sub.example.com/path'</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="n">is_valid_url</span><span class="p">(</span><span class="s1">'not a url'</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="n">is_valid_url</span><span class="p">(</span><span class="s1">'example.com'</span><span class="p">))</span>  <span class="c1"># Missing scheme</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">test_phone_validation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test phone validation&quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">is_valid_phone</span><span class="p">(</span><span class="s1">&#39;5550123&#39;</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">is_valid_phone</span><span class="p">(</span><span class="s1">&#39;+1-555-0123&#39;</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="n">is_valid_phone</span><span class="p">(</span><span class="s1">&#39;123&#39;</span><span class="p">))</span>  <span class="c1"># Too short</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="n">is_valid_phone</span><span class="p">(</span><span class="s1">&#39;abcdefgh&#39;</span><span class="p">))</span>  <span class="c1"># Non-numeric</span>
+<span class="w">        </span><span class="sd">"""Test phone validation"""</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">is_valid_phone</span><span class="p">(</span><span class="s1">'5550123'</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">is_valid_phone</span><span class="p">(</span><span class="s1">'+1-555-0123'</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="n">is_valid_phone</span><span class="p">(</span><span class="s1">'123'</span><span class="p">))</span>  <span class="c1"># Too short</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="n">is_valid_phone</span><span class="p">(</span><span class="s1">'abcdefgh'</span><span class="p">))</span>  <span class="c1"># Non-numeric</span>
 </code></pre></div>
 
 

@@ -1461,6 +1461,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../apps/native_auth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native browser authentication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../apps/notifications/" class="md-nav__link">
         
   
@@ -3109,12 +3137,12 @@
 <span class="c1"># Protect views for company officers</span>
 <span class="nd">@company_officer_required</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">officer_dashboard</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;officer_dashboard.html&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">'officer_dashboard.html'</span><span class="p">)</span>
 
 <span class="c1"># Protect views for company employees</span>
 <span class="nd">@company_employee_required</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">employee_portal</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;employee_portal.html&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">'employee_portal.html'</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="user-impersonation">User Impersonation<a class="headerlink" href="#user-impersonation" title="Permanent link">&para;</a></h2>
 <p>Allow admins to emulate other users for testing:</p>
