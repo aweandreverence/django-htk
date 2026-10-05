@@ -336,3 +336,5 @@ from htk.utils.urls import build_url_with_query_params
 
 url = build_url_with_query_params('/search/', {'q': 'django', 'page': 2})
 ```
+
+`htk.utils.db.atomic_for(Model)` wraps synchronous operations in the model's routed write transaction rather than assuming the default database.
