@@ -95,7 +95,14 @@ def build_views(factory: Callable[[], NativeAuthService]) -> SimpleNamespace:
                     get_token(request),
                 )
             )
-        response["Referrer-Policy"] = "no-referrer"
+        # HTML form POSTs under no-referrer send Origin: null in real browsers,
+        # which Django correctly rejects. Keep a same-origin consent submission;
+        # redirects (including the code-bearing callback) still disclose nothing.
+        response["Referrer-Policy"] = (
+            "same-origin"
+            if request.method == "GET" and response.status_code == 200
+            else "no-referrer"
+        )
         response["X-Frame-Options"] = "DENY"
         return response
 

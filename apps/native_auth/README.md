@@ -58,3 +58,17 @@ by the isolated SQLite suite. Keep production/MySQL and client acceptance explic
 
 Provenance: extracted from the reviewed Awesome.Bible native handoff into generic
 HTK APIs; governed by this repository's license. No production credentials/data.
+
+## Browser consent and CSRF
+
+The HTML consent page uses `Referrer-Policy: same-origin` so a same-origin
+form POST retains its origin for Django CSRF validation, without sending a
+referrer to another origin. `no-referrer` on that page makes real browsers send
+`Origin: null` and breaks both Connect and Cancel. Callback/login redirects and
+errors retain `no-referrer`. Do not exempt consent from CSRF or trust a null
+origin to work around this. See [MDN's form/Origin explanation](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Referrer-Policy).
+
+Consumer acceptance must submit both consent buttons in a real browser as well
+as exercising the HTTP contract; a script omitting Origin cannot prove browser
+compatibility. Social providers and installed-app callback delivery remain
+consumer acceptance responsibilities.
